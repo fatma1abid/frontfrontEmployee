@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { PageAccueilComponent } from './page-accueil/page-accueil.component';
 
 const routes: Routes = [
-  {path:'' , component:PageAccueilComponent}
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'front', loadChildren: () => import('./front/front.module').then(m => m.FrontModule) },
+  { path: '', redirectTo: '/admin/accueil', pathMatch: 'full' },
+
 ];
 
 @NgModule({
