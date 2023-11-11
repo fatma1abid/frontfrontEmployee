@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouteReuseStrategy, Router } from '@angular/router';
+import { ActivatedRoute, RouteReuseStrategy, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,7 @@ import { RouteReuseStrategy, Router } from '@angular/router';
 export class HeaderComponent {
 
 
-  constructor(private router:Router){
+  constructor(private router:Router,private route : ActivatedRoute){
     
   }
 
@@ -22,5 +22,8 @@ export class HeaderComponent {
     return this.router.url.startsWith('/front');
   }
 
-
+  isSpecificRoute(): boolean {
+    console.log(this.router.url);
+    return this.router.url != "/front/user";
+  }
 }
