@@ -1,1 +1,61 @@
-<p>addevenement works!</p>
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Ajouter Evenement </h4>
+            <form [formGroup]="evenementForm" (ngSubmit)="onSubmit()" >
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" name="img[]" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                    <input type="text" class="form-control file-upload-info" disabled placeholder="Ajouter une image">
+                    <span class="input-group-append">
+                        <button class="file-upload-browse btn btn-primary" type="button">Ajouter Image</button>
+                    </span>
+                    </div>
+                </div>
+            <div class="form-group">
+                <label for="exampleInputName1">Nom</label>
+                <input type="text" class="form-control" id="exampleInputName1" placeholder="Nom">
+            </div>
+            <div class="form-group">
+                <label for="dated">Date Début</label>
+                <input type="date" class="form-control" id="dated" formControlName="dated" >
+            </div>
+           <!-- <div *ngIf="evenementForm['dated'].touched">
+                <div *ngIf="evenementForm['dated'].errors?.['required']" class="notification error closeable">
+                  <p>Please fill in all the required fields</p>
+                </div>
+              </div>
+            -->
+            <div class="form-group" >
+                <label for="datef">Date Fin</label>
+                <input type="date" class="form-control" id="datef" >
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName1">Lieu</label>
+                <input type="lieu" class="form-control" id="lieu" placeholder="Lieu">
+            </div>
+            <div class="form-group">
+                <label for="exampleTextarea1">Description</label>
+                <textarea class="form-control" id="exampleTextarea1" rows="4" placeholder="Description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="etat">Etat</label>
+              <select id="etat" class="form-control" >
+                <option value="valeur1">Planifié</option>
+                <option value="valeur2">Términé</option>
+                <option value="valeur3">Reporté</option>
+                <option value="valeur4" selected>Annulé</option>
+              </select>  
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
+            <button type="button" class="btn btn-light" (click)="evenementForm.reset()">Annuler</button>
+
+            </form>
+        </div>
+        </div>
+    </div>
+</div>    
+
+<app-listevenement></app-listevenement>

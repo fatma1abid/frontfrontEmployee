@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Bibliotheque } from 'src/app/models/Bibliotheque.model';
+import { Bibliotheque } from 'src/app/core/models/Bibliotheque.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
