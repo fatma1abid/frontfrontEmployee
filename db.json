@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "universites": [
+    {
+      "id": 1,
+      "nomUniversite": "lala",
+      "adresse": "adrdje",
+      "etatUniversite": "privez"
+    },
+    {
+      "nomUniversite": "new",
+      "adresse": "jjd",
+      "etatUniversite": "ss",
+      "id": 2
+    },
+    {
+      "etatUniversite": "public",
+      "adresse": "aa",
+      "nomUniversite": "e",
+      "id": 3
+    }
+  ]
+}
