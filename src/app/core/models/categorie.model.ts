@@ -1,6 +1,6 @@
 export class Categorie {
-    id!:number;
+    id ?:number;
     nom!:string;
-    descirption!:string;
+    description!:string;
     image!:string;
 }
