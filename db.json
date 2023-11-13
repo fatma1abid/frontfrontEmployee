@@ -29,10 +29,16 @@
   ],
   "departements": [
     {
-      "nomDepartement": "string",
-      "responsable": "string",
-      "nombreProfesseurs": 2,
-      "id": 1
+      "nomDepartement": "Marketing",
+      "responsable": "Sonia",
+      "nombreProfesseurs": 6,
+      "id": 1699879801011
+    },
+    {
+      "nomDepartement": "Informatique",
+      "responsable": "Ahmed",
+      "nombreProfesseurs": 4,
+      "id": 1699879901827
     }
   ]
 }

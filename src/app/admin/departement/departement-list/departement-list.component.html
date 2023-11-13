@@ -1,1 +1,32 @@
-<p>departement-list works!</p>
+<!-- departement-list.component.html -->
+
+<div class="container">
+    <h2>Liste des départements</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Responsable</th>
+          <th>Nombre de professeurs</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let departement of departements">
+          <td>{{ departement.nomDepartement }}</td>
+          <td>{{ departement.responsable }}</td>
+          <td>{{ departement.nombreProfesseurs }}</td>
+          <td>
+            <button matTooltip="Edit Task" class="btn btn-info mr-2" (click)="navigateToEdit(departement.id)">
+              Modifier
+            </button>
+  
+            <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerDepartement(departement.id)">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'front', loadChildren: () => import('./front/front.module').then(m => m.FrontModule) },
   { path: '', redirectTo: '/admin/accueil', pathMatch: 'full' },
     { path: 'admin/universite', loadChildren: () => import('./admin/universite/universite.module').then(m => m.UniversiteModule) },
+    { path: 'admin/departement', loadChildren: () => import('./admin/departement/departement.module').then(m => m.DepartementModule) },
 
   
 
