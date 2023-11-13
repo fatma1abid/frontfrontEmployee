@@ -1,6 +1,6 @@
 export class Categorie {
-    id ?:number;
+    idCategorie ?:number;
     nom!:string;
     description!:string;
-    image!:string;
+    image!:File;
 }

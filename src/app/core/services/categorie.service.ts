@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Categorie } from '../models/categorie.model';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,21 @@ export class CategorieService {
   private apiServerUrl = 'http://localhost:8080/categories';
 
 
-  addCategorie(nom : string , description:string , image:string){
+  addCategorie(nom : string , description:string , image:File):Observable<Categorie>{
 
-    const categorie: Categorie  =  {
-      nom : nom ,
-      description:description,
-      image: image
-    }
-    return this.http.post(this.apiServerUrl + '/add', categorie);
+    const formData: FormData = new FormData();
+    formData.append('nom', nom);
+    formData.append('description', description);
+    formData.append('image', image, image.name);
+
+
+    return this.http.post<Categorie>(this.apiServerUrl + '/add', formData);
+  }
+
+
+
+  getAllCategorie() : Observable<Categorie[]> {
+      return this.http.get<Categorie[]>(this.apiServerUrl + '');
   }
 
 

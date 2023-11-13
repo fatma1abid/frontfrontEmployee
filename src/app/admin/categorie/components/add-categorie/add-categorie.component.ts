@@ -16,11 +16,14 @@ export class AddCategorieComponent implements OnInit {
 
     categorieForm !: FormGroup
     selectedFile!: File;
+    msg !: String;
+    error !: String;
 
     nameFile!:string
 
     onFileChanged(event: any): void {
-      this.selectedFile = event.target.files[0];
+      this.selectedFile =  event.target.files[0];
+  
     }
 
 
@@ -41,9 +44,13 @@ export class AddCategorieComponent implements OnInit {
 
 
     AjouterCategorie(){
-      this.categorieService.addCategorie(this.categorieForm.get('nom')?.value,this.categorieForm.get('description')?.value,this.selectedFile.name).subscribe(
+      this.categorieService.addCategorie(this.categorieForm.get('nom')?.value,this.categorieForm.get('description')?.value,this.selectedFile).subscribe(
         ()=>{
-          console.log("categorie added")
+           this.msg = "Categorie ajouté avec succées"
+           this.categorieForm.reset();
+        },
+        ()=>{
+             this.error = "Il ya une erreur qui est survenu"
         }
       )
     }
