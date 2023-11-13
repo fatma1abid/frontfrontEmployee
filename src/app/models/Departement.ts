@@ -4,4 +4,5 @@ export class Departement {
     nomDepartement!:string;
     responsable!:string;
     nombreProfesseurs!: number;
+    specialite!:String;
 }

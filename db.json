@@ -24,9 +24,10 @@
   "departements": [
     {
       "nomDepartement": "aa",
-      "responsable": "aaa",
+      "responsable": "la vie",
       "nombreProfesseurs": 6,
-      "id": 1699881291109
+      "id": 1699881291109,
+      "specialite": "rrrgt"
     }
   ]
 }

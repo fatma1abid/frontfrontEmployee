@@ -17,6 +17,11 @@
         <label for="nombreProfesseurs">Nombre de professeurs:</label>
         <input type="number" id="nombreProfesseurs" [(ngModel)]="nouveauDepartement.nombreProfesseurs" name="nombreProfesseurs" required>
       </div>
+
+      <div class="form-group">
+        <label for="specialite">specialite:</label>
+        <input type="text" id="specialite" [(ngModel)]="nouveauDepartement.specialite" name="specialite" required>
+      </div>
   
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Ajouter Département</button>

@@ -8,6 +8,7 @@
           <th>Nom</th>
           <th>Responsable</th>
           <th>Nombre de professeurs</th>
+          <th>Specialite</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -16,6 +17,7 @@
           <td>{{ departement.nomDepartement }}</td>
           <td>{{ departement.responsable }}</td>
           <td>{{ departement.nombreProfesseurs }}</td>
+          <td>{{ departement.specialite }}</td>
           <td>
             <button matTooltip="Edit Task" class="btn btn-info mr-2" (click)="navigateToEdit(departement.id)">
               Modifier
