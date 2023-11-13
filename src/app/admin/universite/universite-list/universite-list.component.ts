@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Universite } from 'src/app/models/universite';
 import { UniversiteService } from 'src/app/service/universite.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-universite-list',
@@ -29,20 +30,38 @@ export class UniversiteListComponent implements OnInit {
     );
   }
 
-  navigateToEdit(idUniversite: number) {
-    this.router.navigate(['/admin/universite/update', idUniversite]);
+  navigateToEdit(id: number) {
+    this.router.navigate(['/admin/universite/update', id]);
   }
 
-  supprimerUniversite(idUniversite: number) {
-    this.universiteService.deleteUniversite(idUniversite).subscribe(
-      () => {
-        console.log('Universite deleted successfully');
-        // Rechargez la liste des universités après la suppression
-        this.chargerUniversites();
-      },
-      error => {
-        console.error('Error deleting universite:', error);
+  supprimerUniversite(id: number, nomUniversite: String) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer l\'université ' + nomUniversite + ' ?',
+      text: 'Vous ne pourrez pas récupérer ces données après la suppression !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer !',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.value) {
+        this.universiteService.deleteUniversite(id).subscribe(
+          () => {
+            console.log('Universite deleted successfully');
+            // Rechargez la liste des universités après la suppression
+            this.chargerUniversites();
+          },
+          error => {
+            console.error('Error deleting universite:', error);
+          }
+        );
+        Swal.fire(
+          'Supprimée !',
+          'L\'université a été supprimée avec succès.',
+          'success'
+        );
       }
-    );
+    });
   }
 }

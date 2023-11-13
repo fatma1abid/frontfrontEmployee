@@ -21,12 +21,17 @@
               Modifier
             </button>
   
-            <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerDepartement(departement.id)">
+            <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerDepartement(departement.id,departement.nomDepartement)">
               Supprimer
             </button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <button type="button" class="btn btn-success mb-3" [routerLink]="['/admin/departement/add']">
+        Ajouter Département
+      </button>
+
   </div>
   

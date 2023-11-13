@@ -18,27 +18,15 @@
       "nomUniversite": "lala",
       "adresse": "ee",
       "etatUniversite": "public",
-      "id": 4
-    },
-    {
-      "nomUniversite": "lala",
-      "adresse": "ee",
-      "etatUniversite": "public",
       "id": 5
     }
   ],
   "departements": [
     {
-      "nomDepartement": "Marketing",
-      "responsable": "Sonia",
+      "nomDepartement": "aa",
+      "responsable": "aaa",
       "nombreProfesseurs": 6,
-      "id": 1699879801011
-    },
-    {
-      "nomDepartement": "Informatique",
-      "responsable": "Ahmed",
-      "nombreProfesseurs": 4,
-      "id": 1699879901827
+      "id": 1699881291109
     }
   ]
 }

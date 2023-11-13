@@ -30,16 +30,21 @@
                     Modifier
                   </button>
         
-                  <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerUniversite(universite.id)">
+                  <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerUniversite(universite.id, universite.nomUniversite)">
                     Supprimer
                   </button>
-                     
                       
               </tr>
             </tbody>
           </table>
+          <button type="button" class="btn btn-success mb-3" [routerLink]="['/admin/universite/add']">
+            Ajouter Universite
+          </button>
         </div>
       </div>
     </div>
+
+    
+
   </div>
   

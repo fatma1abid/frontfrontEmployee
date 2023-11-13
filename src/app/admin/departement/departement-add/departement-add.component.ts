@@ -18,7 +18,8 @@ import { DepartementService } from 'src/app/service/departement.service';
         (data) => {
           console.log('Departement ajouté avec succès:', data);
           // Redirigez vers la liste des départements après l'ajout
-          this.router.navigate(['/departement/afficher']);
+          this.router.navigate(['admin/departement/afficher']);
+
         },
         (error) => {
           console.error('Erreur lors de l\'ajout du département:', error);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Departement } from 'src/app/models/Departement';
 import { DepartementService } from 'src/app/service/departement.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-departement-list',
@@ -33,16 +34,34 @@ export class DepartementListComponent implements OnInit {
     this.router.navigate(['/admin/departement/update', idDepartement]);
   }
 
-  supprimerDepartement(idDepartement: number) {
-    this.departementService.deleteDepartement(idDepartement).subscribe(
-      () => {
-        console.log('Département supprimé avec succès');
-        // Rechargez la liste des départements après la suppression
-        this.chargerDepartements();
-      },
-      error => {
-        console.error('Erreur lors de la suppression du département:', error);
+  supprimerDepartement(id: number, nomDepartement: string) {
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir supprimer le département ' + nomDepartement + ' ?',
+      text: 'Vous ne pourrez pas récupérer ces données après la suppression !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer !',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.value) {
+        this.departementService.deleteDepartement(id).subscribe(
+          () => {
+            console.log('Département supprimé avec succès');
+            // Rechargez la liste des départements après la suppression
+            this.chargerDepartements();
+          },
+          error => {
+            console.error('Erreur lors de la suppression du département:', error);
+          }
+        );
+        Swal.fire(
+          'Supprimé !',
+          'Le département a été supprimé avec succès.',
+          'success'
+        );
       }
-    );
+    });
   }
 }
