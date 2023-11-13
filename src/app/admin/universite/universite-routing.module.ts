@@ -5,10 +5,10 @@ import { UniversiteUpdateComponent } from './universite-update/universite-update
 import { UniversiteAddComponent } from './universite-add/universite-add.component';
 
 const routes: Routes = [
-  { path: '', component: UniversiteListComponent },
-  { path: 'detail/:id', component: UniversiteUpdateComponent },
+  { path: 'afficher', component: UniversiteListComponent },
   { path: 'add', component: UniversiteAddComponent },
-  // Ajoutez d'autres routes si nécessaire
+  { path: 'update/:id', component: UniversiteUpdateComponent },
+
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

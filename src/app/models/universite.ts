@@ -1,5 +1,5 @@
 export class Universite {
-    idUniversite!: number;
+    id!: number;
     nomUniversite!: String;
     adresse!: String;
     etatUniversite!: String;

@@ -1,1 +1,34 @@
-<p>universite-update works!</p>
+<!-- universite-update.component.html -->
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="card-body">
+        <h4 class="card-title">Modifier une université</h4>
+        <form #f="ngForm" (submit)="enregistrerUniversite(f)">
+          <div class="form-group">
+            <label for="nomUniversite">Nom de l'université</label>
+            <input type="text" class="form-control" id="nomUniversite" name="nomUniversite" [(ngModel)]="universite.nomUniversite" required>
+          </div>
+
+          <div class="form-group">
+            <label for="adresse">Adresse</label>
+            <input type="text" class="form-control" id="adresse" name="adresse" [(ngModel)]="universite.adresse" required>
+          </div>
+
+          <div class="form-group">
+            <label for="etatUniversite">État de l'université</label>
+            <select class="form-control" id="etatUniversite" name="etatUniversite" [(ngModel)]="universite.etatUniversite" required>
+              <option value="privez">Privé</option>
+              <option value="public">Public</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <a [routerLink]="['/admin/universite/afficher']" class="btn btn-secondary">Annuler</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

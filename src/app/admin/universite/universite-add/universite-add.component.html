@@ -3,6 +3,8 @@
 <div class="container">
     <h2>Ajouter une université</h2>
     <form (submit)="ajouterUniversite()">
+   
+
       <div class="form-group">
         <label for="nom">Nom de l'université:</label>
         <input type="text" id="nom" [(ngModel)]="nouvelleUniversite.nomUniversite" name="nom" required>
@@ -22,7 +24,7 @@
       </div>
   
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Ajouter Université</button>
+        <button  type="submit" class="btn btn-primary" >Ajouter Université</button>
       </div>
     </form>
   </div>

@@ -1,1 +1,45 @@
-<p>universite-list works!</p>
+<div class="col-lg-6 grid-margin stretch-card table-container">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Liste des universités</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>État</th>
+                <th>bouton</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let universite of universites">
+                <td>{{ universite.nomUniversite }}</td>
+                <td>{{ universite.adresse }}</td>
+                <td>
+                  <label class="badge" [ngClass]="{'badge-danger': universite.etatUniversite === 'prive',
+                                                   'badge-info': universite.etatUniversite === 'public',
+                                                  }">
+                    {{ universite.etatUniversite }}
+                  </label>
+                </td>
+                <td>
+                  
+                  <button matTooltip="Edit Task" class="btn btn-info mr-2" [routerLink]="['/admin/universite/update', universite.id]">
+                    Modifier
+                  </button>
+        
+                  <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerUniversite(universite.id)">
+                    Supprimer
+                  </button>
+                     
+                      
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

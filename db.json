@@ -15,22 +15,24 @@
   ],
   "universites": [
     {
-      "id": 1,
       "nomUniversite": "lala",
-      "adresse": "adrdje",
-      "etatUniversite": "privez"
-    },
-    {
-      "nomUniversite": "new",
-      "adresse": "jjd",
-      "etatUniversite": "ss",
-      "id": 2
-    },
-    {
+      "adresse": "ee",
       "etatUniversite": "public",
-      "adresse": "aa",
-      "nomUniversite": "e",
-      "id": 3
+      "id": 4
+    },
+    {
+      "nomUniversite": "lala",
+      "adresse": "ee",
+      "etatUniversite": "public",
+      "id": 5
+    }
+  ],
+  "departements": [
+    {
+      "nomDepartement": "string",
+      "responsable": "string",
+      "nombreProfesseurs": 2,
+      "id": 1
     }
   ]
 }
