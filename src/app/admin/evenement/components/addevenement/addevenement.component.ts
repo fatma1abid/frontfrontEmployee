@@ -1,5 +1,6 @@
 import { Component , OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { EvenementService } from 'src/app/core/services/EvenementService';
 
 
 @Component({
@@ -8,23 +9,50 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./addevenement.component.scss']
 })
 export class AddevenementComponent implements OnInit {
+
   evenementForm! : FormGroup;
-  constructor(private fb: FormBuilder) {}
-  ngOnInit() {
+  selectedFile!: File;
+  nameFile!:string
+
+  onFileChanged(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+  constructor(private fb: FormBuilder , private evenementService:EvenementService) {}
+
+  ngOnInit(): void {
     this.evenementForm = this.fb.group({
-      image: [''], // Ajoutez des validateurs si nécessaire
-      nom: ['', Validators.required],
-      dated: ['', Validators.required],
-      datef: ['', Validators.required],
-      lieu: ['', Validators.required],
-      description: [''],
-      etat: ['valeur4', Validators.required],
+      nomE: [null, [Validators.required, Validators.minLength(3)]],
+      dateDebut: [null, Validators.required],
+      dateFin: [null, Validators.required],
+      lieu: [null, [Validators.required ,Validators.minLength(3)]],
+      description: [null, [Validators.required, Validators.minLength(5)]],
+      etat: ['valeur4'],
+      image: [null], // Ajoutez des validateurs si nécessaire
+
     });
   }
-  onSubmit() {
-    if (this.evenementForm.valid) {
-      // Envoyez les données du formulaire à votre service ou effectuez d'autres actions nécessaires.
-      console.log(this.evenementForm.value);
-    }
+  get f() {
+    return this.evenementForm.controls;
   }
+  AjouterEvent(){
+    this.evenementService.addEvent(
+    this.evenementForm.get('nomE')?.value,
+    this.evenementForm.get('dateDebut')?.value,
+    this.evenementForm.get('dateFin')?.value,
+    this.evenementForm.get('lieu')?.value,
+    this.evenementForm.get('description')?.value,
+    this.evenementForm.get('etat')?.value,
+    this.selectedFile.name).subscribe(
+      ()=>{
+        console.log("Evenement ajouté avec succes")
+      }
+    )
+  }
+
+  //onSubmit() {
+    //if (this.evenementForm.valid) {
+      // Envoyez les données du formulaire à votre service ou effectuez d'autres actions nécessaires.
+      //console.log(this.evenementForm.value);
+    //}
+  //}
 }

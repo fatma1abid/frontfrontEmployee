@@ -1,6 +1,6 @@
 export class Bibliotheque {
-    id!:number;
-    nom!:string;
+    id?:number;
+    nomB!:string;
     email!:string;
     numtel!:number;
     horaire!:string;

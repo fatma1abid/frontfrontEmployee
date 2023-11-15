@@ -1,8 +1,8 @@
-export class evenement{
-    idEvenement!:number;
-    nom!:string;
-    dateDebut!:string;
-    dateFin!:string;
+export class Evenement{
+    idEvenement?:number;
+    nomE!:string;
+    dateDebut!:Date;
+    dateFin!:Date;
     lieu!:string;
     description!:string;
     etat!:string;

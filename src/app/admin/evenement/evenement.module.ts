@@ -5,7 +5,7 @@ import { EvenementRoutingModule } from './evenement-routing.module';
 import { AddevenementComponent } from './components/addevenement/addevenement.component';
 import { UpdateevenementComponent } from './components/updateevenement/updateevenement.component';
 import { ListevenementComponent } from './components/listevenement/listevenement.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { ListevenementComponent } from './components/listevenement/listevenement
     EvenementRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule 
   ]
 })
 export class EvenementModule { }

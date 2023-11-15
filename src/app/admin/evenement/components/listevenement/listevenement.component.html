@@ -19,17 +19,20 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Image</td>
-                    <td>Event Dance</td>
-                    <td>12/11/2023</td>
-                    <td>12/11/2023</td>
-                    <td>Lieu</td>
-                    <td>Etat</td>
+                  <tr *ngFor="let evenement of eventList | async">
+                    <td>{{evenement.idEvenement}}</td>
+                    <td>{{evenement.nomE | titlecase}}</td>
+                    <td>{{evenement.dateDebut}}</td>
+                    <td>{{evenement.dateFin}}</td>
+                    <td>{{evenement.lieu}}</td>
+                    <td>{{evenement.etat}}</td>
+                    <td>{{evenement.description | titlecase}}</td>
                     <td style="width: 20%;">
                         <button class="btn btn-warning">Modifier</button>
                         <button class="btn btn-danger ml-4">Supprimer</button>
                     </td>
                   </tr>
+                  
                 </tbody>
               </table>
             </div>
