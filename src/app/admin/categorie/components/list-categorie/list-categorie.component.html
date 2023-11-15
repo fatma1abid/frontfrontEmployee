@@ -4,7 +4,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Liste des categories</h4>
-            <div class="table-responsive">
+            <div class="table table-hover">
               <table class="table">
                 <thead >
                   <tr>
@@ -17,13 +17,12 @@
                 <tbody>
 
                   <tr *ngFor="let categorie of categorieList | async">
-                    <td>{{categorie.idCategorie}}</td>
                     <td><img [src]="urlImage + '/' + categorie.idCategorie + '/' + categorie.image" alt="Category Image" width="50" height="50"></td>
                     <td>{{categorie.nom | titlecase}}</td>
                     <td>{{categorie.description | titlecase}}</td>
                     <td style="width: 20%;">
-                        <button class="btn btn-warning">Modifier</button>
-                        <button class="btn btn-danger ml-4">Supprimer</button>
+                        <button class="btn btn-warning" (click)="modifierCategorie(categorie.idCategorie)">Modifier</button>
+                        <button  class="btn btn-danger ml-4" (click)="supprimerCategorie(categorie.idCategorie)">Supprimer</button>
                     </td>
                   </tr>
                 </tbody>

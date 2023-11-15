@@ -48,11 +48,16 @@ export class AddCategorieComponent implements OnInit {
         ()=>{
            this.msg = "Categorie ajouté avec succées"
            this.categorieForm.reset();
+           this.refreshCategorieList();
         },
         ()=>{
              this.error = "Il ya une erreur qui est survenu"
         }
       )
+    }
+
+    private refreshCategorieList() {
+      this.categorieService.getAllCategorie();
     }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Categorie } from 'src/app/core/models/categorie.model';
 import { CategorieService } from 'src/app/core/services/categorie.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-categorie',
@@ -11,7 +12,7 @@ import { CategorieService } from 'src/app/core/services/categorie.service';
 export class ListCategorieComponent implements OnInit {
 
 
-  constructor(private categorieService : CategorieService){
+  constructor(private categorieService : CategorieService , private dialog:MatDialog){
 
   }
 
@@ -21,7 +22,28 @@ export class ListCategorieComponent implements OnInit {
 
    ngOnInit(): void {
      this.categorieList =  this.categorieService.getAllCategorie();
-   
+   }
 
- 
-}}
+
+
+   modifierCategorie(id:any){
+
+   }
+
+
+   supprimerCategorie(id:any){
+      this.categorieService.supprimerCategorie(id).subscribe(
+        ()=>{
+            this.categorieService.getAllCategorie();
+        },
+        ()=>{
+
+        }
+      )
+
+   }
+
+
+
+   
+}

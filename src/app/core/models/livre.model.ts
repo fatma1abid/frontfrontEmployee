@@ -1,9 +1,12 @@
+import { Categorie } from "./categorie.model";
+
 export class Livre {
-    id !: number;
+    idLivre ?: number;
     titre !: string;
     nomAuteur !: string;
     nbPages !: number;
     dateDePublication !: Date;
-    description !: String;
-    image !: String;
+    description !: string;
+    categorie !: Categorie;
+    image ?: string;
 }

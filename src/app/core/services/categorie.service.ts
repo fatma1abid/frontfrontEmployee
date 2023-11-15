@@ -33,4 +33,9 @@ export class CategorieService {
   }
 
 
+  supprimerCategorie(id:any)  {
+    return this.http.delete(this.apiServerUrl + `/${id}`);
+  }
+
+
 }

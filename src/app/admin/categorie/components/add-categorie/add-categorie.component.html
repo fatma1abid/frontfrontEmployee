@@ -27,7 +27,7 @@
                       
                     </div>
                     <div *ngIf="f['nom'].errors?.['minlength']" class="error">
-                      <p> <i class="mdi mdi-alert-circle-outline"></i> le nom doit contenir minimum 3 caractéres</p>
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> Le nom doit contenir minimum 3 caractéres</p>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                       
                     </div>
                     <div *ngIf="f['description'].errors?.['minlength']" class="error">
-                      <p> <i class="mdi mdi-alert-circle-outline"></i> la description doit contenir minimum 5 caractéres</p>
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> La description doit contenir minimum 5 caractéres</p>
                     </div>
                 </div>
             </div>
@@ -56,8 +56,7 @@
                     </div>
                 </div>
             </div>   
-            <button type="submit" class="btn btn-primary mr-2" [disabled]="categorieForm.invalid">Ajouter</button>
-            <button class="btn btn-light">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="categorieForm.invalid">Ajouter</button>
             </form>
         </div>
         </div>

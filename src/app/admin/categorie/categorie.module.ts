@@ -5,6 +5,7 @@ import { CategorieRoutingModule } from './categorie-routing.module';
 import { AddCategorieComponent } from './components/add-categorie/add-categorie.component';
 import { ListCategorieComponent } from './components/list-categorie/list-categorie.component';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CategorieRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ]
 })
 export class CategorieModule { }

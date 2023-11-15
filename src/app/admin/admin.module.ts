@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { PageAccueilComponent } from './components/page-accueil/page-accueil.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,7 @@ import { PageAccueilComponent } from './components/page-accueil/page-accueil.com
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
   ]
 })
 export class AdminModule { }
