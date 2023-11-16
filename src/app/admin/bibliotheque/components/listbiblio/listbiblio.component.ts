@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class ListbiblioComponent implements OnInit {
 
 
-  constructor(private BiblioService : BiblioService , private router: Router){
+  constructor(private BiblioService : BiblioService , private router: Router ){
 
   }
  
@@ -25,8 +25,11 @@ export class ListbiblioComponent implements OnInit {
      this.biblioList =  this.BiblioService.getAllBiblios();
    
 }
-redirigerVersModification(idBibliotheque: number) {
-  this.router.navigate(['/updatebiblio', idBibliotheque]);
+navigateToEdit(id: number) {
+  this.router.navigate(['/admin/bibliotheque/updatebiblio', id]);
+}
+navigateToAdd(id: number) {
+  this.router.navigate(['/admin/bibliotheque/addbiblio', id]);
 }
 supprimerBiblio(idBibliotheque: any): void {
   Swal.fire({

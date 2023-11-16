@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Evenement } from '../models/Evenement.model';
+import { EtatEvenement } from '../models/etatEvenement.enum';
 import { Observable } from 'rxjs';
+import { HttpClient , HttpHeaders } from '@angular/common/http';
 
 
 
@@ -14,19 +15,21 @@ export class EvenementService {
   
   private apiServerUrl = 'http://localhost:8082/evenements';
   
-  addEvent(nomE : string , dateDebut:Date ,  dateFin : Date ,  lieu : string ,description:string ,  etat : string , image:string ):Observable<Evenement>{
+  addEvent(nomE : string , dateDebut:Date ,  dateFin : Date ,  lieu : string ,description:string ,  etatEvent : EtatEvenement , image:File ):Observable<Evenement>{
 
-    const evenement: Evenement  =  {
-      nomE :nomE ,
-      dateDebut:dateDebut ,
-      dateFin : dateFin ,
-      lieu:lieu ,
-      description:description ,
-      etat:etat ,
-      image : image ,
-    
-    }
-    return this.http.post<Evenement>(this.apiServerUrl + '/addEvenement', evenement);
+    const formData: FormData = new FormData();
+    formData.append('nomE', nomE);
+    formData.append('dateDebut', dateDebut.toString());
+    formData.append('dateFin', dateFin.toString());
+    formData.append('lieu', lieu);
+    formData.append('description', description);
+    formData.append('etatEvent', etatEvent);
+    formData.append('image', image,image.name);
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'multipart/form-data');
+
+
+    return this.http.post<Evenement>(this.apiServerUrl + '/addEvenement', formData,{headers});
   }
   getAllEvents() : Observable<Evenement[]> {
     return this.http.get<Evenement[]>(this.apiServerUrl + '');
@@ -49,5 +52,11 @@ updateEvent(idEvenement: number, evenement: Evenement): Observable<Evenement> {
   const url = `${this.apiServerUrl}/${idEvenement}`;
   return this.http.put<Evenement>(url, evenement);
 }
-
+getEvenementById(idEvenement: number): Observable<Evenement> {
+  const url = `${this.apiServerUrl}/${idEvenement}`; // Assurez-vous d'avoir la route appropriée dans votre API
+  return this.http.get<Evenement>(url);
+}
+updateEvenement(idEvenement: number, evenement: Evenement): Observable<Evenement> {
+  return this.http.put<Evenement>(this.apiServerUrl + '/updateevent'+ `/${idEvenement}`, evenement);
+}
 }

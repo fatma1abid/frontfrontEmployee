@@ -72,19 +72,20 @@
             </div> 
             
               <div class="form-group">
-                <label for="etat">Etat</label>
-              <select id="etat" class="form-control"  formControlName="etat">
-                <option value="valeur1">Planifié</option>
-                <option value="valeur2">Términé</option>
-                <option value="valeur3">Reporté</option>
-                <option value="valeur4" selected>Annulé</option>
+                <label for="etatEvent">Etat</label>
+              <select id="etatEvent" class="form-control"  formControlName="etatEvent">
+                <option value="PLANIFIE" selected>PLANIFIE</option>
+                <option value="EN_COURS">EN_COURS</option>
+                <option value="REPORTE">REPORTE</option>
+                <option value="ANNULE" >ANNULE</option>
               </select>  
             </div>
             <div class="form-group">
                 <label>Image</label>
                 <div class="input-group col-xs-12">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="img[]" formControlName="image" (change)="onFileChanged($event)">
+                        <input type="file" class="custom-file-input" id="image" name="img[]" formControlName="image" (change)="onFileChanged($event)">
+
                         <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
                     </div>
                 </div>

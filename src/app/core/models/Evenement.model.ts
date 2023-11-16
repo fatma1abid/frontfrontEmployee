@@ -1,3 +1,4 @@
+import { EtatEvenement } from '../models/etatEvenement.enum';
 export class Evenement{
     idEvenement?:number;
     nomE!:string;
@@ -5,8 +6,8 @@ export class Evenement{
     dateFin!:Date;
     lieu!:string;
     description!:string;
-    etat!:string;
-    image!:string;
+    etatEvent!:EtatEvenement;;
+    image!:File;
 
     
     

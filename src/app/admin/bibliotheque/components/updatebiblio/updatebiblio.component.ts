@@ -2,7 +2,7 @@ import { Component , OnInit } from '@angular/core';
 import { Bibliotheque } from 'src/app/core/models/Bibliotheque.model';
 import { BiblioService } from 'src/app/core/services/BiblioService';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router} from '@angular/router';
 
 
 @Component({
@@ -11,50 +11,86 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./updatebiblio.component.scss']
 })
 export class UpdatebiblioComponent implements OnInit {
-    biblioForm!: FormGroup;
-    idBibliotheque: number | null = null;
+  biblioForm!: FormGroup;
+
   
     constructor(
+      
       private fb: FormBuilder,
       private biblioService: BiblioService,
-      private route: ActivatedRoute
-    ) {}
+      private route: ActivatedRoute,
+      private router: Router,
+    ) {
+      this.biblioForm = new FormGroup({
+        idBibliotheque: new FormControl(),
+        nomB: new FormControl(),
+        email: new FormControl(),
+        numTel: new FormControl(),
+        horaire: new FormControl(),
+        description: new FormControl(),
+
+      });
+    }
+    
   
     ngOnInit(): void {
-      this.biblioForm = this.fb.group({
-        nomB: [null, [Validators.required, Validators.minLength(3)]],
-        email: [null, [Validators.required, Validators.email]],
-        numtel: [null, [Validators.required, Validators.minLength(8)]],
-        horaire: [null, [Validators.required, Validators.minLength(3)]],
-        description: [null, [Validators.required, Validators.minLength(5)]],
-      });
+      this.initForm();
+    }
+    initForm() {
+      const idBibliotheque = this.route.snapshot.params['id']; // Supposons que l'ID de la bibliothèque soit dans la route
+      this.biblioService.getBibliothequeById(idBibliotheque).subscribe(
+        (bibliotheque) => {
+          // Affectez les valeurs de la bibliothèque au formulaire
+          this.biblioForm = this.fb.group({
+            idBibliotheque: bibliotheque.idBibliotheque,
+            nomB: bibliotheque.nomB,
+            email: bibliotheque.email,
+            numTel: bibliotheque.numTel,
+            horaire: bibliotheque.horaire,
+            description: bibliotheque.description,
+          });
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération des détails de la bibliothèque', error);
+        }
+      );
+    }
+    get f() {
+      return this.biblioForm.controls;
+    }
+    ModifierBiblio() {
+      if (this.biblioForm.valid) {
+        // Vérifiez si le formulaire est valide avant de procéder à la mise à jour
   
-      // Récupérez l'ID de la bibliothèque à partir de l'URL
-      const idParam = this.route.snapshot.paramMap.get('id');
-      this.idBibliotheque = idParam !== null ? +idParam : null;
-        
-      // Chargez les détails de la bibliothèque à partir de l'API Angular
-      if (this.idBibliotheque !== null) {
-        this.biblioService.getBibliothequeById(this.idBibliotheque).subscribe(
-          (bibliotheque: Bibliotheque) => {
-            // Faites quelque chose avec la bibliothèque récupérée
+        // Récupérez les valeurs du formulaire
+        const idBibliotheque = this.biblioForm.get('idBibliotheque')?.value;
+        const biblioData = this.biblioForm.value;
+  
+        // Appelez la méthode de mise à jour du service
+        this.biblioService.updateBibliotheque(idBibliotheque, biblioData).subscribe(
+          (result) => {
+            // Gérez la réponse de la mise à jour
+            console.log('Bibliothèque mise à jour avec succès', result);
+            this.router.navigate(['/admin/bibliotheque/listbiblio']);
+
+  
+            // Réinitialisez le formulaire après la mise à jour
+            this.biblioForm.reset();
           },
           (error) => {
-            // Gérez les erreurs, par exemple, redirigez vers une page d'erreur
+            // Gérez les erreurs de la mise à jour
+            console.error('Erreur lors de la mise à jour de la bibliothèque', error);
           }
         );
+      } else {
+        // Si le formulaire n'est pas valide, marquez tous les champs comme "touched" pour afficher les messages d'erreur
+        Object.keys(this.biblioForm.controls).forEach((field) => {
+          const control = this.biblioForm.get(field);
+          if (control) {
+            control.markAsTouched({ onlySelf: true });
+          }        });
       }
     }
-  
-  
-    // La méthode pour pré-remplir le formulaire
-    preRemplirFormulaire(bibliotheque: Bibliotheque) {
-      this.biblioForm.patchValue({
-        nomB: bibliotheque.nomB,
-        email: bibliotheque.email,
-        numtel: bibliotheque.numtel,
-        horaire: bibliotheque.horaire,
-        description: bibliotheque.description,
-      });
-    }
   }
+   
+  

@@ -14,12 +14,12 @@ export class BiblioService {
   
   private apiServerUrl = 'http://localhost:8082/bibliotheques';
   
-  addBiblio(nomB : string , email:string ,  numtel : number ,  horaire : string ,description:string  ):Observable<Bibliotheque>{
+  addBiblio(nomB : string , email:string ,  numTel : number ,  horaire : string ,description:string  ):Observable<Bibliotheque>{
 
     const biblio: Bibliotheque  =  {
       nomB :nomB ,
       email:email ,
-      numtel:numtel ,
+      numTel:numTel ,
       horaire:horaire ,
       description:description ,
      
@@ -38,5 +38,8 @@ public deleteBiblio(idBibliotheque: number){
   const url = `${this.apiServerUrl}/${idBibliotheque}`; // Assurez-vous d'avoir la route appropriée dans votre API
   return this.http.get<Bibliotheque>(url);
 }
+updateBibliotheque(idBibliotheque: number, bibliotheque: Bibliotheque): Observable<Bibliotheque> {
+  return this.http.put<Bibliotheque>(this.apiServerUrl + '/updatebiblio'+ `/${idBibliotheque}`, bibliotheque);
 
+}
 }

@@ -18,12 +18,11 @@ export class ListevenementComponent implements OnInit {
   constructor(private EvenementService : EvenementService, private router: Router ){
 
   }
-  modifierEvenement(idEvenement?: number) {
-    if (idEvenement) {
-      this.router.navigate(['/updateevent', idEvenement]);
-    } else {
-      // Gérer le cas où idEvenement est undefined (par exemple, afficher un message d'erreur)
-    }
+  navigateToEdit(id: number) {
+    this.router.navigate(['/admin/evenement/updateevent', id]);
+  }
+  navigateToAdd() {
+    this.router.navigate(['/admin/evenement/addevent']);
   }
 
 
@@ -32,6 +31,7 @@ export class ListevenementComponent implements OnInit {
 
    ngOnInit(): void {
      this.eventList =  this.EvenementService.getAllEvents();
+
    
 
  

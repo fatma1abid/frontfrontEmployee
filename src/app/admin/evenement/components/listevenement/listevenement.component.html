@@ -1,5 +1,11 @@
 <div class="content-wrapper">
     <div class="row">
+
+      <button matTooltip="Edit Task" class="btn btn-primary mr-2" [routerLink]="['/admin/evenement/addevent']">
+        Ajouter un evenement 
+      </button> 
+    
+      
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
@@ -20,16 +26,32 @@
                 <tbody>
                   <tr>
                   <tr *ngFor="let evenement of eventList | async">
-                    <td>{{evenement.idEvenement}}</td>
+                    <td>{{evenement.image}}</td>
                     <td>{{evenement.nomE | titlecase}}</td>
-                    <td>{{evenement.dateDebut}}</td>
-                    <td>{{evenement.dateFin}}</td>
+                    <td>{{evenement.dateDebut| date: 'dd/MM/yyyy' }}</td>
+                    <td>{{evenement.dateFin| date: 'dd/MM/yyyy' }}</td>
                     <td>{{evenement.lieu}}</td>
-                    <td>{{evenement.etat}}</td>
+                  
+                    <td>
+                      <label [ngClass]="{
+
+                       'badge badge-info': evenement.etatEvent === 'EN_COURS',
+
+                       'badge badge-warning': evenement.etatEvent === 'ANNULE',
+
+                       'badge badge-danger': evenement.etatEvent === 'REPORTE',
+
+                       'badge badge-success': evenement.etatEvent === 'PLANIFIE'
+                       
+                       }">
+                      {{evenement.etatEvent}}
+                                              </label></td>
+                  
                     <td>{{evenement.description | titlecase}}</td>
                     <td style="width: 20%;">
-                        <button class="btn btn-warning"(click)="modifierEvenement(evenement.idEvenement)" >Modifier</button>
-                        <button class="btn btn-danger ml-4" (click)="supprimerEvenement(evenement.idEvenement)">Supprimer</button>
+                      <button matTooltip="Edit Task" class="btn btn-info mr-2" [routerLink]="['/admin/evenement/updateevent', evenement.idEvenement]">
+                        Modifier
+                      </button>                         <button class="btn btn-danger ml-4" (click)="supprimerEvenement(evenement.idEvenement)">Supprimer</button>
                     </td>
                   </tr>
                   

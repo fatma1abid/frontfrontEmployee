@@ -26,7 +26,7 @@ export class AddevenementComponent implements OnInit {
       dateFin: [null, Validators.required],
       lieu: [null, [Validators.required ,Validators.minLength(3)]],
       description: [null, [Validators.required, Validators.minLength(5)]],
-      etat: ['valeur4'],
+      etatEvent: ['PLANIFIE'],
       image: [null], // Ajoutez des validateurs si nécessaire
 
     });
@@ -41,8 +41,8 @@ export class AddevenementComponent implements OnInit {
     this.evenementForm.get('dateFin')?.value,
     this.evenementForm.get('lieu')?.value,
     this.evenementForm.get('description')?.value,
-    this.evenementForm.get('etat')?.value,
-    this.selectedFile.name).subscribe(
+    this.evenementForm.get('etatEvent')?.value,
+    this.selectedFile).subscribe(
       ()=>{
         console.log("Evenement ajouté avec succes")
       }

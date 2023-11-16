@@ -3,17 +3,14 @@ import { Evenement } from 'src/app/core/models/Evenement.model';
 import { EvenementService } from 'src/app/core/services/EvenementService';
 import { Observable } from 'rxjs';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router } from '@angular/router';
 @Component({
   selector: 'app-updateevenement',
   templateUrl: './updateevenement.component.html',
   styleUrls: ['./updateevenement.component.scss']
 })
 export class UpdateevenementComponent implements OnInit {
-
-  evenementForm: FormGroup;
- idEvenement: number = 0; // Initialisez idEvenement à une valeur par défaut
-  evenementDetails: Evenement = new Evenement(); 
+  eventForm!: FormGroup;
   selectedFile!: File;
   nameFile!:string
 
@@ -21,63 +18,104 @@ export class UpdateevenementComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-  constructor(private fb: FormBuilder, private evenementService: EvenementService, private route: ActivatedRoute) {
-    this.evenementForm = this.fb.group({
-      nomE: [null, Validators.required],
-      dateDebut: [null, Validators.required],
-      dateFin: [null, Validators.required],
-      lieu: [null, Validators.required],
-      description: [null, [Validators.required, Validators.minLength(5)]],
-      etat: [null, Validators.required],
-      image: [null]    });
-  }
-  get f() {
-    return this.evenementForm.controls;
-  }
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.idEvenement = +params['id']; // Récupérez l'ID de l'URL
-      this.loadEvenementDetails();
-    });
-  }
+  
+    constructor(
+      
+      private fb: FormBuilder,
+      private eventService: EvenementService,
+      private route: ActivatedRoute,
+      private router: Router,
+    ) {
+      this.eventForm = new FormGroup({
+        idEvenement: new FormControl(),
+        nomE: new FormControl(),
+        dateDebut: new FormControl(),
+        dateFin: new FormControl(),
+        lieu: new FormControl(),
+        etatEvent: new FormControl(),
+        description: new FormControl(),
+        image: new FormControl(),
 
-  loadEvenementDetails() {
-    // Utilisez EvenementService pour obtenir les détails de l'événement à partir de l'API
-    this.evenementService.getEvenementDetails(this.idEvenement).subscribe(
-      (evenement) => {
-        this.evenementDetails = evenement;
+      });
+    }
+    
+  
+    ngOnInit(): void {
+      this.initForm();
+    }
+    initForm() {
+      const idEvenement = this.route.snapshot.params['id']; // Supposons que l'ID de la bibliothèque soit dans la route
+      this.eventService.getEvenementById(idEvenement).subscribe(
+        
+        (evenement) => {
+          const originaldateDebut = new Date(evenement.dateDebut);
+        const formatteddateDebut =
+        originaldateDebut.getFullYear() +
+          '-' +
+          ('0' + (originaldateDebut.getMonth() + 1)).slice(-2) +
+          '-' +
+          ('0' + originaldateDebut.getDate()).slice(-2);
+          const originaldateFin = new Date(evenement.dateFin);
+          const formatteddateFin =
+          originaldateFin.getFullYear() +
+            '-' +
+            ('0' + (originaldateFin.getMonth() + 1)).slice(-2) +
+            '-' +
+            ('0' + originaldateFin.getDate()).slice(-2);
 
-        // Mettez à jour les valeurs du formulaire avec les détails de l'événement
-        this.evenementForm.patchValue({
-          nomE: evenement.nomE,
-          dateDebut: evenement.dateDebut,
-          dateFin: evenement.dateFin,
-          lieu: evenement.lieu,
-          description: evenement.description,
-          etat: evenement.etat,
-          image: evenement.image        });
-      },
-      (error) => {
-        console.error('Erreur lors du chargement des détails de l\'événement :', error);
-      }
-    );
-  }
+          // Affectez les valeurs de la bibliothèque au formulaire
+          this.eventForm = this.fb.group({
+            idEvenement: evenement.idEvenement,
+            nomE: evenement.nomE,
+            dateDebut: formatteddateDebut,
+            dateFin: formatteddateFin,
+            lieu: evenement.lieu,
+            etatEvent: evenement.etatEvent,
+            description: evenement.description,
+            image: evenement.image,
 
-  mettreAJourEvenement() {
-    if (this.evenementDetails && this.evenementDetails.idEvenement !== undefined) {
-      const updatedEvent = this.evenementForm.value;
-      this.evenementService.updateEvent(this.evenementDetails.idEvenement, updatedEvent).subscribe(
-        () => {
-          console.log('Evenement mis à jour avec succès');
-          // Effectuez toute action supplémentaire après la mise à jour si nécessaire
+          });
         },
         (error) => {
-          console.error('Erreur lors de la mise à jour de l\'événement :', error);
+          console.error('Erreur lors de la récupération des détails de la bibliothèque', error);
         }
       );
-    } else {
-      console.error('ID de l\'événement non défini. Impossible de mettre à jour.');
-      // Affichez un message d'erreur à l'utilisateur ou prenez une autre action appropriée.
+    }
+    get f() {
+      return this.eventForm.controls;
+    }
+    ModifierEvent() {
+      if (this.eventForm.valid) {
+        // Vérifiez si le formulaire est valide avant de procéder à la mise à jour
+  
+        // Récupérez les valeurs du formulaire
+        const idEvenement = this.eventForm.get('idEvenement')?.value;
+        const eventData = this.eventForm.value;
+  
+        // Appelez la méthode de mise à jour du service
+        this.eventService.updateEvenement(idEvenement, eventData).subscribe(
+          (result) => {
+            // Gérez la réponse de la mise à jour
+            console.log('Evenement mise à jour avec succès', result);
+
+  
+            // Réinitialisez le formulaire après la mise à jour
+            this.eventForm.reset();
+          },
+          (error) => {
+            // Gérez les erreurs de la mise à jour
+            console.error('Erreur lors de la mise à jour de la bibliothèque', error);
+          }
+        );
+      } else {
+        // Si le formulaire n'est pas valide, marquez tous les champs comme "touched" pour afficher les messages d'erreur
+        Object.keys(this.eventForm.controls).forEach((field) => {
+          const control = this.eventForm.get(field);
+          if (control) {
+            control.markAsTouched({ onlySelf: true });
+          }        });
+      }
     }
   }
-}
+   
+  

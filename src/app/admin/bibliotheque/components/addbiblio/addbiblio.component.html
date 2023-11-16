@@ -34,14 +34,14 @@
             </div>
         </div>
         <div class="form-group">
-          <label for="numtel">Numéro de Télephone</label>
-          <input type="number" class="form-control" id="numtel" placeholder="Numéro de Télephone" formControlName="numtel">
-          <div *ngIf="f['numtel'].touched">
-              <div *ngIf="f['numtel'].errors?.['required']" class="error">
+          <label for="numTel">Numéro de Télephone</label>
+          <input type="number" class="form-control" id="numTel" placeholder="Numéro de Télephone" formControlName="numTel">
+          <div *ngIf="f['numTel'].touched">
+              <div *ngIf="f['numTel'].errors?.['required']" class="error">
                 <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
                 
               </div>
-              <div *ngIf="f['numtel'].errors?.['minlength']" class="error">
+              <div *ngIf="f['numTel'].errors?.['minlength']" class="error">
                 <p> <i class="mdi mdi-alert-circle-outline"></i> le numéro n'est pas valide</p>
               </div>
           </div>

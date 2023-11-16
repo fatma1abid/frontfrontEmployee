@@ -4,6 +4,7 @@ import {AddbiblioComponent} from './components/addbiblio/addbiblio.component';
 import {UpdatebiblioComponent} from './components/updatebiblio/updatebiblio.component';
 import {ListbiblioComponent} from './components/listbiblio/listbiblio.component';
 
+
 const routes: Routes = [
   
   { path: 'addbiblio', component: AddbiblioComponent },
