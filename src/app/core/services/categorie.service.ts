@@ -38,4 +38,26 @@ export class CategorieService {
   }
 
 
+  getCategorie(id:any) : Observable<Categorie> {
+    return this.http.get<Categorie>(this.apiServerUrl + `/${id}`);
+  }
+
+
+  getCategorieDuLivre(id:any) : Observable<Categorie> {
+    return this.http.get<Categorie>(this.apiServerUrl + `/livre/${id}`);
+  }
+
+
+  modifierCategorie(id:any ,nom : string , description:string , image:File ) :Observable<Categorie> {
+
+    const formData: FormData = new FormData();
+    formData.append('nom', nom);
+    formData.append('description', description);
+    formData.append('image', image, image.name);
+
+
+    return this.http.put<Categorie>(this.apiServerUrl + `/${id}` , formData);
+  }
+
+
 }

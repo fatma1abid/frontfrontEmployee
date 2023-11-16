@@ -4,6 +4,17 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Liste des categories</h4>
+            <div *ngIf="msg">
+              <div class="alert alert-success" role="alert">
+                  {{msg}}
+              </div>
+            </div>
+
+            <div *ngIf="error">
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+            </div>
             <div class="table table-hover">
               <table class="table">
                 <thead >
@@ -21,8 +32,8 @@
                     <td>{{categorie.nom | titlecase}}</td>
                     <td>{{categorie.description | titlecase}}</td>
                     <td style="width: 20%;">
-                        <button class="btn btn-warning" (click)="modifierCategorie(categorie.idCategorie)">Modifier</button>
-                        <button  class="btn btn-danger ml-4" (click)="supprimerCategorie(categorie.idCategorie)">Supprimer</button>
+                        <button class="btn btn-warning" (click)="openModalModification(categorie.idCategorie)">Modifier</button>
+                        <button  class="btn btn-danger ml-4" (click)="openModalSuppression(categorie.idCategorie)">Supprimer</button>
                     </td>
                   </tr>
                 </tbody>

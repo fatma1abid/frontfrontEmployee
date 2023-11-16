@@ -4,6 +4,17 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Liste des livres</h4>
+            <div *ngIf="msg">
+              <div class="alert alert-success" role="alert">
+                  {{msg}}
+              </div>
+            </div>
+
+            <div *ngIf="error">
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+            </div>
             <div class="table-responsive">
               <table class="table table-hover">
                 <thead >
@@ -14,22 +25,28 @@
                     <th>Auteur</th>
                     <th>Nombre de page</th>
                     <th>Date de publication</th>
+                    <th>Categorie</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
 
                   <tr *ngFor="let livre of livreList | async">
-                    <td>{{livre.idLivre}}</td>
                     <td><img [src]="urlImage + '/' + livre.idLivre + '/' + livre.image" alt="Livre Image" width="50" height="50"></td>
                     <td>{{livre.titre | titlecase}}</td>
                     <td>{{ livre.description | titlecase}}</td>
                     <td>{{ livre.nomAuteur | titlecase}}</td>
                     <td>{{ livre.nbPages }}</td>
-                    <td>{{ livre.dateDePublication | date }}</td>
+                    <td>{{ livre.dateDePublication | date: 'dd/MM/yyyy' }}</td>
+                    <td >
+                      <div *ngIf="livre.idLivre">
+                        {{ getCategoryByLivre(livre.idLivre) }}
+                      </div>
+
+                    </td>
                     <td style="width: 20%;">
-                        <button class="btn btn-warning" (click)="modifierLivre(livre.idLivre)">Modifier</button>
-                        <button class="btn btn-danger ml-4" (click)="supprimerLivre(livre.idLivre)">Supprimer</button>
+                        <button class="btn btn-warning" (click)="openModalModification(livre.idLivre)">Modifier</button>
+                        <button class="btn btn-danger ml-4" (click)="openModalSuppression(livre.idLivre)">Supprimer</button>
                     </td>
                   </tr>
                 </tbody>

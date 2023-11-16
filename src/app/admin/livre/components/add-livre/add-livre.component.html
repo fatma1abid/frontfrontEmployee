@@ -1,3 +1,6 @@
+
+<app-list-livre></app-list-livre>
+
 <div class="content-wrapper">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
@@ -87,9 +90,9 @@
             <div class="form-group">
                 <label for="exampleselectName1">Categorie</label>
                 <select class="form-control" id="exampleselectName1" formControlName="categorie"> 
-                  <option value="" selected >Select a category</option>
+                  <option value="" selected disabled >Select a category</option>
                   <option *ngFor="let categorie of categorieList | async" [value]="categorie.idCategorie">
-                    {{ categorie.idCategorie }}
+                    {{ categorie.nom | titlecase}}
                   </option>
                 </select>
 
@@ -116,4 +119,3 @@
     </div>
 </div>    
 
-<app-list-livre></app-list-livre>

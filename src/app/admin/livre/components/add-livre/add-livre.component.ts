@@ -56,17 +56,6 @@ export class AddLivreComponent {
 
 
   AjouterLivre(){
-
-    const livre : Livre = {
-      titre : this.livreForm.get('titre')?.value,
-      description:this.livreForm.get('description')?.value,
-      nomAuteur:this.livreForm.get('nomAuteur')?.value,
-      nbPages:this.livreForm.get('nbrePage')?.value,
-      dateDePublication:this.livreForm.get('datePublication')?.value,
-      categorie:this.livreForm.get('categorie')?.value,
-    }
-
-
     this.livreService.addLivre(this.livreForm.get('titre')?.value,
     this.livreForm.get('description')?.value,
     this.livreForm.get('nomAuteur')?.value,
@@ -77,6 +66,8 @@ export class AddLivreComponent {
       ()=>{
          this.msg = "Livre ajouté avec succées"
          this.livreForm.reset();
+         this.livreService.getAllLivres();
+         
       },
       ()=>{
            this.error = "Il ya une erreur qui est survenu"

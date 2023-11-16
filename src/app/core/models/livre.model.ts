@@ -7,6 +7,6 @@ export class Livre {
     nbPages !: number;
     dateDePublication !: Date;
     description !: string;
-    categorie !: Categorie;
+    categorie !: number;
     image ?: string;
 }

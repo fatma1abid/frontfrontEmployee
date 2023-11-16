@@ -40,6 +40,12 @@ export class LivreService {
   }
 
 
+  
+  getLivre(id:any) : Observable<Livre> {
+    return this.http.get<Livre>(this.apiServerUrl + `/${id}`);
+  }
+
+
   supprimerLivre(id:any)  {
     return this.http.delete(this.apiServerUrl + `/${id}`);
   }
