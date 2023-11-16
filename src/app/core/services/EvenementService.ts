@@ -31,5 +31,23 @@ export class EvenementService {
   getAllEvents() : Observable<Evenement[]> {
     return this.http.get<Evenement[]>(this.apiServerUrl + '');
 }
+public deleteEvent(id: number){
+  return this.http.delete(this.apiServerUrl + `/${id}`);
+
+
+}
+
+//updateEvent(updatedEvent: any): Observable<void> {
+  //return this.http.put<void>(`${this.apiServerUrl}`, updatedEvent);
+//}
+getEvenementDetails(idEvenement: number): Observable<Evenement> {
+  return this.http.get<Evenement>(`${this.apiServerUrl}/${idEvenement}`);
+}
+
+
+updateEvent(idEvenement: number, evenement: Evenement): Observable<Evenement> {
+  const url = `${this.apiServerUrl}/${idEvenement}`;
+  return this.http.put<Evenement>(url, evenement);
+}
 
 }

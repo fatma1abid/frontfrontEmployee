@@ -4,20 +4,7 @@
         <div class="card-body">
             <h4 class="card-title">Ajouter Evenement </h4>
             <form [formGroup]="evenementForm" (ngSubmit)="AjouterEvent()" >
-                
-               <!-- <div class="form-group">
-
-                    <label>Image</label>
-                    <input type="file" name="img[]" class="file-upload-default">
-                    <div class="input-group col-xs-12">
-                    <input type="text" class="form-control file-upload-info" disabled placeholder="Ajouter une image">
-                    <span class="input-group-append">
-                        <button class="file-upload-browse btn btn-primary" type="button">Ajouter Image</button>
-                    </span>
-                    </div>
-            
-                </div>
-                -->
+             
             <div class="form-group">
                 <label for="nomE">nomE</label>
                 <input type="text" class="form-control" id="nomE" placeholder="nomE" formControlName="nomE">

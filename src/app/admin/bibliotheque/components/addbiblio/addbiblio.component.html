@@ -4,7 +4,8 @@
       <div class="card-body">
           <h4 class="card-title">Ajouter Bibliotheque </h4>
             <form [formGroup]="biblioForm" (ngSubmit)="AjouterBiblio()" >
-            
+              <input type="hidden" formControlName="idBibliotheque">
+
           <div class="form-group">
               <label for="nomB">Nom</label>
               <input type="text" class="form-control" id="nomB" placeholder="nomB" formControlName="nomB">

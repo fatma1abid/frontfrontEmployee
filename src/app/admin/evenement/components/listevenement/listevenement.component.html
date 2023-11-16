@@ -28,8 +28,8 @@
                     <td>{{evenement.etat}}</td>
                     <td>{{evenement.description | titlecase}}</td>
                     <td style="width: 20%;">
-                        <button class="btn btn-warning">Modifier</button>
-                        <button class="btn btn-danger ml-4">Supprimer</button>
+                        <button class="btn btn-warning"(click)="modifierEvenement(evenement.idEvenement)" >Modifier</button>
+                        <button class="btn btn-danger ml-4" (click)="supprimerEvenement(evenement.idEvenement)">Supprimer</button>
                     </td>
                   </tr>
                   

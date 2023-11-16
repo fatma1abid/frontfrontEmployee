@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Bibliotheque } from 'src/app/core/models/Bibliotheque.model';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component , OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { BiblioService } from 'src/app/core/services/BiblioService';
 
@@ -13,7 +9,7 @@ import { BiblioService } from 'src/app/core/services/BiblioService';
   styleUrls: ['./addbiblio.component.scss']
 })
 
-export class AddbiblioComponent{
+export class AddbiblioComponent implements OnInit {
 
   biblioForm! : FormGroup;
   
@@ -39,8 +35,10 @@ export class AddbiblioComponent{
     this.biblioForm.get('email')?.value,
     this.biblioForm.get('numtel')?.value,
     this.biblioForm.get('horaire')?.value,
-    this.biblioForm.get('description')?.value,
-     
+    this.biblioForm.get('description')?.value).subscribe(
+    ()=>{
+      console.log("Bibliotheque ajouté avec succes")
+    }
     )
   }
 

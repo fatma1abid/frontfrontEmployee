@@ -1,5 +1,5 @@
 export class Bibliotheque {
-    id?:number;
+    idBibliotheque?:number;
     nomB!:string;
     email!:string;
     numtel!:number;

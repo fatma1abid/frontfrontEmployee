@@ -30,4 +30,13 @@ export class BiblioService {
   getAllBiblios() : Observable<Bibliotheque[]> {
     return this.http.get<Bibliotheque[]>(this.apiServerUrl + '');
 }
+public deleteBiblio(idBibliotheque: number){
+   return this.http.delete(this.apiServerUrl + `/${idBibliotheque}`);
+  
+ }
+ getBibliothequeById(idBibliotheque: number): Observable<Bibliotheque> {
+  const url = `${this.apiServerUrl}/${idBibliotheque}`; // Assurez-vous d'avoir la route appropriée dans votre API
+  return this.http.get<Bibliotheque>(url);
+}
+
 }
