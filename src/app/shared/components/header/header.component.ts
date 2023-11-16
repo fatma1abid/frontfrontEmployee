@@ -23,7 +23,6 @@ export class HeaderComponent {
   }
 
   isSpecificRoute(): boolean {
-    console.log(this.router.url);
-    return this.router.url != "/front/user";
+    return this.router.url !== "/front/register" && this.router.url !== "/front/login" && this.router.url !== "/front/updateProfile";
   }
 }
