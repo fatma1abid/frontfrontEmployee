@@ -25,7 +25,6 @@
                     <th>Auteur</th>
                     <th>Nombre de page</th>
                     <th>Date de publication</th>
-                    <th>Categorie</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -38,12 +37,6 @@
                     <td>{{ livre.nomAuteur | titlecase}}</td>
                     <td>{{ livre.nbPages }}</td>
                     <td>{{ livre.dateDePublication | date: 'dd/MM/yyyy' }}</td>
-                    <td >
-                      <div *ngIf="livre.idLivre">
-                      
-                      </div>
-
-                    </td>
                     <td style="width: 20%;">
                         <button class="btn btn-warning" (click)="openModalModification(livre.idLivre)">Modifier</button>
                         <button class="btn btn-danger ml-4" (click)="openModalSuppression(livre.idLivre)">Supprimer</button>

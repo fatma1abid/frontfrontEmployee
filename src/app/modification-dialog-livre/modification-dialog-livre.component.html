@@ -1,6 +1,17 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
+<div *ngIf="msg">
+  <div class="alert alert-success" role="alert">
+      {{msg}}
+  </div>
+</div>
+
+<div *ngIf="error">
+  <div class="alert alert-danger" role="alert">
+      {{error}}
+  </div>
+</div>
 <div mat-dialog-content>
-    <form class="forms-sample" [formGroup]="modificationLivreForm" >
+    <form class="forms-sample" [formGroup]="modificationLivreForm" (ngSubmit)="modifierLivre()">
 
         <div class="form-group">
             <label for="exampleInputName1">Titre</label>
@@ -66,24 +77,6 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="form-group">
-            <label for="exampleselectName1">Categorie</label>
-            <select class="form-control" id="exampleselectName1" formControlName="categorie"> 
-              <option [value]=""  selected >{{livre?.categorie}}</option>
-              <option *ngFor="let categorie of categorieList | async" [value]="categorie.idCategorie">
-                {{ categorie.idCategorie }}
-              </option>
-            </select>
-
-            <div *ngIf="f['categorie'].touched">
-                <div *ngIf="f['categorie'].errors?.['required']" class="error">
-                  <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner la categorie du livre </p> 
-                </div>
-            </div>
-        </div> 
-
          
         <div class="form-group">
             <div class="input-group col-xs-12">

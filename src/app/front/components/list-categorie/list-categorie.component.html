@@ -1,0 +1,15 @@
+
+<div class="content-wrapper">
+
+    <h2>Les categories </h2>
+    <div class="row">
+        <div class="col-md-2 grid-margin"  *ngFor="let categorie of categorieList | async">
+            <img [src]="urlImage + '/' + categorie.idCategorie + '/' + categorie.image" alt="Category Image" width="150" height="150">
+            <span>{{categorie.nom}}</span>
+        </div>
+
+        <div class="col-md-6 grid-margin stretch-card">
+
+        </div>   
+    </div>      
+</div>

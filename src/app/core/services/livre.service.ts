@@ -50,4 +50,19 @@ export class LivreService {
     return this.http.delete(this.apiServerUrl + `/${id}`);
   }
 
+
+  modifierLivre(id:any, titre : string, description:string,nomAuteur:string,nbPages:number,dateDePublication:string,image:File):Observable<Livre>  {
+
+    const formData: FormData = new FormData();
+    formData.append('titre', titre );
+    formData.append('description', description );
+    formData.append('nomAuteur', nomAuteur );
+    formData.append('nbPages', nbPages.toString() );
+    formData.append('dateDePublication', dateDePublication );
+    formData.append('image', image, image.name);
+
+
+    return this.http.put<Livre>(this.apiServerUrl + `/${id}` , formData );
+  }
+
 }

@@ -16,7 +16,7 @@ import { formatDate } from '@angular/common';
 export class ModificationDialogLivreComponent {
 
   constructor(private formBuilder:FormBuilder,public dialogRef: MatDialogRef<ModificationDialogLivreComponent>,
-    private livreService:LivreService, private categorieService:CategorieService,
+    private livreService:LivreService, 
     @Inject(MAT_DIALOG_DATA) public data: any){
 
   }
@@ -29,7 +29,6 @@ export class ModificationDialogLivreComponent {
 
   nameFile!:string
 
-  categorieList !: Observable<Categorie[]>
 
   livre !: any;
 
@@ -39,9 +38,6 @@ export class ModificationDialogLivreComponent {
 
 
   ngOnInit(): void {
-
-
-    this.categorieList = this.categorieService.getAllCategorie();
 
     this.livreService.getLivre(this.data.livreId).subscribe(
       result=>{
@@ -59,7 +55,6 @@ export class ModificationDialogLivreComponent {
           nomAuteur:result.nomAuteur,
           nbPages:result.nbPages,
           dateDePublication: formattedDate,
-          categorie:result.categorie,
           image : result.image
         }
       }
@@ -71,7 +66,6 @@ export class ModificationDialogLivreComponent {
       nomAuteur: [null, [Validators.required, Validators.minLength(2)]],
       nbPages: [null, [Validators.required]],
       dateDePublication: [null, [Validators.required]],
-      categorie : [null , [Validators.required]],
       image: [null, [Validators.required]],
     })
 
@@ -84,8 +78,21 @@ export class ModificationDialogLivreComponent {
   }
 
 
-
   modifierLivre(){
+    this.livreService.modifierLivre(this.data.livreId,
+      this.modificationLivreForm.get('titre')?.value,
+      this.modificationLivreForm.get('description')?.value,
+      this.modificationLivreForm.get('nomAuteur')?.value,
+      this.modificationLivreForm.get('nbPages')?.value,
+      this.modificationLivreForm.get('dateDePublication')?.value,
+      this.selectedFile).subscribe(
+      ()=>{
+        this.msg = "Livre modifié avec succées"
+          },
+     ()=>{
+        this.error = "Il ya une erreur qui est survenu"
+     }
+    )
 
   }
 
