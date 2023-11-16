@@ -6,6 +6,7 @@ import { Livre } from '../core/models/livre.model';
 import { LivreService } from '../core/services/livre.service';
 import { Categorie } from '../core/models/categorie.model';
 import { Observable } from 'rxjs';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-modification-dialog-livre',
@@ -20,6 +21,7 @@ export class ModificationDialogLivreComponent {
 
   }
 
+
   modificationLivreForm !: FormGroup
   selectedFile!: File;
   msg !: String;
@@ -29,7 +31,7 @@ export class ModificationDialogLivreComponent {
 
   categorieList !: Observable<Categorie[]>
 
-  livre !: Livre;
+  livre !: any;
 
   onFileChanged(event: any): void {
     this.selectedFile =  event.target.files[0];
@@ -43,13 +45,20 @@ export class ModificationDialogLivreComponent {
 
     this.livreService.getLivre(this.data.livreId).subscribe(
       result=>{
-        console.log(result)
+        const originalDate = new Date(result.dateDePublication);
+        const formattedDate =
+          originalDate.getFullYear() +
+          '-' +
+          ('0' + (originalDate.getMonth() + 1)).slice(-2) +
+          '-' +
+          ('0' + originalDate.getDate()).slice(-2);
+       
         this.livre = {
           titre: result.titre,
           description : result.description,
           nomAuteur:result.nomAuteur,
           nbPages:result.nbPages,
-          dateDePublication:result.dateDePublication,
+          dateDePublication: formattedDate,
           categorie:result.categorie,
           image : result.image
         }
@@ -66,9 +75,10 @@ export class ModificationDialogLivreComponent {
       image: [null, [Validators.required]],
     })
 
+
   }
 
-  
+
   get f() {
     return this.modificationLivreForm.controls;
   }

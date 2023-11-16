@@ -45,7 +45,7 @@ export class ModificationDialogComponent implements OnInit {
     );
 
     this.modificationCategorieForm = this.formBuilder.group({
-      nom: [, [Validators.required , Validators.minLength(3)]],
+      nom: [null, [Validators.required , Validators.minLength(3)]],
       description: [null, [Validators.required, Validators.minLength(5)]],
       image: [null, [Validators.required]],
     })

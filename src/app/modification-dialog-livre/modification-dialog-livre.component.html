@@ -59,7 +59,7 @@
 
         <div class="form-group">
             <label for="exampleInputName1">Date de Publication</label>
-            <input type="date" class="form-control" id="exampleInputName1" rows="4" placeholder="Date de Publication" formControlName="dateDePublication"  [value]="livre?.dateDePublication | date:'jj/mm/aaaa' ">
+            <input type="date" class="form-control" id="exampleInputName1" rows="4" placeholder="Date de Publication" formControlName="dateDePublication"  [value]="livre?.dateDePublication">
             <div *ngIf="f['dateDePublication'].touched">
                 <div *ngIf="f['dateDePublication'].errors?.['required']" class="error">
                   <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner la date de publication </p> 
@@ -93,7 +93,6 @@
                 </div>
             </div>
         </div>   
-        <button type="submit" class="btn btn-primary mr-2" [disabled]="modificationLivreForm.invalid">Modifier</button>
+        <button type="submit" class="btn btn-primary mr-2" >Modifier</button>
         </form>
 </div>
-
