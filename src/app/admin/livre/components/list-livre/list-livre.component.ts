@@ -33,11 +33,11 @@ export class ListLivreComponent {
    
    }
 
-   getCategoryByLivre(idLivre: any) {
+   /*getCategoryByLivre(idLivre: any) {
     this.CategorieService.getCategorieDuLivre(idLivre).subscribe(
       categorieResult => this.category = categorieResult
     );
-  }
+  }*/
 
 
 

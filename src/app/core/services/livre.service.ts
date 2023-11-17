@@ -40,6 +40,10 @@ export class LivreService {
   }
 
 
+  getAllLivresByCategory(idCategory:any) : Observable<Livre[]> {
+    return this.http.get<Livre[]>(this.apiServerUrl + `/category/${idCategory}`);
+  }
+
   
   getLivre(id:any) : Observable<Livre> {
     return this.http.get<Livre>(this.apiServerUrl + `/${id}`);

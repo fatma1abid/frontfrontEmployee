@@ -1,4 +1,3 @@
-
 <div class="content-wrapper">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -183,13 +182,17 @@
 
 
 
-    <h2>Les categories </h2>
-    <div class="row">
-        <div class="col-md-2 grid-margin"  *ngFor="let categorie of categorieList | async">
-            <div class="image-container" [ngClass]="{'hovered': categorie.isHovered}"  (mouseover)="onMouseOver(categorie)" (mouseout)="onMouseOut(categorie)">
-                <img [src]="urlImage + '/' + categorie.idCategorie + '/' + categorie.image" alt="Category Image" width="150" height="150" (click)="getLivresByCategory(categorie.idCategorie)">
-                <span class="d-flex justify-content-center align-items-center text-center grid-margin">{{categorie.nom | titlecase}}</span>
+      <div class="row">
+        <div class="col-md-2 grid-margin stretch-card" *ngFor="let livre of livreList | async">
+            <div class="card">
+              <div class="card-body">
+               <div class="d-flex flex-column justify-content-between">
+                <img [src]="urlImage + '/' + livre.idLivre + '/' + livre.image" alt="Category Image" width="135" height="150">
+                <p class="card-title mt-3 d-flex justify-content-center align-items-center text-center grid-margin">{{livre.titre}}</p>
+                <button class="btn btn-outline-success">Details</button>
+               </div>
+              </div>
             </div>
         </div>
-    </div>      
+      </div>
 </div>

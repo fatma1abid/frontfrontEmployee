@@ -3,4 +3,5 @@ export class Categorie {
     nom!:string;
     description!:string;
     image!:File;
+    isHovered?:boolean;
 }
