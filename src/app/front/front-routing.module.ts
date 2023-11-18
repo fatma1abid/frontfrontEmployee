@@ -8,7 +8,9 @@ import { ListLivresComponent } from './components/list-livres/list-livres.compon
 const routes: Routes = [
   {path:'accueil' , component:AccueilFrontComponent},
   {path:'listCategory' , component:ListCategorieComponent},
-  {path:'listLivres/:idCategory' , component:ListLivresComponent}
+  {path:'listLivres/:idCategory' , component:ListLivresComponent},
+  {path:'livreDetails/:idLivre' , component:ListLivresComponent}
+
 ];
 
 @NgModule({
