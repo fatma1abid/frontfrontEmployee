@@ -6,19 +6,23 @@ import { AddevenementComponent } from './components/addevenement/addevenement.co
 import { UpdateevenementComponent } from './components/updateevenement/updateevenement.component';
 import { ListevenementComponent } from './components/listevenement/listevenement.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
     AddevenementComponent,
     UpdateevenementComponent,
-    ListevenementComponent
+    ListevenementComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,
     EvenementRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule ,
+    FullCalendarModule
   ]
 })
 export class EvenementModule { }

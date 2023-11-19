@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 
 
 
+
 @Component({
   selector: 'app-listevenement',
   templateUrl: './listevenement.component.html',

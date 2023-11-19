@@ -42,7 +42,9 @@ export class AddevenementComponent implements OnInit {
     this.evenementForm.get('lieu')?.value,
     this.evenementForm.get('description')?.value,
     this.evenementForm.get('etatEvent')?.value,
-    this.selectedFile).subscribe(
+    this.selectedFile.name).subscribe(
+      //this.selectedFile).subscribe(
+
       ()=>{
         console.log("Evenement ajouté avec succes")
       }

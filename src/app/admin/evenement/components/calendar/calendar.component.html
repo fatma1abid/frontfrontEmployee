@@ -1,0 +1,14 @@
+<!-- calendar.component.html -->
+<div class="calendar-container">
+  <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+
+</div>
+
+<ng-container *ngFor="let event of events">
+  <div
+    class="fc-event"
+    [attr.data-event-id]="event.id"
+    [innerHTML]="event.title"
+  ></div>
+</ng-container>
+

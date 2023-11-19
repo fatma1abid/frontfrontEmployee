@@ -6,8 +6,8 @@ export class Evenement{
     dateFin!:Date;
     lieu!:string;
     description!:string;
-    etatEvent!:EtatEvenement;;
-    image!:File;
+    etatEvent!:EtatEvenement;
+    image!:string;
 
     
     

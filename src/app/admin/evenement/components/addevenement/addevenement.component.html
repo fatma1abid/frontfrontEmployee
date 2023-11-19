@@ -84,7 +84,7 @@
                 <label>Image</label>
                 <div class="input-group col-xs-12">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image" name="img[]" formControlName="image" (change)="onFileChanged($event)">
+                        <input type="file" class="custom-file-input" id="customFile" name="img[]" formControlName="image" (change)="onFileChanged($event)">
 
                         <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
                     </div>
