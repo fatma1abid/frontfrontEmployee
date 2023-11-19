@@ -1,12 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CategorieService } from '../core/services/categorie.service';
-import { Livre } from '../core/models/livre.model';
 import { LivreService } from '../core/services/livre.service';
-import { Categorie } from '../core/models/categorie.model';
-import { Observable } from 'rxjs';
-import { formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-modification-dialog-livre',

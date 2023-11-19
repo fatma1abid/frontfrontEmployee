@@ -4,13 +4,14 @@ import { AccueilFrontComponent } from './components/accueil-front/accueil-front.
 import { ListCategorieComponent } from './components/list-categorie/list-categorie.component';
 import { ListLivreComponent } from '../admin/livre/components/list-livre/list-livre.component';
 import { ListLivresComponent } from './components/list-livres/list-livres.component';
+import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-emprunt.component';
 
 const routes: Routes = [
   {path:'accueil' , component:AccueilFrontComponent},
   {path:'listCategory' , component:ListCategorieComponent},
   {path:'listLivres/:idCategory' , component:ListLivresComponent},
-  {path:'livreDetails/:idLivre' , component:ListLivresComponent}
-
+  {path:'livreDetails/:idLivre' , component:ListLivresComponent},
+  {path:'emprunterLivre/:idLivre' , component:DemandeEmpruntComponent}
 ];
 
 @NgModule({

@@ -4,6 +4,8 @@ import { Livre } from 'src/app/core/models/livre.model';
 import { LivreService } from 'src/app/core/services/livre.service';
 import { Observable } from 'rxjs';
 import { CategorieService } from 'src/app/core/services/categorie.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LivreDetailsComponent } from '../livre-details/livre-details.component';
 
 @Component({
   selector: 'app-list-livres',
@@ -12,7 +14,7 @@ import { CategorieService } from 'src/app/core/services/categorie.service';
 })
 export class ListLivresComponent implements OnInit {
 
-  constructor(private livreService:LivreService , private route:ActivatedRoute , private categorieService:CategorieService,private router:Router){
+  constructor(private livreService:LivreService , private route:ActivatedRoute , private categorieService:CategorieService,private router:Router,private dialog:MatDialog){
 
   }
 
@@ -51,8 +53,18 @@ export class ListLivresComponent implements OnInit {
     
   }
 
-  voirDetailsLivre(id : any){
-      this.router.navigateByUrl(`/front/livreDetails/${id}`);
+
+  openModalDetails(id:any): void {
+    const dialogRef = this.dialog.open(LivreDetailsComponent, {
+      width: '550px',
+      height:'370px' ,
+      data: { title:"" , idLivre : id}
+    });
+  
   }
+
+  /*voirDetailsLivre(id : any){
+      this.router.navigateByUrl(`/front/livreDetails/${id}`);
+  }*/
 
 }
