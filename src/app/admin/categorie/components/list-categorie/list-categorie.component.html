@@ -32,8 +32,12 @@
                     <td>{{categorie.nom | titlecase}}</td>
                     <td>{{categorie.description | titlecase}}</td>
                     <td style="width: 20%;">
-                        <button class="btn btn-warning" (click)="openModalModification(categorie.idCategorie)">Modifier</button>
-                        <button  class="btn btn-danger ml-4" (click)="openModalSuppression(categorie.idCategorie)">Supprimer</button>
+                        <button type="button"  class="btn btn-warning btn-rounded btn-icon" (click)="openModalModification(categorie.idCategorie)">
+                          <i class="mdi mdi-grease-pencil"></i>
+                      </button>
+                      <button type="button"  class="btn btn-danger btn-rounded btn-icon ml-3" (click)="openModalSuppression(categorie.idCategorie)">
+                          <i class="mdi mdi-delete"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

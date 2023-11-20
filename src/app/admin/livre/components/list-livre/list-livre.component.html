@@ -36,10 +36,14 @@
                     <td>{{ livre.description | titlecase}}</td>
                     <td>{{ livre.nomAuteur | titlecase}}</td>
                     <td>{{ livre.nbPages }}</td>
-                    <td>{{ livre.dateDePublication | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ livre.dateDePublication | date: 'd MMMM yyyy' }}</td>
                     <td style="width: 20%;">
-                        <button class="btn btn-warning" (click)="openModalModification(livre.idLivre)">Modifier</button>
-                        <button class="btn btn-danger ml-4" (click)="openModalSuppression(livre.idLivre)">Supprimer</button>
+                      <button type="button"  class="btn btn-warning btn-rounded btn-icon" (click)="openModalModification(livre.idLivre)">
+                          <i class="mdi mdi-grease-pencil"></i>
+                      </button>
+                      <button type="button"  class="btn btn-danger btn-rounded btn-icon ml-3" (click)="openModalSuppression(livre.idLivre)">
+                          <i class="mdi mdi-delete"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

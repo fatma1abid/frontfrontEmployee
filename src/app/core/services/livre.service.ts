@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Livre } from '../models/livre.model';
 import { Observable } from 'rxjs';
 import { HttpClient , HttpHeaders } from '@angular/common/http';
+import { Utilisateur } from '../models/utilisateur.model';
 
 @Injectable({
   providedIn:'root'
@@ -68,5 +69,16 @@ export class LivreService {
 
     return this.http.put<Livre>(this.apiServerUrl + `/${id}` , formData );
   }
+
+    
+  getUserByEmprunt(id:any) : Observable<Utilisateur> {
+    return this.http.get<Utilisateur>(`http://localhost:8080/utilisateurs/emprunt/${id}`);
+  }
+
+    
+  getLivreByEmprunt(id:any) : Observable<Livre> {
+    return this.http.get<Livre>(this.apiServerUrl + `/emprunt/${id}`);
+  }
+
 
 }

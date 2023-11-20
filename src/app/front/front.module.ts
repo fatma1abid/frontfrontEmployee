@@ -9,6 +9,7 @@ import { LivreDetailsComponent } from './components/livre-details/livre-details.
 import { registerLocaleData } from '@angular/common';
 import * as fr from '@angular/common/locales/fr';
 import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-emprunt.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-em
   ],
   imports: [
     CommonModule,
-    FrontRoutingModule
+    FrontRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR'}
