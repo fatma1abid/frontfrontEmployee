@@ -7,7 +7,7 @@ export class Evenement{
     lieu!:string;
     description!:string;
     etatEvent!:EtatEvenement;
-    image!:string;
+    image?:File;
 
     
     

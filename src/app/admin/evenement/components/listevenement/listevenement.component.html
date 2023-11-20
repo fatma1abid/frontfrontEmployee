@@ -26,7 +26,7 @@
                 <tbody>
                   <tr>
                   <tr *ngFor="let evenement of eventList | async">
-                    <td>{{evenement.image}}</td>
+                    <td><img [src]="urlImage + '/' + evenement.idEvenement + '/' + evenement.image" alt=" Image" width="50" height="50"></td>
                     <td>{{evenement.nomE | titlecase}}</td>
                     <td>{{evenement.dateDebut| date: 'dd/MM/yyyy' }}</td>
                     <td>{{evenement.dateFin| date: 'dd/MM/yyyy' }}</td>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FrontRoutingModule } from './front-routing.module';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
 import { ListbibliosComponent } from './components/listbiblios/listbiblios.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ListbibliosComponent } from './components/listbiblios/listbiblios.compo
   ],
   imports: [
     CommonModule,
-    FrontRoutingModule
+    FrontRoutingModule,
+    FullCalendarModule
   ]
 })
 export class FrontModule { }

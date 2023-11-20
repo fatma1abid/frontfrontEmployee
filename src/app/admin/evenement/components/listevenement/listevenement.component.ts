@@ -28,6 +28,8 @@ export class ListevenementComponent implements OnInit {
 
 
   eventList !: Observable<Evenement[]>
+  urlImage : string  = 'http://localhost:8082/images_events' 
+
 
 
    ngOnInit(): void {
