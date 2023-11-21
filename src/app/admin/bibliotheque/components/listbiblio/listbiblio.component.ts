@@ -19,6 +19,7 @@ export class ListbiblioComponent implements OnInit {
   }
  
   biblioList !: Observable<Bibliotheque[]>
+  urlImage : string  = 'http://localhost:8082/images_biblios' 
 
 
    ngOnInit(): void {

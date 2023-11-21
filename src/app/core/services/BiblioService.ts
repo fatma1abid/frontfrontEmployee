@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Bibliotheque } from '../models/Bibliotheque.model';
+
 
 
 @Injectable({
@@ -14,19 +15,23 @@ export class BiblioService {
   
   private apiServerUrl = 'http://localhost:8082/bibliotheques';
   
-  addBiblio(nomB : string , email:string ,  numTel : number ,  horaire : string ,description:string  ):Observable<Bibliotheque>{
+  addBiblio(nomB : string , email:string ,  numTel : number ,  horaire : string ,description:string , imageB:File  ):Observable<Bibliotheque>{
+    const formData: FormData = new FormData();
+    formData.append('nomB', nomB);
+    formData.append('email', email);
+    formData.append('numTel', numTel.toString());
+    formData.append('horaire', horaire);
+    formData.append('description', description);
+    formData.append('imageB', imageB,imageB.name);
 
-    const biblio: Bibliotheque  =  {
-      nomB :nomB ,
-      email:email ,
-      numTel:numTel ,
-      horaire:horaire ,
-      description:description ,
-     
-    
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'multipart/form-data');
+    return this.http.post<Bibliotheque>(this.apiServerUrl + '/addbibliotheque', formData);
+
+  
     }
-    return this.http.post<Bibliotheque>(this.apiServerUrl + '/addbibliotheque', biblio);
-  }
+
+  
   getAllBiblios() : Observable<Bibliotheque[]> {
     return this.http.get<Bibliotheque[]>(this.apiServerUrl + '');
 }

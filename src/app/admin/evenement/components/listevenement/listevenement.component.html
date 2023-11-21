@@ -49,9 +49,13 @@
                   
                     <td>{{evenement.description | titlecase}}</td>
                     <td style="width: 20%;">
-                      <button matTooltip="Edit Task" class="btn btn-info mr-2" [routerLink]="['/admin/evenement/updateevent', evenement.idEvenement]">
-                        Modifier
-                      </button>                         <button class="btn btn-danger ml-4" (click)="supprimerEvenement(evenement.idEvenement)">Supprimer</button>
+                      <button matTooltip="Edit Task" class="btn btn-warning bnt-rounded btn-icon" [routerLink]="['/admin/evenement/updateevent', evenement.idEvenement]">
+                        <i class="mdi mdi-grease-pencil"></i>
+                      </button>           
+            <button class="btn btn-danger bnt-rounded btn-icon ml-4" (click)="supprimerEvenement(evenement.idEvenement)">
+              <i class="mdi mdi-delete"></i>
+
+            </button>
                     </td>
                   </tr>
                   

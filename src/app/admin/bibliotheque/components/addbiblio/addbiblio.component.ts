@@ -13,6 +13,12 @@ import { ActivatedRoute , Router} from '@angular/router';
 export class AddbiblioComponent implements OnInit {
 
   biblioForm! : FormGroup;
+  selectedFile!: File;
+  nameFile!:string
+
+  onFileChanged(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
 
   constructor(private fb: FormBuilder , private BiblioService:BiblioService ,   private router: Router
     ) {}
@@ -24,7 +30,8 @@ export class AddbiblioComponent implements OnInit {
       numTel: [null, [Validators.required, Validators.minLength(8)]],
       horaire: [null, [Validators.required ,Validators.minLength(3)]],
       description: [null, [Validators.required, Validators.minLength(5)]],
-   
+      imageB: [null], // Ajoutez des validateurs si nécessaire
+
 
     });
   }
@@ -37,13 +44,20 @@ export class AddbiblioComponent implements OnInit {
     this.biblioForm.get('email')?.value,
     this.biblioForm.get('numTel')?.value,
     this.biblioForm.get('horaire')?.value,
-    this.biblioForm.get('description')?.value).subscribe(
-    ()=>{
-      console.log("Bibliotheque ajouté avec succes")
-      this.router.navigate(['/admin/bibliotheque/listbiblio']);
+    this.biblioForm.get('description')?.value,
+      this.selectedFile).subscribe(
 
+        ()=>{
+          console.log("Evenement ajouté avec succes")
+          this.biblioForm.reset();
+          this.refreshBibliosList();
+  
+        }
+      )
     }
-    )
+    private refreshBibliosList() {
+    this.BiblioService.getAllBiblios();
   }
+
 
 }

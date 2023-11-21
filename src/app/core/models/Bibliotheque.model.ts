@@ -4,5 +4,7 @@ export class Bibliotheque {
     email!:string;
     numTel!:number;
     horaire!:string;
-    description!:string
+    description!:string;
+    imageB?:File;
+
 }

@@ -4,7 +4,7 @@
       <div class="card-body">
           <h4 class="card-title">Ajouter Bibliotheque </h4>
             <form [formGroup]="biblioForm" (ngSubmit)="AjouterBiblio()" >
-              <input type="hidden" formControlName="idBibliotheque">
+             <!--<input type="hidden" formControlName="idBibliotheque">-->
 
           <div class="form-group">
               <label for="nomB">Nom</label>
@@ -76,6 +76,16 @@
                   </div>
               </div>
           </div> 
+          <div class="form-group">
+            <label>Image</label>
+            <div class="input-group col-xs-12">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile1" name="img[]" formControlName="imageB" (change)="onFileChanged($event)">
+
+                    <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
+                </div>
+            </div>
+        </div>
           
           
          
