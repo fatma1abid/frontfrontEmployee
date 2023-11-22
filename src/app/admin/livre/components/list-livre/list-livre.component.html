@@ -25,6 +25,7 @@
                     <th>Auteur</th>
                     <th>Nombre de page</th>
                     <th>Date de publication</th>
+                    <th>Disponibilité</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -37,6 +38,14 @@
                     <td>{{ livre.nomAuteur | titlecase}}</td>
                     <td>{{ livre.nbPages }}</td>
                     <td>{{ livre.dateDePublication | date: 'd MMMM yyyy' }}</td>
+                    <td> 
+                      <div *ngIf="livre.disponibilite === true">
+                         <div class="badge badge-success"> Disponible</div>
+                      </div>
+                      <div *ngIf="livre.disponibilite === false">
+                         <div class="badge badge-danger">Non disponible</div>
+                      </div>
+                    </td>
                     <td style="width: 20%;">
                       <button type="button"  class="btn btn-warning btn-rounded btn-icon" (click)="openModalModification(livre.idLivre)">
                           <i class="mdi mdi-grease-pencil"></i>

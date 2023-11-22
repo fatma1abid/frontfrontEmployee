@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CategorieService } from '../core/services/categorie.service';
-import { Categorie } from '../core/models/categorie.model';
+import { CategorieService } from '../../../../core/services/categorie.service';
+import { Categorie } from '../../../../core/models/categorie.model';
 
 @Component({
   selector: 'app-modification-dialog',

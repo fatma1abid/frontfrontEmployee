@@ -14,7 +14,7 @@ import { LivreService } from 'src/app/core/services/livre.service';
 })
 export class DemandeEmpruntComponent implements OnInit{
     
-  constructor(private livreService:LivreService , private empruntLivreService:EmpruntLivreService,private formBuilder:FormBuilder , private route:ActivatedRoute){
+  constructor(private livreService:LivreService , private empruntLivreService:EmpruntLivreService,private formBuilder:FormBuilder , private route:ActivatedRoute , private router:Router){
 
   }
 
@@ -67,6 +67,11 @@ export class DemandeEmpruntComponent implements OnInit{
           this.error = "Il ya une erreur qui est survenu"
      }
      )
+  }
+
+
+  annuler(){
+     this.router.navigateByUrl('/front/listCategory');
   }
 
 

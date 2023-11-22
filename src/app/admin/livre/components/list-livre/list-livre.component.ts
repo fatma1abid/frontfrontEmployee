@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from 'src/app/admin/components/confirmation-dialog/confirmation-dialog.component';
 import { Categorie } from 'src/app/core/models/categorie.model';
 import { Livre } from 'src/app/core/models/livre.model';
 import { CategorieService } from 'src/app/core/services/categorie.service';
 import { LivreService } from 'src/app/core/services/livre.service';
-import { ModificationDialogLivreComponent } from 'src/app/modification-dialog-livre/modification-dialog-livre.component';
+import { ModificationDialogLivreComponent } from 'src/app/admin/livre/components/modification-dialog-livre/modification-dialog-livre.component';
 
 @Component({
   selector: 'app-list-livre',

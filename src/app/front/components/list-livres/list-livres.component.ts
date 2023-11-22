@@ -37,8 +37,7 @@ export class ListLivresComponent implements OnInit {
    
     this.category = this.categorieService.getCategorie(this.idCategory).subscribe(
       result =>{
-        console.log(result.nom)
-          if(result.nom === "enfant") {
+          if(result.nom === "Enfant") {
              this.imageBanniere = "/assets/images/book_children.png"
              
           }else if(result.nom === "Romans et littérature"){
@@ -62,9 +61,5 @@ export class ListLivresComponent implements OnInit {
     });
   
   }
-
-  /*voirDetailsLivre(id : any){
-      this.router.navigateByUrl(`/front/livreDetails/${id}`);
-  }*/
 
 }

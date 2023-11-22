@@ -6,19 +6,25 @@ import { AddLivreComponent } from './components/add-livre/add-livre.component';
 import { ListLivreComponent } from './components/list-livre/list-livre.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListEmpruntLivresComponent } from './components/list-emprunt-livres/list-emprunt-livres.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ModificationDialogLivreComponent } from './components/modification-dialog-livre/modification-dialog-livre.component';
 
 
 @NgModule({
   declarations: [
     AddLivreComponent,
     ListLivreComponent,
-    ListEmpruntLivresComponent
+    ListEmpruntLivresComponent,
+    ModificationDialogLivreComponent
   ],
   imports: [
     CommonModule,
     LivreRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule
   ]
 })
 export class LivreModule { }

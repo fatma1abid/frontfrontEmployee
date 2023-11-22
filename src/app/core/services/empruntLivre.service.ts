@@ -55,4 +55,15 @@ export class EmpruntLivreService {
   }
 
 
+  accepterDemandeEmprunt(id:any,emprunt:any):Observable<empruntLivre>{
+    return this.http.put<empruntLivre>(this.apiServerUrl + `/accepter/${id}`, emprunt) ;
+  }
+
+
+  
+  refuserDemandeEmprunt(idEmprunt:any,idLivre:any){
+    return this.http.delete(this.apiServerUrl + `/refuser/${idEmprunt}/${idLivre}`) ;
+  }
+
+
 }

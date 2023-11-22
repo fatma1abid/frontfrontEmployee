@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 import { Categorie } from 'src/app/core/models/categorie.model';
 import { CategorieService } from 'src/app/core/services/categorie.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-import { ModificationDialogComponent } from 'src/app/modification-dialog/modification-dialog.component';
+import { ConfirmationDialogComponent } from 'src/app/admin/components/confirmation-dialog/confirmation-dialog.component';
+import { ModificationDialogComponent } from 'src/app/admin/categorie/components/modification-dialog/modification-dialog.component';
 
 @Component({
   selector: 'app-list-categorie',

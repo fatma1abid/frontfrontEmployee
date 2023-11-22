@@ -4,7 +4,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Liste des demandes d'emprunts</h4>
-           <!--- <div *ngIf="msg">
+            <div *ngIf="msg">
               <div class="alert alert-success" role="alert">
                   {{msg}}
               </div>
@@ -14,7 +14,7 @@
                 <div class="alert alert-danger" role="alert">
                     {{error}}
                 </div>
-            </div>-->
+            </div>
 
             <div class="table-responsive">
               <table class="table table-hover">
@@ -50,12 +50,19 @@
                     </td>
                     <td style="width: 20%;">
 
-                        <button type="button" [hidden]="empruntDetails.emprunt.etat === 'valide'" class="btn btn-success btn-rounded btn-icon">
+                        <button type="button" [hidden]="empruntDetails.emprunt.etat === 'valide'" (click)="accepterDemandeEmprunt(empruntDetails.emprunt.idEmprunt , empruntDetails.emprunt)" class="btn btn-success btn-rounded btn-icon">
                             <i class="mdi mdi-check"></i>
                         </button>
-                        <button type="button" [hidden]="empruntDetails.emprunt.etat === 'valide'" class="btn btn-danger btn-rounded btn-icon ml-3">
+                        <button type="button" [hidden]="empruntDetails.emprunt.etat === 'valide'" (click)="refuserDemandeEmprunt(empruntDetails.emprunt.idEmprunt,empruntDetails.livre.idLivre)" class="btn btn-danger btn-rounded btn-icon ml-3">
                             <i class="mdi mdi-close"></i>
                         </button>
+
+                        <button type="button" [hidden]="empruntDetails.emprunt.etat === 'non valide'" (click)="modifierDemandeEmprunt(empruntDetails.emprunt.idEmprunt)" class="btn btn-warning btn-rounded btn-icon">
+                          <i class="mdi mdi-grease-pencil"></i>
+                      </button>
+                      <button type="button" [hidden]="empruntDetails.emprunt.etat === 'non valide'" (click)="openModalSuppression(empruntDetails.emprunt.idEmprunt)" class="btn btn-danger btn-rounded btn-icon ml-3">
+                          <i class="mdi mdi-delete"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

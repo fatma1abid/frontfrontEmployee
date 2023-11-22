@@ -1,4 +1,3 @@
-import { Categorie } from "./categorie.model";
 
 export class Livre {
     idLivre ?: number;
@@ -9,4 +8,5 @@ export class Livre {
     description !: string;
     categorie !: number;
     image ?: string;
+    disponibilite ?: boolean;
 }
