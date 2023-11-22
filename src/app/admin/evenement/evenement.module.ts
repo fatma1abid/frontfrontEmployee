@@ -8,6 +8,7 @@ import { ListevenementComponent } from './components/listevenement/listevenement
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule ,
-    FullCalendarModule
+    FullCalendarModule,
+    MatDialogModule,
   ]
 })
 export class EvenementModule { }

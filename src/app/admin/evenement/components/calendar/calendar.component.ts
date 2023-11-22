@@ -2,12 +2,22 @@
 // Importez les bibliothèques nécessaires
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EvenementService } from 'src/app/core/services/EvenementService';
+
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import { CalendarOptions, EventApi } from '@fullcalendar/core';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DateClickArg } from '@fullcalendar/interaction';
+import { AddevenementComponent } from 'src/app/admin/evenement/components/addevenement/addevenement.component';
+import { Renderer2 } from '@angular/core';
+
+import { Observable } from 'rxjs';
+import { EtatEvenement } from 'src/app/core/models/etatEvenement.enum';
+import { Evenement } from 'src/app/core/models/Evenement.model';
+
 
 @Component({
   selector: 'app-calendar',
@@ -20,6 +30,18 @@ export class CalendarComponent implements OnInit {
   selectedEvent: any;
   formattedDate!: string;
   urlImage : string  = 'http://localhost:8082/images_events' ;
+  isEventFormVisible: boolean = false;
+  //newEvent: any = {};
+
+  newEvent = {
+    nomE: '',
+    dateDebut: '',
+    dateFin: '',
+    lieu: '',
+    description: '',
+    etatEvent: '',
+    image: '',
+  };
 
 
   calendarOptions: CalendarOptions = {
@@ -30,14 +52,33 @@ export class CalendarComponent implements OnInit {
     eventDidMount: this.eventDidMount.bind(this),
     editable: true,
     eventDrop: this.handleEventDrop.bind(this),
+
+
+
+
   };
 
-  constructor(private evenementService: EvenementService , private router: Router ) {}
+  constructor(private evenementService: EvenementService ,
+     private router: Router ,
+      private dialog: MatDialog,
+      private renderer: Renderer2,
+      ) 
+  {
+
+  }
 
   ngOnInit() {
     this.loadEvents();
-  }
+    this.evenementService.selectedDate$.subscribe((selectedDate) => {
+      if (selectedDate) {
+        this.openAddEventDialog(selectedDate);
+        this.evenementService.resetSelectedDate();
+      }
+    });
 
+  
+  }
+ 
   loadEvents() {
     this.evenementService.getAllEvents().subscribe(
       (events) => {
@@ -92,9 +133,9 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  handleDateClick(arg: any) {
+  handleDateClick(arg: DateClickArg) {
     try {
-      const clickedDate = moment(arg.date).startOf('day');
+      const clickedDate = new Date(arg.date.setHours(0, 0, 0, 0));
       this.selectedEvent = this.events.find((event) =>
         moment(event.date).startOf('day').isSame(clickedDate)
       );
@@ -103,9 +144,24 @@ export class CalendarComponent implements OnInit {
         this.prepareEventData();
         this.showEventDetailsPopup();
       }
+      else { 
+        this.evenementService.setSelectedDate(clickedDate);
+      }
     } catch (error) {
       console.error('An error occurred in handleDateClick:', error);
     }
+  }
+  openAddEventDialog(selectedDate: Date) {
+    const dialogRef = this.dialog.open(AddevenementComponent, {
+      data: { dateDebut: selectedDate },
+      width: '800px', 
+      height: '2000px', // ajustez la largeur selon vos besoins
+
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Traitez le résultat si nécessaire
+    });
   }
 
   prepareEventData() {
@@ -120,53 +176,73 @@ export class CalendarComponent implements OnInit {
   navigateToEdit(id: number) {
     this.router.navigate(['/admin/evenement/updateevent', id]);
   }
-  showEventDetailsPopup() {
-    Swal.fire({
-      title: this.selectedEvent.title,
-      html: `
-      <div>
-      <img src="http://localhost:8082/images_events/${this.selectedEvent.eventDetails.idEvenement}/${this.selectedEvent.eventDetails.image}" alt="Image" style="max-width: 100%;">
-    </div>
-        Date: ${this.formattedDate}
-        <br>
-        Lieu: ${this.selectedEvent.eventDetails.lieu}
-        <br>
-        Description: ${this.selectedEvent.eventDetails.description}
-      `,
-      confirmButtonText: 'Fermer',
-      showCancelButton: true,
-      footer: `
-        <button class="btn btn-secondary" id="modifyBtn">Modifier</button>
-        <button class="btn btn-danger" id="deleteBtn">Supprimer</button>
-      `,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Handle the "Fermer" button click
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Handle the cancel button click
-      } else if (result.dismiss === Swal.DismissReason.close) {
-        // Handle the close button click
-      }
+    navigateToDelete(id : number) {
+      this.router.navigate(['/admin/evenement',id]);
+    }
+    deleteEvent(idEvenement: number) {
+      // Appelez la méthode deleteEvent du service
+      this.evenementService.deleteEvent(idEvenement).subscribe(
+        () => {
+          console.log(`Evenement avec ID ${idEvenement} supprimé avec succès.`);
+          this.loadEvents(); // Chargez à nouveau les événements après la suppression
+        },
+        (error) => {
+          console.error(`Erreur lors de la suppression de l'événement avec ID ${idEvenement}:`, error);
+        }
+      );
+    }
   
-      // Add event listeners for the custom buttons
-      const modifyBtn = document.getElementById('modifyBtn');
-      const deleteBtn = document.getElementById('deleteBtn');
   
-      if (modifyBtn) {
-        modifyBtn.addEventListener('click', () => {
-          // Handle modify button click
-          this.navigateToEdit(this.selectedEvent.eventDetails.idEvenement); // Call your navigation function here
-        });
-      }
-  
-      if (deleteBtn) {
-        deleteBtn.addEventListener('click', () => {
-          // Handle delete button click
-          // You can call a function to initiate the deletion process
-        });
-      }
-    });
-  }
+    showEventDetailsPopup() {
+      Swal.fire({
+        title: this.selectedEvent.title,
+        html: `
+          <div>
+            <img src="http://localhost:8082/images_events/${this.selectedEvent.eventDetails.idEvenement}/${this.selectedEvent.eventDetails.image}" alt="Image" style="max-width: 100%;">
+          </div>
+          Date: ${this.formattedDate}
+          <br>
+          Lieu: ${this.selectedEvent.eventDetails.lieu}
+          <br>
+          Description: ${this.selectedEvent.eventDetails.description}
+        `,
+        confirmButtonText: 'Fermer',
+        showCancelButton: true,
+        footer: `
+          <button class="btn btn-secondary" id="modifyBtn">Modifier</button>
+          <button class="btn btn-danger" (click)="deleteEvent()" id="deleteBtn">Supprimer</button>
+        `,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Handle the "Fermer" button click
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Handle the cancel button click
+        } else if (result.dismiss === Swal.DismissReason.close) {
+          // Handle the close button click
+        }
+    
+        // Add event listeners for the custom buttons
+        const modifyBtn = document.getElementById('modifyBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+    
+        if (modifyBtn) {
+          modifyBtn.addEventListener('click', () => {
+            // Handle modify button click
+            this.modifyEvent();
+          });
+        }
+    
+       
+      });
+    }
+    
+    modifyEvent() {
+      this.navigateToEdit(this.selectedEvent.eventDetails.idEvenement);
+    }
+    
+    
+    
+
  
 
   eventDidMount(arg: { event: EventApi; el: HTMLElement }) {
@@ -188,5 +264,6 @@ export class CalendarComponent implements OnInit {
   navigateToAdd() {
     this.router.navigate(['/admin/evenement/addevent']);
   }
-    
-}
+ 
+
+  }

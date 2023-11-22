@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Evenement } from '../models/Evenement.model';
 import { EtatEvenement } from '../models/etatEvenement.enum';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { UpdateStartDateDTO } from 'src/app/admin/evenement/components/calendar/update-start-date.dto';
+import * as moment from 'moment';
+import { catchError } from 'rxjs/operators';
 
 
 
@@ -11,13 +13,24 @@ import { UpdateStartDateDTO } from 'src/app/admin/evenement/components/calendar/
   providedIn: 'root'
 })
 export class EvenementService {
+  private selectedDateSubject = new BehaviorSubject<Date | null>(null);
+  selectedDate$: Observable<Date | null> = this.selectedDateSubject.asObservable();
+
 
   constructor(private http : HttpClient){ }
   
   private apiServerUrl = 'http://localhost:8082/evenements';
   
   
-  
+  setSelectedDate(date: Date) {
+    this.selectedDateSubject.next(date);
+  }
+
+  resetSelectedDate() {
+    this.selectedDateSubject.next(null);
+  }
+
+
 
     addEvent(nomE : string , dateDebut:Date ,  dateFin : Date ,  lieu : string ,description:string ,  etatEvent : EtatEvenement , image:File ):Observable<Evenement>{
 
@@ -49,10 +62,7 @@ getEvenementDetails(idEvenement: number): Observable<Evenement> {
 }
 
 
-updateEvent(idEvenement: number, evenement: Evenement): Observable<Evenement> {
-  const url = `${this.apiServerUrl}/${idEvenement}`;
-  return this.http.put<Evenement>(url, evenement);
-}
+
 getEvenementById(idEvenement: number): Observable<Evenement> {
   const url = `${this.apiServerUrl}/${idEvenement}`; // Assurez-vous d'avoir la route appropriée dans votre API
   return this.http.get<Evenement>(url);
@@ -64,5 +74,5 @@ updateEventStartDate(idEvenement: number, newStartDate: Date): Observable<any> {
   return this.http.put(this.apiServerUrl + `/updateeventStartDate/${idEvenement}`, { newStartDate });
 }
 
-
 }
+

@@ -11,7 +11,8 @@ import { PageAccueilComponent } from './components/page-accueil/page-accueil.com
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    
   ]
 })
 export class AdminModule { }
