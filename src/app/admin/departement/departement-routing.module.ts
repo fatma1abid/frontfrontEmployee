@@ -7,7 +7,7 @@ import { DepartementDetailComponent } from './departement-detail/departement-det
 const routes: Routes = [
   { path: 'afficher', component: DepartementListComponent },
   { path: 'add', component: DepartementAddComponent },
-  { path: 'update/:id', component: DepartementDetailComponent },
+  { path: 'update/:idDepartement', component: DepartementDetailComponent },
 
 ];
 @NgModule({

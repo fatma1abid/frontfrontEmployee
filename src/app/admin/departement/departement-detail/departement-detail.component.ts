@@ -22,14 +22,14 @@ export class DepartementDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const originalId = params['id'];
+      const originalId = params['idDepartement']; // Utilisez 'idDepartement' au lieu de 'id'
 
-      console.log('id:', originalId);
+      console.log('idDepartement:', originalId);
 
       const convertedId = +originalId;
 
       if (!isNaN(convertedId)) {
-        console.log('Converted id:', convertedId);
+        console.log('Converted idDepartement:', convertedId);
 
         this.departementService.getDepartementById(convertedId).subscribe(
           (data: Departement) => {
@@ -42,13 +42,13 @@ export class DepartementDetailComponent implements OnInit {
           }
         );
       } else {
-        console.error('Invalid id:', originalId);
+        console.error('Invalid idDepartement:', originalId);
       }
     });
   }
 
   enregistrerDepartement(f: NgForm) {
-    const id = this.departement.id;
+    const id = this.departement.idDepartement;
     this.departementService.updateDepartement(id, this.departement).subscribe(
       (data) => {
         console.log('Departement updated successfully:', data);

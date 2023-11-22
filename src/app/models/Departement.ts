@@ -1,6 +1,6 @@
 
 export class Departement {
-    id!:number;
+    idDepartement!:number;
     nomDepartement!:string;
     responsable!:string;
     nombreProfesseurs!: number;

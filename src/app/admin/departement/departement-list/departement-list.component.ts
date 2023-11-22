@@ -35,6 +35,7 @@ export class DepartementListComponent implements OnInit {
   }
 
   supprimerDepartement(id: number, nomDepartement: string) {
+    console.log('ID du département à supprimer :', id); // Ajoutez cette ligne
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer le département ' + nomDepartement + ' ?',
       text: 'Vous ne pourrez pas récupérer ces données après la suppression !',
@@ -46,21 +47,25 @@ export class DepartementListComponent implements OnInit {
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.value) {
-        this.departementService.deleteDepartement(id).subscribe(
-          () => {
-            console.log('Département supprimé avec succès');
-            // Rechargez la liste des départements après la suppression
-            this.chargerDepartements();
-          },
-          error => {
-            console.error('Erreur lors de la suppression du département:', error);
-          }
-        );
-        Swal.fire(
-          'Supprimé !',
-          'Le département a été supprimé avec succès.',
-          'success'
-        );
+        if (!isNaN(id) && id !== null && id !== undefined) {
+          this.departementService.deleteDepartement(id).subscribe(
+            () => {
+              console.log('Département supprimé avec succès');
+              // Rechargez la liste des départements après la suppression
+              this.chargerDepartements();
+            },
+            error => {
+              console.error('Erreur lors de la suppression du département:', error);
+            }
+          );
+          Swal.fire(
+            'Supprimé !',
+            'Le département a été supprimé avec succès.',
+            'success'
+          );
+        } else {
+          console.error('ID invalide. La suppression du département ne peut pas être effectuée.');
+        }
       }
     });
   }

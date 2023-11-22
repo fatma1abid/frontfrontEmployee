@@ -19,14 +19,17 @@
           <td>{{ departement.nombreProfesseurs }}</td>
           <td>{{ departement.specialite }}</td>
           <td>
-            <button matTooltip="Edit Task" class="btn btn-info mr-2" (click)="navigateToEdit(departement.id)">
-              Modifier
-            </button>
-  
-            <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerDepartement(departement.id,departement.nomDepartement)">
+            
+            <button type="button" class="btn btn-dark btn-icon-text mr-2" fdprocessedid="2mcgwr" (click)="navigateToEdit(departement.idDepartement)">
+                Modifier
+                <i class="ti-file btn-icon-append"></i>                          
+              </button>
+             
+            <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerDepartement(departement.idDepartement,departement.nomDepartement)">
               Supprimer
             </button>
           </td>
+          
         </tr>
       </tbody>
     </table>

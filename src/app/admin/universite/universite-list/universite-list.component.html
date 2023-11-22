@@ -1,8 +1,5 @@
-<div class="col-lg-6 grid-margin stretch-card table-container">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Liste des universités</h4>
-        <div class="table-responsive">
+<div class="container">
+        <h2 >Liste des universités</h2>
           <table class="table">
             <thead>
               <tr>
@@ -18,32 +15,32 @@
                 <td>{{ universite.nomUniversite }}</td>
                 <td>{{ universite.adresse }}</td>
                 <td>
-                  <label class="badge" [ngClass]="{'badge-danger': universite.etatUniversite === 'prive',
-                                                   'badge-info': universite.etatUniversite === 'public',
+                  <label class="badge" [ngClass]="{'badge-danger': universite.etatUniversite === 'Prive',
+                                                   'badge-info': universite.etatUniversite === 'Public',
                                                   }">
                     {{ universite.etatUniversite }}
                   </label>
                 </td>
+                
                 <td>
                   
-                  <button matTooltip="Edit Task" class="btn btn-info mr-2" [routerLink]="['/admin/universite/update', universite.id]">
-                    Modifier
-                  </button>
-        
-                  <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerUniversite(universite.id, universite.nomUniversite)">
-                    Supprimer
-                  </button>
-                      
-              </tr>
-            </tbody>
-          </table>
-          <button type="button" class="btn btn-success mb-3" [routerLink]="['/admin/universite/add']">
-            Ajouter Universite
-          </button>
-        </div>
-      </div>
-    </div>
+               
+                 <button type="button" class="btn btn-dark btn-icon-text mr-2" fdprocessedid="2mcgwr" [routerLink]="['/admin/universite/update', universite.idUniversite]">
+                  Modifier
+                  <i class="ti-file btn-icon-append"></i>                          
+                </button>
 
+                <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerUniversite(universite.idUniversite, universite.nomUniversite)">
+                  Supprimer
+                </button>
+                </td>
+                      
+  </tr>
+  </tbody>
+  </table>
+    <button type="button" class="btn btn-success mb-3" [routerLink]="['/admin/universite/add']">
+      Ajouter Universite
+    </button>
     
 
   </div>

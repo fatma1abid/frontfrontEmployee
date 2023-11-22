@@ -35,6 +35,8 @@ export class UniversiteListComponent implements OnInit {
   }
 
   supprimerUniversite(id: number, nomUniversite: String) {
+    console.log('ID du universite à supprimer :', id); // Ajoutez cette ligne
+
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer l\'université ' + nomUniversite + ' ?',
       text: 'Vous ne pourrez pas récupérer ces données après la suppression !',
@@ -44,8 +46,10 @@ export class UniversiteListComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Oui, supprimer !',
       cancelButtonText: 'Annuler'
+      
     }).then((result) => {
       if (result.value) {
+        if (!isNaN(id) && id !== null && id !== undefined) {
         this.universiteService.deleteUniversite(id).subscribe(
           () => {
             console.log('Universite deleted successfully');
@@ -60,7 +64,10 @@ export class UniversiteListComponent implements OnInit {
           'Supprimée !',
           'L\'université a été supprimée avec succès.',
           'success'
-        );
+          );
+        } else {
+          console.error('ID invalide. La suppression du universite ne peut pas être effectuée.');
+        }
       }
     });
   }

@@ -48,7 +48,7 @@ export class UniversiteUpdateComponent implements OnInit {
   
   
   enregistrerUniversite(f: NgForm) {
-    const id = this.universite.id;
+    const id = this.universite.idUniversite;
     this.universiteService.updateUniversite(id, this.universite).subscribe(
       (data) => {
         console.log('Universite updated successfully:', data);

@@ -18,12 +18,13 @@
 
           <div class="form-group">
             <label for="etatUniversite">État de l'université</label>
-            <select class="form-control" id="etatUniversite" name="etatUniversite" [(ngModel)]="universite.etatUniversite" required>
-              <option value="privez">Privé</option>
-              <option value="public">Public</option>
-              <option value="Autre">Autre</option>
+            <select class="form-control" id="etatUniversite" name="etatUniversite" [(ngModel)]="universite.etatUniversite" required
+                    style="color: #000000; background-color: #fff; ">
+              <option value="Prive">Prive</option>
+              <option value="Public">Public</option>
             </select>
           </div>
+          
 
           <button type="submit" class="btn btn-primary">Enregistrer</button>
           <a [routerLink]="['/admin/universite/afficher']" class="btn btn-secondary">Annuler</a>

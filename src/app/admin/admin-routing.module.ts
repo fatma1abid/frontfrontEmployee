@@ -7,7 +7,7 @@ import { UniversiteUpdateComponent } from './universite/universite-update/univer
 const routes: Routes = [
   {path:'accueil' , component:PageAccueilComponent},
   { path: 'liste-universites', component: UniversiteListComponent },
-  { path: 'update/:id', component: UniversiteUpdateComponent }
+  { path: 'update/:idUniversite', component: UniversiteUpdateComponent }
 
 
 
