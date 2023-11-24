@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { ConfirmationDialogComponent } from 'src/app/admin/components/confirmation-dialog/confirmation-dialog.component';
 import { Categorie } from 'src/app/core/models/categorie.model';
 import { Livre } from 'src/app/core/models/livre.model';
@@ -27,25 +27,49 @@ export class ListLivreComponent {
   category !: Categorie;
 
 
+  LivreList !: any[]; 
+  livreDetailsList: any[] = []; 
+
+
+
 
    ngOnInit(): void {
-     this.livreList =  this.livreService.getAllLivres();  
+     //this.livreList =  this.livreService.getAllLivres();  
+
+
+     this.livreService.getAllLivres().subscribe((livres: any[]) => {
+      this.LivreList = livres;
+
+      this.initLivreDetailsList();
+    });
    
    }
 
-   /*getCategoryByLivre(idLivre: any) {
-    this.CategorieService.getCategorieDuLivre(idLivre).subscribe(
-      categorieResult => this.category = categorieResult
-    );
-  }*/
+   initLivreDetailsList(): void {
+    const observables: Observable<any>[] = this.LivreList.map(livre => {
+      const categorieObservable = this.CategorieService.getCategorieDuLivre(livre.idLivre);
+  
+      return categorieObservable.pipe(
+        map(categorieDetails => ({
+          livre,
+          categorie: categorieDetails
+        }))
+      );
+    });
+  
+    forkJoin(observables).subscribe((result: any[]) => {
+      this.livreDetailsList = result;
+      console.log(result)
+    });
+  }
 
 
 
-   openModalModification(id:any): void {
+   openModalModification(id:any, idCategorie:any): void {
     const dialogRef = this.dialog.open(ModificationDialogLivreComponent, {
-      width: '1000px',
+      width: '550px',
       height:'500px' ,
-      data: { title:"Modification livre" , livreId : id}
+      data: { title:"Modification livre" , livreId : id , categorieId:idCategorie}
     });
   
   }

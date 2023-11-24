@@ -41,6 +41,7 @@ export class LivreService {
   }
 
 
+
   getAllLivresByCategory(idCategory:any) : Observable<Livre[]> {
     return this.http.get<Livre[]>(this.apiServerUrl + `/category/${idCategory}`);
   }
@@ -56,7 +57,7 @@ export class LivreService {
   }
 
 
-  modifierLivre(id:any, titre : string, description:string,nomAuteur:string,nbPages:number,dateDePublication:string,image:File):Observable<Livre>  {
+  modifierLivre(id:any, titre : string, description:string,nomAuteur:string,nbPages:number,dateDePublication:string,idCategorie:number,disponibilite:number,image:File):Observable<Livre>  {
 
     const formData: FormData = new FormData();
     formData.append('titre', titre );
@@ -64,6 +65,8 @@ export class LivreService {
     formData.append('nomAuteur', nomAuteur );
     formData.append('nbPages', nbPages.toString() );
     formData.append('dateDePublication', dateDePublication );
+    formData.append('idCategorie', idCategorie.toString() );
+    formData.append('disponibilite', disponibilite.toString() );
     formData.append('image', image, image.name);
 
 

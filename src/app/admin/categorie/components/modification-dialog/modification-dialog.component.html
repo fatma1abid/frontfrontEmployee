@@ -53,6 +53,8 @@
                 </div>
             </div>
         </div>   
-            <button type="submit" class="btn btn-primary" >Modifier</button>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary" [disabled]="modificationCategorieForm.invalid" >Modifier</button>
+        </div>    
     </form>
 </div>

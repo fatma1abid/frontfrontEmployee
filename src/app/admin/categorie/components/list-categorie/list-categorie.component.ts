@@ -32,7 +32,7 @@ export class ListCategorieComponent implements OnInit {
 
    openModalModification(id:any): void {
     const dialogRef = this.dialog.open(ModificationDialogComponent, {
-      width: '800px',
+      width: '500px',
       height:'450px' ,
       data: { title:"Modification categorie" , categorieId : id}
     });

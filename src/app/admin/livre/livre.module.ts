@@ -5,7 +5,7 @@ import { LivreRoutingModule } from './livre-routing.module';
 import { AddLivreComponent } from './components/add-livre/add-livre.component';
 import { ListLivreComponent } from './components/list-livre/list-livre.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ListEmpruntLivresComponent } from './components/list-emprunt-livres/list-emprunt-livres.component';
+import { ListEmpruntLivresComponent } from '../emprunt-livre/components/list-emprunt-livres/list-emprunt-livres.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ModificationDialogLivreComponent } from './components/modification-dialog-livre/modification-dialog-livre.component';
@@ -15,7 +15,6 @@ import { ModificationDialogLivreComponent } from './components/modification-dial
   declarations: [
     AddLivreComponent,
     ListLivreComponent,
-    ListEmpruntLivresComponent,
     ModificationDialogLivreComponent
   ],
   imports: [

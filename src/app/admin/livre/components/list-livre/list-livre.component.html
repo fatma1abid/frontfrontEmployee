@@ -25,32 +25,34 @@
                     <th>Auteur</th>
                     <th>Nombre de page</th>
                     <th>Date de publication</th>
+                    <th>Categorie</th>
                     <th>Disponibilité</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  <tr *ngFor="let livre of livreList | async">
-                    <td><img [src]="urlImage + '/' + livre.idLivre + '/' + livre.image" alt="Livre Image" width="50" height="50"></td>
-                    <td>{{livre.titre | titlecase}}</td>
-                    <td>{{ livre.description | titlecase}}</td>
-                    <td>{{ livre.nomAuteur | titlecase}}</td>
-                    <td>{{ livre.nbPages }}</td>
-                    <td>{{ livre.dateDePublication | date: 'd MMMM yyyy' }}</td>
+                  <tr *ngFor="let livreDetails of livreDetailsList ">
+                    <td><img [src]="urlImage + '/' + livreDetails.livre.idLivre + '/' + livreDetails.livre.image" alt="Livre Image" width="50" height="50"></td>
+                    <td>{{livreDetails.livre.titre | titlecase}}</td>
+                    <td>{{ livreDetails.livre.description | titlecase}}</td>
+                    <td>{{ livreDetails.livre.nomAuteur | titlecase}}</td>
+                    <td>{{ livreDetails.livre.nbPages }}</td>
+                    <td>{{ livreDetails.livre.dateDePublication | date: 'd MMMM yyyy' }}</td>
+                    <td><span class="categorie">{{livreDetails.categorie.nom}}</span></td>
                     <td> 
-                      <div *ngIf="livre.disponibilite === true">
+                      <div *ngIf="livreDetails.livre.disponibilite === true">
                          <div class="badge badge-success"> Disponible</div>
                       </div>
-                      <div *ngIf="livre.disponibilite === false">
+                      <div *ngIf="livreDetails.livre.disponibilite === false">
                          <div class="badge badge-danger">Non disponible</div>
                       </div>
                     </td>
                     <td style="width: 20%;">
-                      <button type="button"  class="btn btn-warning btn-rounded btn-icon" (click)="openModalModification(livre.idLivre)">
+                      <button type="button"  class="btn btn-warning btn-rounded btn-icon" (click)="openModalModification(livreDetails.livre.idLivre,livreDetails.categorie.idCategorie)">
                           <i class="mdi mdi-grease-pencil"></i>
                       </button>
-                      <button type="button"  class="btn btn-danger btn-rounded btn-icon ml-3" (click)="openModalSuppression(livre.idLivre)">
+                      <button type="button"  class="btn btn-danger btn-rounded btn-icon ml-3" (click)="openModalSuppression(livreDetails.livre.idLivre)">
                           <i class="mdi mdi-delete"></i>
                       </button>
                     </td>

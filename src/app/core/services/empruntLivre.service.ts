@@ -33,8 +33,8 @@ export class EmpruntLivreService {
   }
 
 
-  supprimerEmpruntLivre(id:any)  {
-    return this.http.delete(this.apiServerUrl + `/${id}`);
+  supprimerEmpruntLivre(id:any , idLivre:any)  {
+    return this.http.delete(this.apiServerUrl + `/${id}/${idLivre}`);
   }
 
 
@@ -43,26 +43,26 @@ export class EmpruntLivreService {
   }
 
 
-  modifierEmpruntLivre(id:any ,nom : string , description:string , image:File ) :Observable<empruntLivre> {
+  modifierEmpruntLivre(id:any,  dateDebutEmprunt:Date , dateFinEmprunt:Date , idLivre:number , idAncienLivre:number  ) :Observable<empruntLivre> {
 
     const formData: FormData = new FormData();
-    formData.append('nom', nom);
-    formData.append('description', description);
-    formData.append('image', image, image.name);
-
-
+    formData.append('dateDebutEmprunt', dateDebutEmprunt.toString() );
+    formData.append('dateFinEmprunt', dateFinEmprunt.toString() );
+    formData.append('idLivre', idLivre.toString() );
+    formData.append('idAncienLivre', idAncienLivre.toString() );
+      
     return this.http.put<empruntLivre>(this.apiServerUrl + `/${id}` , formData);
   }
 
 
-  accepterDemandeEmprunt(id:any,emprunt:any):Observable<empruntLivre>{
-    return this.http.put<empruntLivre>(this.apiServerUrl + `/accepter/${id}`, emprunt) ;
+  accepterDemandeEmprunt(id:any,email:string):Observable<empruntLivre>{
+    return this.http.put<empruntLivre>(this.apiServerUrl + `/accepter/${id}`, email) ;
   }
 
 
   
-  refuserDemandeEmprunt(idEmprunt:any,idLivre:any){
-    return this.http.delete(this.apiServerUrl + `/refuser/${idEmprunt}/${idLivre}`) ;
+  refuserDemandeEmprunt(idEmprunt:any,idLivre:any, idEtudiant:any){
+    return this.http.delete(this.apiServerUrl + `/refuser/${idEmprunt}/${idLivre}/${idEtudiant}` ) ;
   }
 
 

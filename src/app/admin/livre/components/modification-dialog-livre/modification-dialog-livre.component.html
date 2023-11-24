@@ -77,7 +77,27 @@
                 </div>
             </div>
         </div>
+
+        <div class="form-group">
+          <label for="exampleselectName1">Categorie</label>
+          <select class="form-control" id="exampleselectName1" name="categorie" formControlName="categorie"> 
+            <option [value]="" selected disabled >{{categorie.nom}}</option>
+            <option *ngFor="let categorie of categorieList | async" [value]="categorie.idCategorie" >
+              {{ categorie.nom | titlecase}}
+            </option>
+          </select>
+        </div> 
          
+
+        <div class="form-group">
+          <label for="exampleselectName1">Disponibilité</label>
+          <select class="form-control" id="exampleselectName1" name="disponibilite" formControlName="disponibilite"> 
+            <option [value]="1" selected  >Disponible</option>
+            <option [value]="0">Non disponible</option>
+          </select>
+        </div> 
+
+
         <div class="form-group">
             <div class="input-group col-xs-12">
                 <div class="custom-file">
@@ -86,6 +106,8 @@
                 </div>
             </div>
         </div>   
-        <button type="submit" class="btn btn-primary mr-2" >Modifier</button>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary mr-2" [disabled]="modificationLivreForm.invalid" >Modifier</button>
+        </div>
         </form>
 </div>
