@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Liste des départements</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Responsable</th>
+        <th>Nombre de professeurs</th>
+        <th>Specialite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let departement of departements">
+        <td>{{ departement.nomDepartement }}</td>
+        <td>{{ departement.responsable }}</td>
+        <td>{{ departement.nombreProfesseurs }}</td>
+        <td>{{ departement.specialite }}</td>
+         
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Departement } from '../models/Departement';
 import { Observable } from 'rxjs';
+import { Universite } from '../models/universite';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,8 @@ export class DepartementService {
         .set('nomDepartement', departement.nomDepartement)
         .set('responsable', departement.responsable)
         .set('nombreProfesseurs', departement.nombreProfesseurs.toString())
-        .set('specialite', departement.specialite.toString());
+        .set('specialite', departement.specialite.toString())
+        .set('universite', departement.universite.toString());
     
       return this.http.put<Departement>(this.apiUrl1 + `/update/${id}`, {}, { params });
     }
@@ -43,5 +45,15 @@ export class DepartementService {
 
 
     }
+
+    getUniversites(): Observable<Universite[]> {
+      return this.http.get<Universite[]>(`${this.apiUrl1}/getUniversites`);
+    }
+
+    affecterDepartementAUniversite(departementId: number, universiteId: number): Observable<Departement> {
+      return this.http.put<Departement>(`${this.apiUrl1}/affecterDepartementAUniversite/${departementId}/${universiteId}`, {});
+    }
+
+    
     
   }

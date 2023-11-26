@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Departement } from 'src/app/models/Departement';
+import { Universite } from 'src/app/models/universite';
 import { DepartementService } from 'src/app/service/departement.service';
+import { UniversiteService } from 'src/app/service/universite.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,11 +14,19 @@ import Swal from 'sweetalert2';
 export class DepartementListComponent implements OnInit {
   departements: Departement[] = [];
 
-  constructor(private departementService: DepartementService, private router: Router) {}
+  constructor(
+    private departementService: DepartementService,
+    private universiteService: UniversiteService,
+    private router: Router
+  ) {
+}
 
   ngOnInit() {
     this.chargerDepartements();
   }
+
+  
+  
 
   chargerDepartements() {
     this.departementService.getAllDepartements().subscribe(
@@ -30,12 +40,15 @@ export class DepartementListComponent implements OnInit {
     );
   }
 
+  
+  
+
   navigateToEdit(idDepartement: number) {
     this.router.navigate(['/admin/departement/update', idDepartement]);
   }
 
   supprimerDepartement(id: number, nomDepartement: string) {
-    console.log('ID du département à supprimer :', id); // Ajoutez cette ligne
+    console.log('ID du département à supprimer :', id);
     Swal.fire({
       title: 'Êtes-vous sûr de vouloir supprimer le département ' + nomDepartement + ' ?',
       text: 'Vous ne pourrez pas récupérer ces données après la suppression !',
@@ -51,7 +64,6 @@ export class DepartementListComponent implements OnInit {
           this.departementService.deleteDepartement(id).subscribe(
             () => {
               console.log('Département supprimé avec succès');
-              // Rechargez la liste des départements après la suppression
               this.chargerDepartements();
             },
             error => {

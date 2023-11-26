@@ -7,6 +7,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/admin/accueil', pathMatch: 'full' },
     { path: 'admin/universite', loadChildren: () => import('./admin/universite/universite.module').then(m => m.UniversiteModule) },
     { path: 'admin/departement', loadChildren: () => import('./admin/departement/departement.module').then(m => m.DepartementModule) },
+    { path: 'front/departement', loadChildren: () => import('./front/departement/departement.module').then(m => m.DepartementModule) },
+    { path: 'front/universite', loadChildren: () => import('./front/universite/universite.module').then(m => m.UniversiteModule) },
+
+
 
   
 

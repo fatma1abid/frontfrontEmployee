@@ -1,0 +1,31 @@
+<div class="container">
+        <h2 >Liste des universités</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>État</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let universite of universites">
+                <td>{{ universite.nomUniversite }}</td>
+                <td>{{ universite.adresse }}</td>
+                <td>
+                  <label class="badge" [ngClass]="{'badge-danger': universite.etatUniversite === 'Prive',
+                                                   'badge-info': universite.etatUniversite === 'Public',
+                                                  }">
+                    {{ universite.etatUniversite }}
+                  </label>
+                </td>
+                <td>
+                  <a [routerLink]="['/front/departement', universite.nomUniversite.toLowerCase()]">Get Departements</a>
+                </td>             
+  </tr>
+  </tbody>
+  </table>
+
+  </div>
+  

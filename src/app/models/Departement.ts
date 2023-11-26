@@ -1,3 +1,4 @@
+import { Universite } from "./universite";
 
 export class Departement {
     idDepartement!:number;
@@ -5,4 +6,5 @@ export class Departement {
     responsable!:string;
     nombreProfesseurs!: number;
     specialite!:String;
+    universite!: Universite
 }
