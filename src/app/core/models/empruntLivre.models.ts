@@ -4,5 +4,5 @@ export class empruntLivre {
     dateFinEmprunt !: Date;
     etat ?: string;
     livre !: number;
-    etudiant ?: number;
+    etudiant ?: string;
 }

@@ -20,11 +20,6 @@ export class HeaderComponent {
 
   }
 
-
-  shouldApplyClass1():boolean{
-     return this.router.url.startsWith('/front/listLivres') ;
-  }
-
   isAdminRoute(): boolean {
     return this.router.url.startsWith('/admin');
   }

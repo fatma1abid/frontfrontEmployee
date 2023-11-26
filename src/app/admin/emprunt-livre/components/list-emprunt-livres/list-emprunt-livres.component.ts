@@ -58,8 +58,8 @@ export class ListEmpruntLivresComponent implements OnInit {
 
 
 
-  accepterDemandeEmprunt(id:any , email:string){
-      this.EmpruntLivreService.accepterDemandeEmprunt(id,email).subscribe(
+  accepterDemandeEmprunt(id:any , email:string, idLivre:any){
+      this.EmpruntLivreService.accepterDemandeEmprunt(id,email,idLivre).subscribe(
         ()=>{
           this.msg = "Demande accepté avec succées"
         },

@@ -27,6 +27,18 @@ export class EmpruntLivreService {
   }
 
 
+  addEmpruntLivreAdmin(email : string , dateDebutEmprunt:Date , dateFinEmprunt:Date , idLivre:number):Observable<empruntLivre>{
+     
+    const formData: FormData = new FormData();
+    formData.append('email', email );
+    formData.append('dateDebutEmprunt', dateDebutEmprunt.toString() );
+    formData.append('dateFinEmprunt', dateFinEmprunt.toString() );
+    formData.append('idLivre', idLivre.toString() );
+
+    return this.http.post<empruntLivre>(this.apiServerUrl + '/add/admin', formData);
+  }
+
+
 
   getAllEmpruntLivre() : Observable<empruntLivre[]> {
       return this.http.get<empruntLivre[]>(this.apiServerUrl + '');
@@ -55,8 +67,12 @@ export class EmpruntLivreService {
   }
 
 
-  accepterDemandeEmprunt(id:any,email:string):Observable<empruntLivre>{
-    return this.http.put<empruntLivre>(this.apiServerUrl + `/accepter/${id}`, email) ;
+  accepterDemandeEmprunt(id:any,email:string,idLivre:number):Observable<empruntLivre>{
+    const formData: FormData = new FormData();
+    formData.append('email', email.toString() );
+    formData.append('idLivre', idLivre.toString() );
+
+    return this.http.put<empruntLivre>(this.apiServerUrl + `/accepter/${id}`, formData) ;
   }
 
 

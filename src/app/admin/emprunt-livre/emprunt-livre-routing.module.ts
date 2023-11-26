@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListEmpruntLivresComponent } from './components/list-emprunt-livres/list-emprunt-livres.component';
+import { AddEmpruntLivreComponent } from './add-emprunt-livre/add-emprunt-livre.component';
 
 const routes: Routes = [
-  {path: 'list' , component:ListEmpruntLivresComponent}
+  {path: 'list' , component:AddEmpruntLivreComponent}
 ];
 
 @NgModule({

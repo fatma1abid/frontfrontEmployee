@@ -50,7 +50,7 @@
                     </td>
                     <td style="width: 20%;">
 
-                        <button type="button" [hidden]="empruntDetails.emprunt.etat === 'valide'" (click)="accepterDemandeEmprunt(empruntDetails.emprunt.idEmprunt ,empruntDetails.user.email)" class="btn btn-success btn-rounded btn-icon">
+                        <button type="button" [hidden]="empruntDetails.emprunt.etat === 'valide'" (click)="accepterDemandeEmprunt(empruntDetails.emprunt.idEmprunt ,empruntDetails.user.email,empruntDetails.livre.idLivre)" class="btn btn-success btn-rounded btn-icon">
                             <i class="mdi mdi-check"></i>
                         </button>
                         <button type="button" [hidden]="empruntDetails.emprunt.etat === 'valide'" (click)="refuserDemandeEmprunt(empruntDetails.emprunt.idEmprunt,empruntDetails.livre.idLivre,empruntDetails.user.idEtudiant)" class="btn btn-danger btn-rounded btn-icon ml-3">
