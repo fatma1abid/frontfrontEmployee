@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class DepartementListComponent implements OnInit {
   departements: Departement[] = [];
+  nomDepartementRecherche: string = '';
+
 
   constructor(
     private departementService: DepartementService,

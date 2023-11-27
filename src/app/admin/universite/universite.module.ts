@@ -6,15 +6,17 @@ import { UniversiteAddComponent } from './universite-add/universite-add.componen
 import { UniversiteListComponent } from './universite-list/universite-list.component';
 import { UniversiteUpdateComponent } from './universite-update/universite-update.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
     UniversiteAddComponent,
     UniversiteListComponent,
-    UniversiteUpdateComponent
+    UniversiteUpdateComponent,
   ],
   imports: [
+    SharedModule,
     CommonModule,
     UniversiteRoutingModule,
     FormsModule,

@@ -6,15 +6,20 @@ import { DepartementListComponent } from './departement-list/departement-list.co
 import { DepartementDetailComponent } from './departement-detail/departement-detail.component';
 import { DepartementAddComponent } from './departement-add/departement-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { filter } from 'rxjs';
+import { FilterPipe } from 'src/filter.pipe';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
     DepartementListComponent,
     DepartementDetailComponent,
-    DepartementAddComponent
+    DepartementAddComponent,
+    
   ],
   imports: [
+    SharedModule,
     CommonModule,
     DepartementRoutingModule,
     FormsModule,

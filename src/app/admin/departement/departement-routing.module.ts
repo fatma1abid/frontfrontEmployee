@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DepartementListComponent } from './departement-list/departement-list.component';
 import { DepartementAddComponent } from './departement-add/departement-add.component';
 import { DepartementDetailComponent } from './departement-detail/departement-detail.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'afficher', component: DepartementListComponent },
@@ -11,7 +12,7 @@ const routes: Routes = [
 
 ];
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [FormsModule , RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class DepartementRoutingModule { }

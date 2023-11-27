@@ -11,6 +11,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class UniversiteListComponent implements OnInit {
   universites: Universite[] = [];
+  nomUniversiteRecherche: string = '';
 
   constructor(private universiteService: UniversiteService, private router: Router) {}
 
@@ -29,7 +30,6 @@ export class UniversiteListComponent implements OnInit {
       }
     );
   }
-
   navigateToEdit(id: number) {
     this.router.navigate(['/admin/universite/update', id]);
   }

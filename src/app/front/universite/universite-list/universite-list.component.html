@@ -1,31 +1,25 @@
+<div class="container-fluid">
+  <img src="assets/images/univ.jpg" class="img-fluid w-100" alt="Image Alt Text">
 <div class="container">
-        <h2 >Liste des universités</h2>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>État</th>
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let universite of universites">
-                <td>{{ universite.nomUniversite }}</td>
-                <td>{{ universite.adresse }}</td>
-                <td>
-                  <label class="badge" [ngClass]="{'badge-danger': universite.etatUniversite === 'Prive',
-                                                   'badge-info': universite.etatUniversite === 'Public',
-                                                  }">
-                    {{ universite.etatUniversite }}
-                  </label>
-                </td>
-                <td>
-                  <a [routerLink]="['/front/departement', universite.nomUniversite.toLowerCase()]">Get Departements</a>
-                </td>             
-  </tr>
-  </tbody>
-  </table>
-
+  <h2 class="text-center">Universités</h2>
+  <input type="text" [(ngModel)]="nomUniversiteRecherche" placeholder="Rechercher par nom" class="form-control mb-3" />
+  <div class="row justify-content-center">
+    <div class="col-md-4" *ngFor="let universite of universites | filter: nomUniversiteRecherche:'nomUniversite'; let i = index ">
+      <div class="card mb-4" [ngClass]="{'bg-primary': i % 2 === 0, 'bg-success': i % 2 !== 0}">
+        <div class="card-body text-white">
+          <h4 class="card-title">{{ universite.nomUniversite }}</h4>
+          <p class="card-text">Adresse: {{ universite.adresse }}</p>
+          <p class="card-text">
+            État:
+            <span [ngClass]="{'badge badge-danger': universite.etatUniversite === 'Prive',
+                               'badge badge-info': universite.etatUniversite === 'Public',
+                              }">
+              {{ universite.etatUniversite }}
+            </span>
+          </p>
+          <a [routerLink]="['/front/departement', universite.nomUniversite.toLowerCase()]" class="btn btn-light">Voir les départements</a>
+        </div>
+      </div>
+    </div>
   </div>
-  
+</div>

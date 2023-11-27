@@ -11,38 +11,41 @@ import { UniversiteService } from 'src/app/service/universite.service';
 })
 export class DepartementListComponent implements OnInit {
   departements: Departement[] = [];
+  nomDepartementRecherche: string = '';
 
   constructor(
     private departementService: DepartementService,
     private universiteService: UniversiteService,
     private router: Router,
     private route: ActivatedRoute
-
-  ) {
-}
+  ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       const nomUniversite = params['nomUniversite'];
       this.getDepartementsByUniversite(nomUniversite);
     });
   }
 
-  
-  
   getDepartementsByUniversite(nomUniversite: string): void {
-    this.universiteService.getDepartementsByNomUniversite(nomUniversite).subscribe(
-      data => {
-        this.departements = data;
-        console.log('Departements for university:', this.departements);
-      },
-      error => {
-        console.error('Error fetching departements for university:', error);
-      }
-    );
+    this.universiteService
+      .getDepartementsByNomUniversite(nomUniversite)
+      .subscribe(
+        (data) => {
+          this.departements = data;
+          console.log('Departements for university:', this.departements);
+        },
+        (error) => {
+          console.error(
+            'Error fetching departements for university:',
+            error
+          );
+        }
+      );
   }
- 
 
-  
-  
+  // Ajoutez cette fonction pour obtenir l'index dans la boucle
+  trackByFn(index: any, item: any) {
+    return index;
+  }
 }

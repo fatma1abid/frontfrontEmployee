@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FrontRoutingModule } from './front-routing.module';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -10,8 +11,10 @@ import { AccueilFrontComponent } from './components/accueil-front/accueil-front.
     AccueilFrontComponent
   ],
   imports: [
+    SharedModule,
     CommonModule,
-    FrontRoutingModule
+    FrontRoutingModule,
+    SharedModule
   ]
 })
 export class FrontModule { }

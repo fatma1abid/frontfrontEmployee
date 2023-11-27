@@ -14,6 +14,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 export class UniversiteListComponent implements OnInit {
   universites: Universite[] = [];
   departements: Departement[] = []; // Ajoutez cette ligne
+  nomUniversiteRecherche: string = '';
 
 
   constructor(

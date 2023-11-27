@@ -1,5 +1,7 @@
 <div class="container">
         <h2 >Liste des universités</h2>
+        <input type="text" [(ngModel)]="nomUniversiteRecherche" placeholder="Rechercher par nom" class="form-control mb-3" />
+
           <table class="table">
             <thead>
               <tr>
@@ -11,8 +13,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let universite of universites">
-                <td>{{ universite.nomUniversite }}</td>
+<tr *ngFor="let universite of universites | filter: nomUniversiteRecherche:'nomUniversite'">
+                  <td>{{ universite.nomUniversite }}</td>
                 <td>{{ universite.adresse }}</td>
                 <td>
                   <label class="badge" [ngClass]="{'badge-danger': universite.etatUniversite === 'Prive',
