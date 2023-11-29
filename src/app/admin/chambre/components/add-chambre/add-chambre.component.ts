@@ -12,10 +12,6 @@ import { TypeChambre } from 'src/app/core/models/TypeChambre.model';
 export class AddChambreComponent implements OnInit{
   constructor(private formBuilder : FormBuilder , private chambreService:ChambreService ){}
 
-  
-   
-
-
   chambreForm !: FormGroup
   selectedFile!: File;
   msg !: String;

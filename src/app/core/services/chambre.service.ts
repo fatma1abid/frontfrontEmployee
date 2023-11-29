@@ -31,31 +31,34 @@ export class ChambreService {
     return this.http.post<Chambre>(`${this.apiServerUrl}api/chambres/addChambre`,chambre);
   }*/
 
-  public getAllChambre(): Observable<Chambre[]> {
+   public getAllChambre(): Observable<Chambre[]> {
     return this.http.get<Chambre[]>(`${this.apiServerUrl}/getAllChambre`);
+  } 
+   
+
+   
+  supprimerChambre(idChambre:any)  {
+    return this.http.delete(this.apiServerUrl + `/deleteChambre/${idChambre}`);
   }
 
-
-  supprimerChambre(id:any)  {
-    return this.http.delete(this.apiServerUrl + `/deletechambre/${id}`);
+  getChambre(idChambre:any) : Observable<Chambre> {
+    return this.http.get<Chambre>(this.apiServerUrl + `/${idChambre}`);
   }
 
-  getChambre(id:any) : Observable<Chambre> {
-    return this.http.get<Chambre>(this.apiServerUrl + `/${id}`);
-  }
-
-  modifierChambre(id:any , numero : number , typeChambre:TypeChambre ) :Observable<Chambre> {
-
+  /*modifierChambre(  idChambre : number ,numeroChambre : number , typeChambre:TypeChambre ) :Observable<Chambre> {
+     
     const formData: FormData = new FormData();
-    formData.append('numero', numero.toString());
-    formData.append('typeChambre', typeChambre);
-    
+    formData.append('idChambre', idChambre.toString());
+    formData.append('numeroChambre', numeroChambre.toString());
+    formData.append('typeChambre', typeChambre.toString());
+    return this.http.put<Chambre>(this.apiServerUrl + `/updateChambre` , formData);
+  }*/
 
-
-    return this.http.put<Chambre>(this.apiServerUrl + `/${id}` , formData);
+  modifierChambre(idChambre : number ,numeroChambre: number, typeChambre: TypeChambre): Observable<Chambre> {
+    const chambre: Chambre = {idChambre, numeroChambre, typeChambre };  
+    return this.http.put<Chambre>(this.apiServerUrl+`/updateChambre`, chambre);
   }
 
 
- 
-
+  
 }

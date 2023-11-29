@@ -5,7 +5,7 @@ import { PageAccueilComponent } from './components/page-accueil/page-accueil.com
 const routes: Routes = [
   {path:'accueil' , component:PageAccueilComponent},
   {path: 'chambre', loadChildren: () => import('./chambre/chambre.module').then(m => m.ChambreModule) },
-  //{path: 'reservation', loadChildren: () => import('./reservation/reservation.module').then(m => m.reservationModule) }
+   
 ];
 
 @NgModule({
