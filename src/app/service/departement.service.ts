@@ -29,15 +29,22 @@ export class DepartementService {
     }
   
     updateDepartement(id: number, departement: Departement): Observable<Departement> {
-      const params = new HttpParams()
-        .set('nomDepartement', departement.nomDepartement)
-        .set('responsable', departement.responsable)
-        .set('nombreProfesseurs', departement.nombreProfesseurs.toString())
-        .set('specialite', departement.specialite.toString())
-        .set('universite', departement.universite.toString());
+      // Create an object to hold the parameters
+      const params: any = {
+        nomDepartement: departement.nomDepartement,
+        responsable: departement.responsable,
+        nombreProfesseurs: departement.nombreProfesseurs.toString(),
+        specialite: departement.specialite.toString(),
+      };
     
-      return this.http.put<Departement>(this.apiUrl1 + `/update/${id}`, {}, { params });
+      // Check if universite is defined before adding it to the parameters
+      if (departement.universite) {
+        params.universite = departement.universite.toString();
+      }
+    
+      return this.http.put<Departement>(`${this.apiUrl1}/update/${id}`, {}, { params });
     }
+    
     
     // Supprimer un département par ID
     deleteDepartement(id: number): Observable<void> {

@@ -35,6 +35,7 @@ export class DepartementListComponent implements OnInit {
       data => {
         this.departements = data;
         console.log('Départements depuis l\'API:', this.departements);
+
       },
       error => {
         console.error('Erreur lors de la récupération des départements:', error);

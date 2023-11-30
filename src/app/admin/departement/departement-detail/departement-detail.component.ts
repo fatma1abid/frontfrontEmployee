@@ -26,13 +26,17 @@ export class DepartementDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const originalId = params['idDepartement'];
-
+  
       const convertedId = +originalId;
-
+  
       if (!isNaN(convertedId)) {
         this.departementService.getDepartementById(convertedId).subscribe(
           (data: Departement) => {
             this.departement = data;
+  
+            // Ensure that the universite property is initialized
+            this.departement.universite = this.departement.universite || new Universite();
+  
             this.cd.detectChanges();
           },
           (error) => {
@@ -43,7 +47,7 @@ export class DepartementDetailComponent implements OnInit {
         console.error('Invalid idDepartement:', originalId);
       }
     });
-
+  
     this.departementService.getUniversites().subscribe(
       (data: Universite[]) => {
         this.universites = data;
@@ -53,9 +57,14 @@ export class DepartementDetailComponent implements OnInit {
       }
     );
   }
+  
 
   enregistrerDepartement(f: NgForm) {
     const id = this.departement.idDepartement;
+  
+    // Ensure that departement.universite is initialized
+    this.departement.universite = this.departement.universite || new Universite();
+  
     this.departementService.updateDepartement(id, this.departement).subscribe(
       (data) => {
         console.log('Departement updated successfully:', data);
@@ -65,22 +74,28 @@ export class DepartementDetailComponent implements OnInit {
         console.error('Error updating departement:', error);
       }
     );
-    if (this.selectedUniversiteId) {
-      this.departementService.affecterDepartementAUniversite(this.departement.idDepartement, this.selectedUniversiteId).subscribe(
-        () => {
-          console.log('Département affecté à l\'université avec succès.');
   
-        },
-        (error) => {
-          console.error('Erreur lors de l\'affectation du département à l\'université:', error);
-        }
-      );
+    if (this.selectedUniversiteId !== undefined && this.selectedUniversiteId !== null) {
+      console.log('selectedUniversiteId:', this.selectedUniversiteId);
+  
+      // Check if universite is defined before accessing its properties
+      if (this.departement.universite && this.departement.universite.idUniversite !== this.selectedUniversiteId) {
+        this.departementService.affecterDepartementAUniversite(this.departement.idDepartement, this.selectedUniversiteId).subscribe(
+          () => {
+            console.log('Département affecté à l\'université avec succès.');
+          },
+          (error) => {
+            console.error('Erreur lors de l\'affectation du département à l\'université:', error);
+          }
+        );
+      } else {
+        console.log('No change in the selected university or universite is undefined.');
+      }
     } else {
       console.error('Veuillez sélectionner une université avant d\'affecter le département.');
-    
+    }
   }
   
-  }
-
-
-}
+  
+  
+}  
