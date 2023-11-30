@@ -1,11 +1,13 @@
 import { Chambre } from "./chambre.model";
 import { Utilisateur } from "./utilisateur.model";
-
-export class Reservation {
+import { DatePipe } from '@angular/common';
+export class Reservation   {
     idReservation?: number;
-    anneeUniversitaire!: Date;
-    estValide!: Boolean;
-    utilisateur?: Utilisateur[];
-    chambre?:Chambre[];
+    anneeUniversitaire?: Date;
+    estValide ?: Boolean;
+   // chambre?:Chambre[];
+     
+    //utilisateur?: Utilisateur[];
+    
 
   }

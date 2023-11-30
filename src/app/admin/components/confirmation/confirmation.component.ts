@@ -19,7 +19,10 @@ export class ConfirmationComponent {
     // Emit the user's choice along with any necessary data
     this.dialogRef.close({ confirmed: true });
   }
-
+  non(): void {
+    // Emit the user's choice along with any necessary data
+    this.dialogRef.close({   });
+  }
 
 
 
