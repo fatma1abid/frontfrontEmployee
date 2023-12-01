@@ -5,7 +5,6 @@ import { ChambreService } from 'src/app/core/services/chambre.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModificationComponent } from '../modification/modification.component';
 import { ConfirmationComponent } from 'src/app/admin/components/confirmation/confirmation.component';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-list-chambre',

@@ -20,7 +20,7 @@ export class ReservationService {
 
   addReservation(anneeUniversitaire: Date, estValide: boolean): Observable<Reservation> {
     if (estValide) {
-      estValide=false;
+      estValide=true;
       const reservation: Reservation = { anneeUniversitaire,estValide };
       return this.http.post<Reservation>(`${this.apiServerUrl}/addReservation`, reservation);
       
@@ -33,11 +33,11 @@ export class ReservationService {
   
 
   public getAllReservation(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiServerUrl}/getAllReservation`);
+    return this.http.get<Reservation[]>(`${this.apiServerUrl}/getAllRes`);
   } 
    
   supprimerReservation(idReservation:any)  {
-    return this.http.delete(this.apiServerUrl + `/deleteReservation/${idReservation}`);
+    return this.http.delete(this.apiServerUrl + `/deleteRes/${idReservation}`);
   }
 
 getReservation(idReservation:any) : Observable<Reservation> {
@@ -45,9 +45,9 @@ getReservation(idReservation:any) : Observable<Reservation> {
   }
 
 
-  modifierReservation(idReservation : number ,anneeUniversitaire : Date, estValide  : Boolean): Observable<Reservation> {
+  modifierReservation(idReservation : number ,anneeUniversitaire : Date, estValide : Boolean): Observable<Reservation> {
     const reservation: Reservation = {idReservation, anneeUniversitaire, estValide };  
-    return this.http.put<Reservation>(this.apiServerUrl+`/updateReservation`, reservation);
+    return this.http.put<Reservation>(this.apiServerUrl+`/updateRes`, reservation);
   }
 
 

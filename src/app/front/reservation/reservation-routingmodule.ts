@@ -5,6 +5,7 @@ import { AddReservationComponent } from './components/add-reservation/add-reserv
 const routes: Routes = [
   {path:'addReservation' , component:AddReservationComponent}
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

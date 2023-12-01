@@ -1,18 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddReservationComponent } from './components/add-reservation/add-reservation.component';
-//import { ListChambreComponent } from './components/list-chambre/list-chambre.component';
 import { ReservationRoutingModule } from  './reservation-routingmodule';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { ModifResComponent } from './components/modif-res/modif-res.component';
+import { ListReservationComponent } from './components/list-reservation/list-reservation.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button'; 
  
 
 @NgModule({
-  declarations: [AddReservationComponent],
+  declarations: [
+    AddReservationComponent,
+    ModifResComponent,
+    ListReservationComponent],
   imports: [
     CommonModule,
     ReservationRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule, 
+    MatDialogModule,
+    MatButtonModule,
   ]
 })
 export class ReservationModule { }
