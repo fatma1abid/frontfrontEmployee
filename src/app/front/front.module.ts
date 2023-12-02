@@ -11,6 +11,7 @@ import * as fr from '@angular/common/locales/fr';
 import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-emprunt.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { LivreComponent } from './components/livre/livre.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ListCategorieComponent,
     ListLivresComponent,
     LivreDetailsComponent,
-    DemandeEmpruntComponent
+    DemandeEmpruntComponent,
+    LivreComponent
   ],
   imports: [
     CommonModule,

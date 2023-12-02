@@ -7,14 +7,19 @@ import { ListCategorieComponent } from './components/list-categorie/list-categor
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+
 import { ModificationDialogComponent } from './components/modification-dialog/modification-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
   declarations: [
     AddCategorieComponent,
     ListCategorieComponent,
-    ModificationDialogComponent
+    ModificationDialogComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -22,7 +27,7 @@ import { ModificationDialogComponent } from './components/modification-dialog/mo
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
   ]
 })
 export class CategorieModule { }

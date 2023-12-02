@@ -55,6 +55,23 @@ export class EmpruntLivreService {
   }
 
 
+
+  getNbreEmpruntLivre() : Observable<number> {
+    return this.http.get<number>(this.apiServerUrl + "/count/total");
+  }
+
+
+  getNbreEmpruntLivreEncours() : Observable<number> {
+    return this.http.get<number>(this.apiServerUrl + "/count/Encours");
+  }
+
+
+  getNbreEmpruntLivreAccepte() : Observable<number> {
+    return this.http.get<number>(this.apiServerUrl + "/count/Accepte");
+  }
+
+
+
   modifierEmpruntLivre(id:any,  dateDebutEmprunt:Date , dateFinEmprunt:Date , idLivre:number , idAncienLivre:number  ) :Observable<empruntLivre> {
 
     const formData: FormData = new FormData();

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable , timer } from 'rxjs';
 import { Categorie } from 'src/app/core/models/categorie.model';
 import { CategorieService } from 'src/app/core/services/categorie.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/admin/components/confirmation-dialog/confirmation-dialog.component';
 import { ModificationDialogComponent } from 'src/app/admin/categorie/components/modification-dialog/modification-dialog.component';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { startWith , map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-categorie',
@@ -14,7 +18,7 @@ import { ModificationDialogComponent } from 'src/app/admin/categorie/components/
 export class ListCategorieComponent implements OnInit {
 
 
-  constructor(private categorieService : CategorieService , private dialog:MatDialog){
+  constructor(private categorieService : CategorieService , private dialog:MatDialog , private FormBuilder:FormBuilder , private router:Router){
 
   }
 
@@ -23,11 +27,34 @@ export class ListCategorieComponent implements OnInit {
   msg !: string;
   error!:string;
 
+  filteredCategorieList !: any;
+
+
+  searchCtrl!: FormControl;
+
 
    ngOnInit(): void {
-     this.categorieList =  this.categorieService.getAllCategorie();
+    this.categorieList =  this.categorieService.getAllCategorie();
+
+    this.initForm();
+    const search$ = this.searchCtrl.valueChanges.pipe(
+      startWith(this.searchCtrl.value),
+      map(value => value.toLowerCase())
+     );
+
+    
+
+      this.filteredCategorieList = combineLatest([this.categorieList, search$]).pipe(
+      map(([categorieList, search]) =>
+        categorieList.filter((categorie) => categorie.nom.toLowerCase().includes(search))
+      )
+    );
    }
 
+
+   private initForm() {
+      this.searchCtrl = this.FormBuilder.control('');  
+    }
 
 
    openModalModification(id:any): void {
@@ -35,6 +62,10 @@ export class ListCategorieComponent implements OnInit {
       width: '500px',
       height:'450px' ,
       data: { title:"Modification categorie" , categorieId : id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.filteredCategorieList = this.categorieService.getAllCategorie();
     });
   
   }
@@ -53,13 +84,18 @@ export class ListCategorieComponent implements OnInit {
       this.categorieService.supprimerCategorie(id).subscribe(
         ()=>{
             this.msg = "Categorie supprimé avec succées"
-            this.categorieService.getAllCategorie();
+            this.filteredCategorieList = this.categorieService.getAllCategorie();
+
         },
         ()=>{
           this.error = "Il ya une erreur qui est survenu"
         }
       )
     }});
+  }
+
+  ajouter(){
+     this.router.navigateByUrl("/admin/categorie/add")
   }
 
 

@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categorie } from 'src/app/core/models/categorie.model';
 import { CategorieService } from 'src/app/core/services/categorie.service';
 import { LivreService } from 'src/app/core/services/livre.service';
-import { Observable } from 'rxjs';
-import { Livre } from 'src/app/core/models/livre.model';
+import { Observable , timer } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-livre',
@@ -13,7 +13,7 @@ import { Livre } from 'src/app/core/models/livre.model';
 })
 export class AddLivreComponent {
 
-  constructor(private formBuilder : FormBuilder , private livreService:LivreService , private categorieService:CategorieService ){
+  constructor(private formBuilder : FormBuilder , private livreService:LivreService , private categorieService:CategorieService , private router:Router ){
 
   }
 
@@ -66,7 +66,9 @@ export class AddLivreComponent {
       ()=>{
          this.msg = "Livre ajouté avec succées"
          this.livreForm.reset();
-         this.livreService.getAllLivres();
+         timer(2000).subscribe(() => {
+          this.router.navigateByUrl('/admin/livre/list');
+        });
          
       },
       ()=>{

@@ -52,6 +52,12 @@ export class LivreService {
   }
 
 
+  getLivreWithMaxEmprunts() : Observable<Livre> {
+    return this.http.get<Livre>(this.apiServerUrl + "/maxEmprunts");
+  }
+
+
+
   supprimerLivre(id:any)  {
     return this.http.delete(this.apiServerUrl + `/${id}`);
   }

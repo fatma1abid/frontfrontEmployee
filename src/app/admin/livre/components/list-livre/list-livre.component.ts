@@ -7,7 +7,10 @@ import { Livre } from 'src/app/core/models/livre.model';
 import { CategorieService } from 'src/app/core/services/categorie.service';
 import { LivreService } from 'src/app/core/services/livre.service';
 import { ModificationDialogLivreComponent } from 'src/app/admin/livre/components/modification-dialog-livre/modification-dialog-livre.component';
-
+import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-livre',
   templateUrl: './list-livre.component.html',
@@ -15,10 +18,9 @@ import { ModificationDialogLivreComponent } from 'src/app/admin/livre/components
 })
 export class ListLivreComponent {
 
-  constructor(private livreService : LivreService ,  private dialog:MatDialog , private CategorieService:CategorieService){
+  constructor(private livreService : LivreService ,  private dialog:MatDialog , private CategorieService:CategorieService , private FormBuilder:FormBuilder , private router:Router){
   }
 
-  livreList !: Observable<Livre[]>
   urlImage : string  = 'http://localhost:8080/images_livres' 
   msg!:string;
   error!:string;
@@ -30,39 +32,76 @@ export class ListLivreComponent {
   LivreList !: any[]; 
   livreDetailsList: any[] = []; 
 
+  filteredLivreList: any[] = [];
+
+
+  searchCtrl!: FormControl;
+
 
 
 
    ngOnInit(): void {
-     //this.livreList =  this.livreService.getAllLivres();  
-
-
      this.livreService.getAllLivres().subscribe((livres: any[]) => {
       this.LivreList = livres;
 
       this.initLivreDetailsList();
+       
     });
-   
+
+
+    this.initForm();
    }
 
-   initLivreDetailsList(): void {
-    const observables: Observable<any>[] = this.LivreList.map(livre => {
-      const categorieObservable = this.CategorieService.getCategorieDuLivre(livre.idLivre);
+
+   private initForm() {
+    this.searchCtrl = this.FormBuilder.control('');  
+  }
+
+  initLivreDetailsList(): void {
+    const search$ = this.searchCtrl.valueChanges.pipe(
+      startWith(this.searchCtrl.value),
+      switchMap(searchTerm => {
+        const observables: Observable<any>[] = this.LivreList.map(livre => {
+          const categorieObservable = this.CategorieService.getCategorieDuLivre(livre.idLivre);
   
-      return categorieObservable.pipe(
-        map(categorieDetails => ({
-          livre,
-          categorie: categorieDetails
-        }))
-      );
-    });
+          return categorieObservable.pipe(
+            map(categorieDetails => ({
+              livre,
+              categorie: categorieDetails
+            }))
+          );
+        });
+
+      
   
-    forkJoin(observables).subscribe((result: any[]) => {
-      this.livreDetailsList = result;
-      console.log(result)
+        return forkJoin(observables).pipe(
+          map((result: any[]) =>
+            result.filter(item =>
+              this.matchSearchTerm(item, searchTerm))
+            
+          )
+        );
+      })
+    );
+  
+    search$.subscribe((filteredResults: any[]) => {
+      this.livreDetailsList = filteredResults;
+      console.log(filteredResults);
     });
   }
 
+
+  private matchSearchTerm(item: any, searchTerm: string): boolean {
+    const lowerCaseTerm = searchTerm.toLowerCase();
+  
+    const titreMatch = item.livre.titre.toLowerCase().includes(lowerCaseTerm);
+    const auteurMatch = item.livre.nomAuteur.toLowerCase().includes(lowerCaseTerm);
+    const dispoMatch = item.categorie.nom.toLowerCase().includes(lowerCaseTerm);
+    const descriptionMatch = item.livre.description.toLowerCase().includes(lowerCaseTerm);
+
+  
+    return titreMatch || auteurMatch || dispoMatch || descriptionMatch;
+  }
 
 
    openModalModification(id:any, idCategorie:any): void {
@@ -70,6 +109,15 @@ export class ListLivreComponent {
       width: '550px',
       height:'500px' ,
       data: { title:"Modification livre" , livreId : id , categorieId:idCategorie}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.livreService.getAllLivres().subscribe((livres: any[]) => {
+        this.LivreList = livres;
+  
+        this.initLivreDetailsList();
+         
+      });
     });
   
   }
@@ -88,7 +136,12 @@ export class ListLivreComponent {
       this.livreService.supprimerLivre(id).subscribe(
         ()=>{
             this.msg = "Livre supprimé avec succées"
-            this.livreService.getAllLivres().subscribe();
+            this.livreService.getAllLivres().subscribe((livres: any[]) => {
+              this.LivreList = livres;
+        
+              this.initLivreDetailsList();
+               
+            });
         },
         ()=>{
           this.error = "Il ya une erreur qui est survenu"
@@ -96,6 +149,10 @@ export class ListLivreComponent {
       )
     }});
   }
+
+  ajouter(){
+    this.router.navigateByUrl("/admin/livre/add")
+ }
 
 
 }

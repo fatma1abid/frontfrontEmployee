@@ -6,7 +6,7 @@ import { ListEmpruntLivresComponent } from './components/list-emprunt-livres/lis
 import { ModificationEmpruntLivreComponent } from './components/modification-emprunt-livre/modification-emprunt-livre.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddEmpruntLivreComponent } from './add-emprunt-livre/add-emprunt-livre.component';
+import { AddEmpruntLivreComponent } from './components/add-emprunt-livre/add-emprunt-livre.component';
 
 
 @NgModule({

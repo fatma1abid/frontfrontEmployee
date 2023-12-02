@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { Observable, forkJoin, map, startWith, switchMap } from 'rxjs';
 import { ConfirmationDialogComponent } from 'src/app/admin/components/confirmation-dialog/confirmation-dialog.component';
 import { empruntLivre } from 'src/app/core/models/empruntLivre.models';
 import { EmpruntLivreService } from 'src/app/core/services/empruntLivre.service';
 import { LivreService } from 'src/app/core/services/livre.service';
 import { ModificationEmpruntLivreComponent } from '../modification-emprunt-livre/modification-emprunt-livre.component';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-emprunt-livres',
@@ -15,7 +17,7 @@ import { ModificationEmpruntLivreComponent } from '../modification-emprunt-livre
 export class ListEmpruntLivresComponent implements OnInit {
 
 
-  constructor( private EmpruntLivreService:EmpruntLivreService , private dialog:MatDialog , private livreService:LivreService){
+  constructor( private EmpruntLivreService:EmpruntLivreService , private dialog:MatDialog , private livreService:LivreService  , private formBuilder:FormBuilder , private router:Router){
   }
 
 
@@ -26,6 +28,18 @@ export class ListEmpruntLivresComponent implements OnInit {
   empruntLivreList !: any[]; 
   empruntDetailsList: any[] = []; 
 
+  searchCtrl!: FormControl;
+
+  nbreEmprunts !: any;
+
+  nbreEmpruntsEncours !: any;
+
+
+  nbreEmpruntsAccepte !: any;
+
+  livre!:any
+
+
 
   ngOnInit(): void {
     this.EmpruntLivreService.getAllEmpruntLivre().subscribe((emprunts: any[]) => {
@@ -33,28 +47,78 @@ export class ListEmpruntLivresComponent implements OnInit {
 
       this.initEmpruntDetailsList();
     });
+
+    this.initForm();
+
+    this.EmpruntLivreService.getNbreEmpruntLivre().subscribe(
+      (nombre: number) => {
+        this.nbreEmprunts = nombre;
+    })
+
+    this.EmpruntLivreService.getNbreEmpruntLivreEncours().subscribe(
+        (nombre: number) => {
+          this.nbreEmpruntsEncours = nombre;
+    })  
+
+    this.EmpruntLivreService.getNbreEmpruntLivreAccepte().subscribe(
+      (nombre: number) => {
+        this.nbreEmpruntsAccepte = nombre;
+    })
+
+    this.livreService.getLivreWithMaxEmprunts().subscribe(
+      (livre) => {
+         this.livre = livre
+      }
+    )
   }
+
+  
+  private initForm() {
+    this.searchCtrl = this.formBuilder.control('');  
+  }
+
 
   initEmpruntDetailsList(): void {
-    const observables: Observable<any>[] = this.empruntLivreList.map(emprunt => {
-      const userObservable = this.livreService.getUserByEmprunt(emprunt.idEmprunt);
-      const livreObservable = this.livreService.getLivreByEmprunt(emprunt.idEmprunt);
-
-      return forkJoin([userObservable, livreObservable]).pipe(
-        map(([userDetails, livreDetails]) => {
-          return {
-            emprunt,
-            user: userDetails,
-            livre: livreDetails
-          };
-        })
-      );
-    });
-
-    forkJoin(observables).subscribe((result: any[]) => {
-      this.empruntDetailsList = result;
+    const search$ = this.searchCtrl.valueChanges.pipe(
+      startWith(this.searchCtrl.value),
+      switchMap(searchTerm => {
+        const observables: Observable<any>[] = this.empruntLivreList.map(emprunt => {
+          const userObservable = this.livreService.getUserByEmprunt(emprunt.idEmprunt);
+          const livreObservable = this.livreService.getLivreByEmprunt(emprunt.idEmprunt);
+  
+          return forkJoin([userObservable, livreObservable]).pipe(
+            map(([userDetails, livreDetails]) => ({
+              emprunt,
+              user: userDetails,
+              livre: livreDetails
+            }))
+          );
+        });
+  
+        return forkJoin(observables).pipe(
+          map((result: any[]) =>
+            result.filter(item => this.matchSearchTermEmprunt(item, searchTerm))
+          )
+        );
+      })
+    );
+  
+    search$.subscribe((filteredResults: any[]) => {
+      this.empruntDetailsList = filteredResults;
     });
   }
+  
+  private matchSearchTermEmprunt(item: any, searchTerm: string): boolean {
+    const lowerCaseTerm = searchTerm.toLowerCase();
+  
+    const titleMatch = item.livre.titre.toLowerCase().includes(lowerCaseTerm);
+    const nomEtMatch = item.user.nomEt.toLowerCase().includes(lowerCaseTerm);
+    const prenomEtMatch = item.user.prenomEt.toLowerCase().includes(lowerCaseTerm);
+    const emailMatch = item.user.email.toLowerCase().includes(lowerCaseTerm);
+  
+    return titleMatch || nomEtMatch || prenomEtMatch || emailMatch;
+  }
+
 
 
 
@@ -62,6 +126,11 @@ export class ListEmpruntLivresComponent implements OnInit {
       this.EmpruntLivreService.accepterDemandeEmprunt(id,email,idLivre).subscribe(
         ()=>{
           this.msg = "Demande accepté avec succées"
+          this.EmpruntLivreService.getAllEmpruntLivre().subscribe((emprunts: any[]) => {
+            this.empruntLivreList = emprunts;
+      
+            this.initEmpruntDetailsList();
+          });
         },
         ()=>{
           this.error = "Il ya une erreur qui est survenu"
@@ -82,6 +151,11 @@ export class ListEmpruntLivresComponent implements OnInit {
       this.EmpruntLivreService.refuserDemandeEmprunt(idEmprunt,idLivre,idEtudiant).subscribe(
         ()=>{
             this.msg = "Demande refusé avec succées"
+            this.EmpruntLivreService.getAllEmpruntLivre().subscribe((emprunts: any[]) => {
+              this.empruntLivreList = emprunts;
+        
+              this.initEmpruntDetailsList();
+            });
         },
         ()=>{
           this.error = "Il ya une erreur qui est survenu"
@@ -97,6 +171,14 @@ export class ListEmpruntLivresComponent implements OnInit {
       width: '500px',
       height:'450px' ,
       data: { title:"Modification Emprunt Livre" , empruntId : id , livreId:livre}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.EmpruntLivreService.getAllEmpruntLivre().subscribe((emprunts: any[]) => {
+        this.empruntLivreList = emprunts;
+  
+        this.initEmpruntDetailsList();
+      });
     });
   
   }
@@ -115,6 +197,11 @@ export class ListEmpruntLivresComponent implements OnInit {
       this.EmpruntLivreService.supprimerEmpruntLivre(id,livre).subscribe(
         ()=>{
             this.msg = "emprunt livre supprimé avec succées"
+            this.EmpruntLivreService.getAllEmpruntLivre().subscribe((emprunts: any[]) => {
+              this.empruntLivreList = emprunts;
+        
+              this.initEmpruntDetailsList();
+            });
         },
         ()=>{
           this.error = "Il ya une erreur qui est survenu"
@@ -122,6 +209,12 @@ export class ListEmpruntLivresComponent implements OnInit {
       )
     }});
   }
+
+
+  ajouter(){
+    this.router.navigateByUrl("/admin/empruntLivre/add")
+  }
+
 
 }
 

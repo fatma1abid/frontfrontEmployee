@@ -53,7 +53,7 @@ export class ListLivresComponent implements OnInit {
   }
 
 
-  openModalDetails(id:any): void {
+ openModalDetails(id:any): void {
     const dialogRef = this.dialog.open(LivreDetailsComponent, {
       width: '550px',
       height:'370px' ,

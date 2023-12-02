@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddEmpruntLivreComponent } from './add-emprunt-livre/add-emprunt-livre.component';
+import { AddEmpruntLivreComponent } from './components/add-emprunt-livre/add-emprunt-livre.component';
+import { ListEmpruntLivresComponent } from './components/list-emprunt-livres/list-emprunt-livres.component';
 
 const routes: Routes = [
-  {path: 'list' , component:AddEmpruntLivreComponent}
+  {path: 'add' , component:AddEmpruntLivreComponent},
+  {path: 'list' , component:ListEmpruntLivresComponent}
 ];
 
 @NgModule({
