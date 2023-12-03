@@ -28,12 +28,17 @@
 
               
     
-              <div class="form-group">
-                <label for="universite">Affecter à l'université :</label>
-                <select id="universite" [(ngModel)]="selectedUniversiteId" name="universite" required>
-                  <option *ngFor="let universite of universites" [value]="universite.idUniversite">{{ universite.nomUniversite }}</option>
-                </select>
-              </div>
+             <!-- departement-update.component.html -->
+
+<div class="form-group">
+  <label for="universite">Affecter à l'université :</label>
+  <select id="universite" [(ngModel)]="selectedUniversiteId" name="universite" required>
+    <option *ngFor="let universite of universites" [value]="universite.idUniversite">{{ universite.nomUniversite }}</option>
+  </select>
+</div>
+
+              
+              
               
             <button type="submit" class="btn btn-primary">Enregistrer</button>
             <a [routerLink]="['/admin/departement/afficher']" class="btn btn-secondary">Annuler</a>

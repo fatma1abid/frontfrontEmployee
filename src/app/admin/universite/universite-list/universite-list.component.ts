@@ -71,4 +71,5 @@ export class UniversiteListComponent implements OnInit {
       }
     });
   }
+  
 }

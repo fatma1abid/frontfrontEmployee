@@ -6,7 +6,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6" *ngFor="let departement of departements | filter: nomDepartementRecherche:'nomDepartement'; trackBy: trackByFn; let i = index">
 
-      <div class="custom-card-departement mb-4" [ngClass]="{'bg-primary': i % 2 === 0, 'bg-success': i % 2 !== 0}">
+      <div class="custom-card-departement mb-4" [ngClass]="{'bg-nude1': i % 2 === 0, 'bg-nude2': i % 2 !== 0}">
         <div class="card-body text-dark">
           <h4 class="card-title">{{ departement.nomDepartement }}</h4>
           <p class="card-text"><strong>Responsable:</strong> {{ departement.responsable }}</p>
@@ -14,6 +14,6 @@
           <p class="card-text"><strong>Spécialité:</strong> {{ departement.specialite }}</p>
         </div>
       </div>
-      </div>
     </div>
   </div>
+</div>

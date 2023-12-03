@@ -14,7 +14,7 @@ import { DepartementService } from 'src/app/service/departement.service';
 export class DepartementDetailComponent implements OnInit {
   departement: Departement = new Departement();
   universites: Universite[] = []; // Declare universites array
-  selectedUniversiteId: number =1 ;
+  selectedUniversiteId: number | undefined;
 
   constructor(
     private departementService: DepartementService,
@@ -58,12 +58,20 @@ export class DepartementDetailComponent implements OnInit {
     );
   }
   
-
   enregistrerDepartement(f: NgForm) {
     const id = this.departement.idDepartement;
   
     // Ensure that departement.universite is initialized
     this.departement.universite = this.departement.universite || new Universite();
+  
+    // Check if selectedUniversiteId is defined before assignment
+    if (this.selectedUniversiteId !== undefined) {
+      // Update the university ID in the departement object
+      this.departement.universite.idUniversite = this.selectedUniversiteId;
+    } else {
+      console.error('Selected university ID is undefined. Unable to update.');
+      return; // Stop further processing if the ID is undefined
+    }
   
     this.departementService.updateDepartement(id, this.departement).subscribe(
       (data) => {
@@ -74,6 +82,8 @@ export class DepartementDetailComponent implements OnInit {
         console.error('Error updating departement:', error);
       }
     );
+  
+ 
   
     if (this.selectedUniversiteId !== undefined && this.selectedUniversiteId !== null) {
       console.log('selectedUniversiteId:', this.selectedUniversiteId);

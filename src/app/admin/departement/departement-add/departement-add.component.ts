@@ -13,7 +13,8 @@ import { UniversiteService } from 'src/app/service/universite.service';
 export class DepartementAddComponent {
   nouveauDepartement: Departement = new Departement();
   universites: Universite[] = [];
-  selectedUniversiteId: number  =1 ;
+  selectedUniversiteId: number = 1;
+  errorMessage: string = '';
 
   constructor(
     private departementService: DepartementService,
@@ -28,34 +29,45 @@ export class DepartementAddComponent {
   }
 
   ajouterDepartement() {
-    if (this.selectedUniversiteId) {
-      // Ajouter le département
-      this.departementService.addDepartement(this.nouveauDepartement).subscribe(
-        (departement: Departement) => {
-          console.log('Département ajouté avec succès:', departement);
-          console.log('selectedUniversiteId:', this.selectedUniversiteId);
+    // Check if all conditions are met
+    if (
+      this.nouveauDepartement.nomDepartement &&
+      this.nouveauDepartement.responsable &&
+      this.nouveauDepartement.specialite &&
+      /^[A-Z]/.test(this.nouveauDepartement.nomDepartement) &&
+      /^[A-Z]/.test(this.nouveauDepartement.responsable) &&
+      /^[A-Z]/.test(this.nouveauDepartement.specialite.toString())
+    ) {
+      if (this.selectedUniversiteId) {
+        // Ajouter le département
+        this.departementService.addDepartement(this.nouveauDepartement).subscribe(
+          (departement: Departement) => {
+            console.log('Département ajouté avec succès:', departement);
+            console.log('selectedUniversiteId:', this.selectedUniversiteId);
 
-          
-          this.universiteService.affecterDepartementAUniversite(departement.idDepartement, this.selectedUniversiteId).subscribe(
-            () => {
-              console.log('Département affecté à l\'université avec succès.');
-              
-              // Réinitialiser le formulaire
-              this.nouveauDepartement = new Departement();
-            },
-            (error) => {
-              console.error('Erreur lors de l\'affectation du département à l\'université:', error);
-            }
-          );
-        },
-        (error) => {
-          console.error('Erreur lors de l\'ajout du département:', error);
-        }
-      );
+            this.universiteService.affecterDepartementAUniversite(departement.idDepartement, this.selectedUniversiteId).subscribe(
+              () => {
+                console.log('Département affecté à l\'université avec succès.');
+
+                // Réinitialiser le formulaire
+                this.nouveauDepartement = new Departement();
+                this.errorMessage = ''; // Clear any previous error message
+              },
+              (error) => {
+                this.errorMessage = 'Erreur lors de l\'affectation du département à l\'université:' + error.message;
+              }
+            );
+          },
+          (error) => {
+            this.errorMessage = 'Erreur lors de l\'ajout du département:' + error.message;
+          }
+        );
+      } else {
+        this.errorMessage = 'Veuillez sélectionner une université avant d\'ajouter le département.';
+      }
+      this.router.navigate(['/admin/departement/afficher']);
     } else {
-      console.error('Veuillez sélectionner une université avant d\'ajouter le département.');
+      this.errorMessage = 'Veuillez remplir tous les champs et commencer les champs appropriés par une lettre majuscule.';
     }
-                  this.router.navigate(['/admin/departement/afficher']);
-
   }
 }

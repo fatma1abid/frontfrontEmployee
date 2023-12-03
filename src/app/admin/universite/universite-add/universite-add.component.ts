@@ -20,12 +20,29 @@ export class UniversiteAddComponent implements OnInit {
 
   initForm(): void {
     this.universiteForm = this.fb.group({
-      nomUniversite: ['', Validators.required],
-      adresse: ['', Validators.required],
-      etatUniversite: ['public', Validators.required]
+      nomUniversite: ['', [Validators.required, this.capitalizeValidator]],
+      adresse: ['', [Validators.required, this.capitalizeValidator]],
+      etatUniversite: ['', [Validators.required, this.validateEtatSelection]]
     });
   }
-
+  
+  validateEtatSelection(control: any): {[key: string]: boolean} | null {
+    const value = control.value;
+    if (!value || value === "") {
+      return { 'required': true };
+    }
+    return null;
+  }
+  
+  
+  capitalizeValidator(control: any): {[key: string]: boolean} | null {
+    const value = control.value;
+    if (value && value.charAt(0) !== value.charAt(0).toUpperCase()) {
+      return { 'capitalize': true };
+    }
+    return null;
+  }
+  
   ajouterUniversite(): void {
     if (this.universiteForm.valid) {
       const nouvelleUniversite: Universite = this.universiteForm.value;
