@@ -36,7 +36,8 @@ export class ModifResComponent implements OnInit {
           this.reservation = {
             idReservation: result.idReservation,
             anneeUniversitaire: result.anneeUniversitaire,
-            estValide : result.estValide,
+          
+            
              
           }
         }
@@ -45,7 +46,7 @@ export class ModifResComponent implements OnInit {
       this.modificationReservationForm = this.formBuilder.group({
         idReservation: [null, [Validators.required , Validators.minLength(1)]],
         anneeUniversitaire: [null, [Validators.required , Validators.minLength(1)]],
-        estValide: [null, [Validators.required, Validators.minLength(1)]],
+      //  estValide: [null, [Validators.required, Validators.minLength(1)]],
         
       })
   
@@ -57,7 +58,7 @@ export class ModifResComponent implements OnInit {
   
   
     modifierReservation(){
-      this.reservationService.modifierReservation(this.modificationReservationForm.get('idReservation')?.value,this.modificationReservationForm.get('anneeUniversitaire')?.value,this.modificationReservationForm.get('estValide')?.value).subscribe(
+      this.reservationService.modifierReservation(this.modificationReservationForm.get('idReservation')?.value,this.modificationReservationForm.get('anneeUniversitaire')?.value ).subscribe(
         ()=>{
           this.msg = "reservation modifié avec succées"
             },

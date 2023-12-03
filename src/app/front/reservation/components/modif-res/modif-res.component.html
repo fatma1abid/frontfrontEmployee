@@ -44,19 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputName1">estValide </label>
-            <input type="number" class="form-control" id="exampleInputName1" placeholder="estValide " name="estValide " formControlName="estValide" [value]="reservation?.estValide">
-            <div *ngIf="f['estValide'].touched">
-                <div *ngIf="f['estValide'].errors?.['required']" class="error">
-                  <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner estValide  </p> 
-                  
-                </div>
-                <div *ngIf="f['estValide'].errors?.['minlength']" class="error">
-                  <p> <i class="mdi mdi-alert-circle-outline"></i> Le estValide</p>
-                </div>
-            </div>
-        </div>
+       
     
        
          

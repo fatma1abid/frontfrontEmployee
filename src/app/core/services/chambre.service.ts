@@ -40,7 +40,7 @@ export class ChambreService {
   supprimerChambre(idChambre:any)  {
     return this.http.delete(this.apiServerUrl + `/deleteChambre/${idChambre}`);
   }
-
+  
   getChambre(idChambre:any) : Observable<Chambre> {
     return this.http.get<Chambre>(this.apiServerUrl + `/${idChambre}`);
   }

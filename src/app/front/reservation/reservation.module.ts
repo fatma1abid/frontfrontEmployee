@@ -8,7 +8,7 @@ import { ListReservationComponent } from './components/list-reservation/list-res
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button'; 
 import { ListChambreComponent } from '../../admin/chambre/components/list-chambre/list-chambre.component';
-
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { ListChambreComponent } from '../../admin/chambre/components/list-chambr
     FormsModule, 
     MatDialogModule,
     MatButtonModule,
+    QRCodeModule,
   ]
 })
 export class ReservationModule { }

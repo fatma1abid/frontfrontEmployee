@@ -11,6 +11,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     ConfirmationComponent
   ],
   imports: [
+     
     CommonModule,
     AdminRoutingModule
   ]

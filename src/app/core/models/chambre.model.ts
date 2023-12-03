@@ -9,8 +9,10 @@ export class Chambre {
     numeroChambre!: number;
     typeChambre!: TypeChambre;
    // bloc?: Bloc[]; 
-    //reservations?:  Reservation[];
+    reservations?:  Reservation[];
+    
 
+     
     
 }
 

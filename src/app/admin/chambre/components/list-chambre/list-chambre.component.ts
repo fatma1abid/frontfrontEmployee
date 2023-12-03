@@ -93,22 +93,16 @@ openModalSuppression(id:any): void {
     doc.html(content, {
       callback: function (pdf) {
         pdf.save('chambres.pdf');
-      },
-       
-      html2canvas: { scale: 0.2 }, // optional, adjust as needed
-       
-       
+      },   
+      html2canvas: { scale: 0.2 }, // optional, adjust as needed 
       autoPaging: true,
-      // Adjust the scale and other options as needed
       
-      windowWidth: content.offsetWidth, // Set the width of the "window" (viewport)
-       
+      windowWidth: content.offsetWidth, // Set the width of the "window" (viewport)     
     });
-   
-
 
   }
 
+ 
 
   fileName= 'ExcelChambres.xlsx';
   exportexcel(): void

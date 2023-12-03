@@ -7,12 +7,14 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ModificationComponent } from './components/modification/modification.component';
+ 
 
 @NgModule({
   declarations: [
     AddChambreComponent,
    ListChambreComponent,
    ModificationComponent,
+   
 
   ],
   imports: [
@@ -22,6 +24,7 @@ import { ModificationComponent } from './components/modification/modification.co
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
+   
     
 
   ]

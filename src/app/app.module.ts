@@ -8,7 +8,7 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
- 
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-     
+    QRCodeModule,
   
   ],
 

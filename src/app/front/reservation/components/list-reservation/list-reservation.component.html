@@ -29,18 +29,20 @@
               <table class="     table "  id="content" #content >
                 <thead >
                   <tr>
-                    <th>id Reservation</th>
-                    <th>anneeUniversitaire</th>
-                    <th>estValide </th>
-                    <th>Delete</th>
+                    <th>idReservation</th>
+                    <th>anneeUniversitaire </th>
+                  
+                    <th>Delete </th>
                   </tr>
                 </thead>
                 
                 <tbody>
                     <tr *ngFor="let reservation of reservationList | async" >
-                    <td>{{reservation.idReservation  }}</td>
+                    <td>{{reservation.idReservation  }}  </td>
                      <td>{{reservation.anneeUniversitaire | date }}</td>
-                    <td>{{reservation.estValide  }}</td>
+                      
+                      
+
                       <td style="width: 10%;">
        
                                          <button type="button" class="btn btn-danger btn-icon ml-3" (click)="openModalSuppressionn(reservation.idReservation )">
@@ -52,10 +54,18 @@
                 </tbody>
  
                
-               
+               <!-- your-component.component.html -->
+
+                      
+
                
               
               </table>
+
+
+ 
+
+
               <button type="button" class="btn btn-primary " (click)="openModalModificationn(reservation)">
                     
                 <i class="mdi mdi-grease-pencil"></i> Modifier reservation 

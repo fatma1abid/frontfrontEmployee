@@ -5,6 +5,7 @@ import { AccueilFrontComponent } from './components/accueil-front/accueil-front.
 const routes: Routes = [
   {path:'accueil' , component:AccueilFrontComponent},
   {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) }
+  
 ];
 
 @NgModule({
