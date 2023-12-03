@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { ReservationService } from 'src/app/core/services/reservation.service';
 import { Reservation } from 'src/app/core/models/reservation.model';
 import { DatePipe } from '@angular/common';
+import { Chambre } from 'src/app/core/models/chambre.model';
 @Component({
   selector: 'app-add-reservation',
   templateUrl: './add-reservation.component.html',
@@ -17,13 +18,14 @@ export class AddReservationComponent implements OnInit{
   msg !: String;
   error !: String;
   anneeUniversitaire = new Date();
- 
-
+   
   onFileChanged(event: any): void {
     this.selectedFile =  event.target.files[0];
 
   }
    
+
+
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
       anneeUniversitaire: [null, [Validators.required , Validators.minLength(1)]],

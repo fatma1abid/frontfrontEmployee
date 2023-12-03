@@ -7,11 +7,13 @@ import { ModifResComponent } from './components/modif-res/modif-res.component';
 import { ListReservationComponent } from './components/list-reservation/list-reservation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button'; 
- 
+import { ListChambreComponent } from '../../admin/chambre/components/list-chambre/list-chambre.component';
+
 
 @NgModule({
   declarations: [
     AddReservationComponent,
+    
     ModifResComponent,
     ListReservationComponent],
   imports: [

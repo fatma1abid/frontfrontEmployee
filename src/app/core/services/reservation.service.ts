@@ -18,7 +18,7 @@ export class ReservationService {
 
   
 
-  addReservation(anneeUniversitaire: Date, estValide: boolean): Observable<Reservation> {
+  addReservation(anneeUniversitaire: Date, estValide: boolean ): Observable<Reservation> {
     if (estValide) {
       estValide=true;
       const reservation: Reservation = { anneeUniversitaire,estValide };

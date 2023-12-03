@@ -1,20 +1,16 @@
  
 
 
+ 
+
+
+ 
+ <app-list-reservation></app-list-reservation>
 
 
 
-
-
-
-<app-list-reservation></app-list-reservation>
-
-
-
-
-
-<div class="content-wrapper">
-  <div class="col-12 grid-margin stretch-card">
+<div class="pond ">
+  <div class="pond col-12 grid-margin stretch-card">
      <div class="card">
        <div class="card-body">
          <h4 class="card-title">Ajouter réservation</h4>
@@ -27,27 +23,36 @@
            {{error}}
          </div>
  
-         <form class="forms-sample" [formGroup]="reservationForm" (ngSubmit)="AjouterReservation()">
+         <form class="  forms-sample" [formGroup]="reservationForm" (ngSubmit)="AjouterReservation()">
            <div class="form-group">
-            <div class="form-row">
+            <div class=" ">
               <div class="form-group col-md-6">
              <label for="anneeUniversitaire">Année Universitaire</label>
              <input type="date" class="form-control" id="anneeUniversitaire" placeholder="Année Universitaire"
                formControlName="anneeUniversitaire">
              <small class="form-text text-muted">{{ anneeUniversitaire | date: 'dd/MM/yyyy hh:mm a' }}</small>
-           </div>
+             </div>
  
+
+             <div *ngIf="f['anneeUniversitaire'].touched">
+              <div *ngIf="f['anneeUniversitaire'].errors?.['required']" class="error">
+                <p><i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner la date de reservation</p>
+              </div>
+              <div *ngIf="f['estValide'].errors?.['minlength']" class="error">
+             
+              </div>
+            </div>
+
+
            <div class="form-group">
              <label for="estValide">Est Valide</label>
              <input type="number" class="form-control" id="estValide" placeholder="Est Valide" formControlName="estValide">
  
              <div *ngIf="f['estValide'].touched">
                <div *ngIf="f['estValide'].errors?.['required']" class="error">
-                 <p><i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner le numéro</p>
+                 <p><i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner si la reservation est valid ou non</p>
                </div>
-               <div *ngIf="f['estValide'].errors?.['minlength']" class="error">
-                 <p><i class="mdi mdi-alert-circle-outline"></i> Le numéro doit contenir minimum 1 caractère</p>
-               </div>
+               
              </div>
            </div>
           </div>
@@ -57,4 +62,4 @@
        </div>
      </div>
   </div>
- </div>
+ </div> 

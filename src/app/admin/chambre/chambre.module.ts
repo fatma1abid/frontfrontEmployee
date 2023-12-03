@@ -22,6 +22,7 @@ import { ModificationComponent } from './components/modification/modification.co
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
+    
 
   ]
 })

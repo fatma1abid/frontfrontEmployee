@@ -1,7 +1,7 @@
 
 
-
-<div class="content-wrapper">
+ 
+<div class="content-wrapper ">
     <div class="row">
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -19,8 +19,9 @@
                     {{error}}
                 </div>
             </div>
-            <div class="table table-hover">
-              <table class="table">
+            <div class="table table-hover"   id="content" #content>
+              <table class="table  "> 
+                <ion-content [fullscreeb]="true">
                 <thead >
                   <tr>
                     <th>id</th>
@@ -47,11 +48,14 @@
                     </td>
                   </tr>
                 </tbody>
-                <button type="button" class="btn btn-primary " (click)="openModalModification(chambre)">
-                    
-                    <i class="mdi mdi-grease-pencil"></i> Modifier chambre 
-               </button>
+              </ion-content>
               </table>
+              <button type="button" class="btn btn-primary " (click)="openModalModification(chambre)">
+                    
+                <i class="mdi mdi-grease-pencil"></i> Modifier chambre 
+           </button>
+              <input type="button" value="Download PDF" class="btn btn-success" (click)="SavePDF()">
+              <button  class="btn btn-primary " (click)="exportexcel()">Export to Excel</button>
             </div>
           </div>
         </div>

@@ -5,7 +5,8 @@ export class Reservation   {
     idReservation?: number;
     anneeUniversitaire?: Date;
     estValide ?: Boolean;
-   // chambre?:Chambre[];
+    chambre ?:Chambre;
+   
      
     //utilisateur?: Utilisateur[];
     

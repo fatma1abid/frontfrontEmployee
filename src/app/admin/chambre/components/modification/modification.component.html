@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label for="exampleInputName1">id Chambre</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="idChambre" name="idChambre" formControlName="idChambre" [value]="chambre?.idChambre">
+            <input type="number" class="form-control" id="exampleInputName1" placeholder="idChambre" name="idChambre" formControlName="idChambre" [value]="chambre?.idChambre">
    </div>
    <div *ngIf="f['idChambre'].touched">
     <div *ngIf="f['idChambre'].errors?.['required']" class="error">
@@ -33,7 +33,7 @@
  
         <div class="form-group">
             <label for="exampleInputName1">numero chambre</label>
-            <input type="text" class="form-control" id="exampleInputName1" placeholder="numeroChambre" name="numeroChambre" formControlName="numeroChambre" [value]="chambre?.numeroChambre">
+            <input type="number" class="form-control" id="exampleInputName1" placeholder="numeroChambre" name="numeroChambre" formControlName="numeroChambre" [value]="chambre?.numeroChambre">
             <div *ngIf="f['numeroChambre'].touched">
                 <div *ngIf="f['numeroChambre'].errors?.['required']" class="error">
                   <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner le numero  </p> 

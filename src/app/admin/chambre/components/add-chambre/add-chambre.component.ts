@@ -13,17 +13,13 @@ export class AddChambreComponent implements OnInit{
   constructor(private formBuilder : FormBuilder , private chambreService:ChambreService ){}
 
   chambreForm !: FormGroup
-  selectedFile!: File;
+  
   msg !: String;
   error !: String;
 
+   
+
   
-
-  onFileChanged(event: any): void {
-    this.selectedFile =  event.target.files[0];
-
-  }
-
   ngOnInit(): void {
     this.chambreForm = this.formBuilder.group({
       numero: [null, [Validators.required , Validators.minLength(1)]],
@@ -31,16 +27,17 @@ export class AddChambreComponent implements OnInit{
   
     })
 
-    
   }
 
   get f() {
     return this.chambreForm.controls;
   }
 
-  
+  private refreshChambreList() {
+    this.chambreService.getAllChambre();
+  }
   AjouterChambre(){
-    this.chambreService.addChambre(this.chambreForm. get('numero')?.value,this.chambreForm.get('typechambre')?.value).subscribe(
+    this.chambreService.addChambre(this.chambreForm.get('numero')?.value,this.chambreForm.get('typechambre')?.value).subscribe(
       ()=>{
          this.msg = "Chambre ajouté avec succées"
          this.chambreForm.reset();
@@ -50,10 +47,5 @@ export class AddChambreComponent implements OnInit{
            this.error = "Il ya une erreur qui est survenu"
       }
     )  }
-
- 
-
-  private refreshChambreList() {
-    this.chambreService.getAllChambre();
-  }
+  
 }
