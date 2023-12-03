@@ -1,5 +1,3 @@
-
-
 <div class="container">
         <h2 >Liste des universités</h2>
         <input type="text" [(ngModel)]="nomUniversiteRecherche" placeholder="Rechercher par nom" class="form-control mb-3" />
@@ -11,7 +9,6 @@
                 <th>Adresse</th>
                 <th>État</th>
                 <th>bouton</th>
-
               </tr>
             </thead>
             <tbody>
@@ -25,28 +22,17 @@
                   }">
                     {{ universite.etatUniversite }}
                   </label>
-                  
-                  
-
-
-                </td>
-
-              
-                
+                    </td>
                 <td>
-                  
-               
-                 <button type="button" class="btn btn-dark btn-icon-text mr-2" fdprocessedid="2mcgwr" [routerLink]="['/admin/universite/update', universite.idUniversite]">
+                <button type="button" class="btn btn-dark btn-icon-text mr-2" fdprocessedid="2mcgwr" [routerLink]="['/admin/universite/update', universite.idUniversite]">
                   Modifier
                   <i class="ti-file btn-icon-append"></i>                          
                 </button>
-
                 <button matTooltip="Edit Task" class="btn btn-info" (click)="supprimerUniversite(universite.idUniversite, universite.nomUniversite)">
                   Supprimer
                 </button>
                 </td>
-                      
-  </tr>
+              </tr>
   </tbody>
   </table>
     <button type="button" class="btn btn-success mb-3" [routerLink]="['/admin/universite/add']">

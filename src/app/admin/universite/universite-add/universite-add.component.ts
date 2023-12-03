@@ -22,8 +22,8 @@ export class UniversiteAddComponent implements OnInit {
 
   initForm(): void {
     this.universiteForm = this.fb.group({
-      nomUniversite: ['', [Validators.required, this.capitalizeValidator]],
-      adresse: ['', [Validators.required, this.capitalizeValidator]],
+      nomUniversite: ['', [Validators.minLength(3) ,Validators.required, this.capitalizeValidator]],
+      adresse: ['', [Validators.minLength(3) , Validators.required, this.capitalizeValidator]],
       etatUniversite: ['', [Validators.required, this.validateEtatSelection]]
     });
   }
