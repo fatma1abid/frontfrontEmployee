@@ -112,8 +112,9 @@
        
       </div>
     </nav>
-    <!-- partial -->
-    <div [ngClass]="{'container-fluid page-body-wrapper': isSpecificRoute()}">
+    <!-- partial 
+    <div [ngClass]="{'container-fluid page-body-wrapper': isSpecificRoute()}">-->
+    <div  [ngClass]="{'container-fluid page-body-wrapper': !shouldApplyClass()}" >
       <!-- partial:partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -306,12 +307,19 @@
               <span class="menu-title">Reclamations</span>
             </a>
           </li>
+      
           <li class="nav-item">
             <a class="nav-link" href="pages/documentation/documentation.html">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Bibliotheque</span>
             </a>
           </li>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/categorie/list">   <i class="icon-paper menu-icon"></i>
+                <span class="menu-title">Categories</span></a></li>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/livre/list"><i class="icon-paper menu-icon"></i>
+                <span class="menu-title">Livres</span></a></li>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/empruntLivre/list"><i class="icon-paper menu-icon"></i>
+                <span class="menu-title">Emprunts</span></a></li>
         </ul>
       </nav>
       <!-- partial -->

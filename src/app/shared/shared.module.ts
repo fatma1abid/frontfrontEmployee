@@ -10,8 +10,6 @@ import { PaginationDirective } from './directives/pagination.directive';
 import { SpinnerModalComponent } from './components/spinner-modal/spinner-modal.component';
 import { AlertComponent } from './components/alert/alert.component';
 
-
-
 @NgModule({
   declarations: [
     PaginationDirective,
@@ -23,7 +21,7 @@ import { AlertComponent } from './components/alert/alert.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [
     httpInterceptorProviders

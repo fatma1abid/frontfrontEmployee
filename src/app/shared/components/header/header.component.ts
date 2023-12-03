@@ -14,6 +14,13 @@ export class HeaderComponent {
     
   }
 
+
+  shouldApplyClass(): boolean {
+    // Par exemple, basé sur la route
+    return this.router.url.startsWith('/front')  ;
+
+  }
+
   isAdminRoute(): boolean {
     return this.router.url.startsWith('/admin');
   }

@@ -16,6 +16,9 @@ export class UserService {
 
 
   }
+  getUserByEmprunt(id:any) : Observable<any> {
+    return this.httpClient.get<any>(`${this.url}utilisateurs/emprunt/${id}`);
+  }
   getUsers():Observable<any[]>{
     return this.httpClient.get<any[]>(this.url+"utilisateurs")
   }

@@ -16,6 +16,17 @@ const routes: Routes = [
 
 
   
+  {path: 'categorie', loadChildren: () => import('./categorie/categorie.module').then(m => m.CategorieModule),canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } },
+  {path: 'livre', loadChildren: () => import('./livre/livre.module').then(m => m.LivreModule),canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } },
+  {path: 'empruntLivre', loadChildren: () => import('./emprunt-livre/emprunt-livre.module').then(m => m.EmpruntLivreModule),canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } },
+
+
 ];
 
 @NgModule({

@@ -32,6 +32,7 @@
                     Vous n'avez pas de compte ?<a routerLink="/front/register" class="text-primary">Créez-en un</a>
                 </div>
               </form>
+              <app-alert *ngIf="message" [type]="type" [message]="message"></app-alert>
             </div>
           </div>
         </div>

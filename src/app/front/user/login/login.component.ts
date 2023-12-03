@@ -10,7 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit{
   loginForm !:FormGroup;
-
+  type!: 'success' | 'error';
+  message!:string | null;
   constructor(private formBuilder:FormBuilder,private userService:UserService,private route:Router){}
   ngOnInit(): void {
     this.loginForm =this.formBuilder.group({
@@ -28,13 +29,13 @@ export class LoginComponent implements OnInit{
       next:(response) => {
         let token = response.token;
         localStorage.setItem('Token', token);
-        console.log("logged in")
         this.route.navigateByUrl("/front/accueil");
       },
-      error:(error) => {
-        console.error('Error authentified:', error);
-        
-          alert('Error authentified:');
+      error:(error) => {        
+          console.log(error);
+          this.type = 'error';
+          this.message =error.error;
+
 
       }
     }
