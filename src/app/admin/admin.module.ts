@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { PageAccueilComponent } from './components/page-accueil/page-accueil.component';
+import { FoyerModule } from './foyer/foyer.module';
+import { BlocModule } from '../front/bloc/bloc.module';
 
 
 @NgModule({
@@ -11,7 +13,10 @@ import { PageAccueilComponent } from './components/page-accueil/page-accueil.com
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FoyerModule,
+    BlocModule,
+  
   ]
 })
 export class AdminModule { }
