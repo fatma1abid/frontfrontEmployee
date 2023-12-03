@@ -2,26 +2,30 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FrontRoutingModule } from './front-routing.module';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
-import { RegisterComponent } from './components/user/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/user/login/login.component';
-import { UpdateProfileComponent } from './components/user/update-profile/update-profile.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from '../shared/interceptors/auth-interceptor.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
     AccueilFrontComponent,
-    RegisterComponent,
-    LoginComponent,
-    UpdateProfileComponent
+
   ],
   imports: [
     CommonModule,
     FrontRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+  
   ]
+  ,
+  providers: [
+    JwtHelperService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  
+  ],
 })
 export class FrontModule { }

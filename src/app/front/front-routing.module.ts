@@ -1,16 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
-import { RegisterComponent } from './components/user/register/register.component';
-import { LoginComponent } from './components/user/login/login.component';
-import { UpdateProfileComponent } from './components/user/update-profile/update-profile.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
+import { LogoutGuard } from '../shared/guards/logout..guard';
 
 const routes: Routes = [
   {path:'accueil' , component:AccueilFrontComponent},
-  {path: 'register', component:RegisterComponent},
-  {path: 'login', component:LoginComponent},
-  {path: 'updateProfile', component:UpdateProfileComponent},
-
+  { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+  { path: 'reclamation', loadChildren: () => import('./reclamation/reclamation.module').then(m => m.ReclamationModule) },
 
 ];
 

@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { PageAccueilComponent } from './components/page-accueil/page-accueil.component';
-import { ListEtudiantsComponent } from './components/user/list-etudiants/list-etudiants.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     PageAccueilComponent,
-    ListEtudiantsComponent,
-  ],
+    ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

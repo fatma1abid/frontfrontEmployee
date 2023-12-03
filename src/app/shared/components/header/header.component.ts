@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouteReuseStrategy, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { ActivatedRoute, RouteReuseStrategy, Router } from '@angular/router';
 export class HeaderComponent {
 
 
-  constructor(private router:Router,private route : ActivatedRoute){
+  constructor(private router:Router,private route : ActivatedRoute,private userService:UserService){
     
   }
 
@@ -23,6 +24,23 @@ export class HeaderComponent {
   }
 
   isSpecificRoute(): boolean {
-    return this.router.url !== "/front/register" && this.router.url !== "/front/login" && this.router.url !== "/front/updateProfile";
+    return this.router.url !== "/front/register" && this.router.url !== "/front/login" && this.router.url !== "/front/updateProfile" && this.router.url !== "/front/reclamation/mesRec";
+  }
+  logout(): void {
+    this.userService.logout().subscribe(
+      () => {
+        // Handle successful logout
+        localStorage.removeItem('Token')
+
+        window.location.href = '/front/login'; // Redirect to the login page
+      },
+
+      (error) => {
+       // window.location.href = '/front/login'; // Redirect to the login page
+      }    
+      );
+  }
+  isAuthenticated():boolean{
+    return this.userService.isAUthenticated();
   }
 }

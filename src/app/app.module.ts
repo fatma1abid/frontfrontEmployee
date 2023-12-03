@@ -6,16 +6,23 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { httpInterceptorProviders } from './shared/interceptors';
+import { AuthInterceptor } from './shared/interceptors/auth-interceptor.service';
+import { FrontModule } from './front/front.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    FrontModule,
+    AdminModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'XSRF-TOKEN', // The name of the cookie that contains the CSRF token
@@ -24,7 +31,9 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
   ],
 
   
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    httpInterceptorProviders
+],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
