@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Universite } from 'src/app/models/universite';
@@ -11,6 +11,8 @@ import { UniversiteService } from 'src/app/service/universite.service';
 })
 export class UniversiteAddComponent implements OnInit {
   universiteForm!: FormGroup;
+  @Input() universiteParDefaut: Universite = new Universite(); 
+
 
   constructor(private universiteService: UniversiteService, private router: Router, private fb: FormBuilder) {}
 

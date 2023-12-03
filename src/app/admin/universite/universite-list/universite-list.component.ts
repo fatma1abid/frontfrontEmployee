@@ -12,6 +12,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 export class UniversiteListComponent implements OnInit {
   universites: Universite[] = [];
   nomUniversiteRecherche: string = '';
+  universiteParDefaut: Universite = new Universite(); // Définissez les données par défaut ici
+
 
   constructor(private universiteService: UniversiteService, private router: Router) {}
 
@@ -24,11 +26,17 @@ export class UniversiteListComponent implements OnInit {
       data => {
         this.universites = data;
         console.log('Universites from API:', this.universites);
+
+        // Affectez la première université de la liste comme universiteParDefaut
+        if (this.universites.length > 0) {
+          this.universiteParDefaut = this.universites[0];
+        }
       },
       error => {
         console.error('Error fetching universites:', error);
       }
     );
+  
   }
   navigateToEdit(id: number) {
     this.router.navigate(['/admin/universite/update', id]);

@@ -34,4 +34,7 @@
   <button type="button" class="btn btn-success mb-3" [routerLink]="['/admin/departement/add']">
       Ajouter Département
   </button>
+  <app-departement-add (departementAjoute)="handleDepartementAjoute($event)"></app-departement-add>
+
+
 </div>

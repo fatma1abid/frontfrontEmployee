@@ -44,7 +44,11 @@ export class DepartementListComponent implements OnInit {
   }
 
   
-  
+  handleDepartementAjoute(departement: Departement) {
+    // Gérez l'ajout réussi du département ici
+    console.log('Département ajouté avec succès dans le composant parent:', departement);
+    // Ajoutez tout autre traitement nécessaire
+  }
 
   navigateToEdit(idDepartement: number) {
     this.router.navigate(['/admin/departement/update', idDepartement]);
