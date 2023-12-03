@@ -98,7 +98,7 @@
         <ul class="navbar-nav nav-front" *ngIf="isFrontRoute() && isAuthenticated()">
         
          <li class="front"><a href="#">Accueil</a></li>
-         <li class="front"><a href="#">Universités</a></li>
+         <li class="front"><a [routerLink]="['/front/universite/afficher']">Universités</a></li>
          <li class="front"><a href="#">Foyer</a></li>
          <li class="front"><a href="#">Biblothéques</a></li>
          <li class="front"><a href="#">Contact</a></li>

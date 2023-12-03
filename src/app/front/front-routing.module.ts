@@ -7,6 +7,8 @@ import { ListCategorieComponent } from './components/list-categorie/list-categor
 import { ListLivresComponent } from './components/list-livres/list-livres.component';
 import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-emprunt.component';
 import { RoleGuard } from '../shared/guards/role.guard';
+import { DepartementListComponent } from './departement/departement-list/departement-list.component';
+import { UniversiteListComponent } from './universite/universite-list/universite-list.component';
 
 const routes: Routes = [
   {path:'accueil' , component:AccueilFrontComponent},
@@ -26,7 +28,13 @@ const routes: Routes = [
   expectedRole: 'ETUDIANT' }},
   {path:'emprunterLivre/:idLivre' , component:DemandeEmpruntComponent,canActivate: [AuthGuard,RoleGuard], 
   data: { 
-  expectedRole: 'ETUDIANT' }}
+  expectedRole: 'ETUDIANT' }},
+
+  {path:'accueil' , component:AccueilFrontComponent},
+  {path:'afficher' , component:UniversiteListComponent},
+  { path: 'departement/:nomUniversite', component: DepartementListComponent },
+
+
 ];
 
 @NgModule({

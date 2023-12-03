@@ -9,6 +9,9 @@ import { httpInterceptorProviders } from './interceptors';
 import { PaginationDirective } from './directives/pagination.directive';
 import { SpinnerModalComponent } from './components/spinner-modal/spinner-modal.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { FilterPipe } from 'src/filter.pipe';
+
+
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { AlertComponent } from './components/alert/alert.component';
     SpinnerModalComponent,
     AlertComponent,
     
+    FilterPipe
   ],
   imports: [
     CommonModule,
@@ -31,8 +35,9 @@ import { AlertComponent } from './components/alert/alert.component';
     FooterComponent,
     PaginationDirective,
     SpinnerModalComponent,
-    AlertComponent
+    AlertComponent,
 
+    FilterPipe
   ]
 })
 export class SharedModule { }

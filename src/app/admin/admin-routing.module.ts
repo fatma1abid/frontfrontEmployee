@@ -4,6 +4,7 @@ import { PageAccueilComponent } from './components/page-accueil/page-accueil.com
 import { ListEtudiantsComponent } from './user/list-etudiants/list-etudiants.component';
 import { RoleGuard } from '../shared/guards/role.guard';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { UniversiteListComponent } from './universite/universite-list/universite-list.component';
 
 const routes: Routes = [
   {path:'accueil' , component:PageAccueilComponent},
@@ -25,6 +26,11 @@ const routes: Routes = [
   {path: 'empruntLivre', loadChildren: () => import('./emprunt-livre/emprunt-livre.module').then(m => m.EmpruntLivreModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ADMIN' } },
+
+  {path:'accueil' , component:PageAccueilComponent},
+  { path: 'afficher', component: UniversiteListComponent },
+
+
 
 
 ];

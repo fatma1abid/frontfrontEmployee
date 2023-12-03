@@ -11,6 +11,7 @@ import { BackgroundDirective } from './directives/background.directive';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FilterPipe } from 'src/filter.pipe';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BackgroundDirective,
     ],
   imports: [
+    SharedModule,
     CommonModule,
     AdminRoutingModule,
     SharedModule,

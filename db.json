@@ -1,0 +1,39 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "universites": [
+    {
+      "nomUniversite": "lala",
+      "adresse": "eekekkeke",
+      "etatUniversite": "public",
+      "id": 5
+    },
+    {
+      "nomUniversite": "aaaa",
+      "adresse": "aaa",
+      "etatUniversite": "public",
+      "id": 1700571091031
+    }
+  ],
+  "departements": [
+    {
+      "nomDepartement": "aa",
+      "responsable": "la vie",
+      "nombreProfesseurs": 6,
+      "id": 1699881291109,
+      "specialite": "rrrgt"
+    }
+  ]
+}
