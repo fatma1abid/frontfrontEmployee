@@ -11,8 +11,9 @@ import { PaginationDirective } from 'src/app/shared/directives/pagination.direct
 export class ListeReclamationsComponent implements OnInit{
   @ViewChild(PaginationDirective, { static: true }) paginationDirective!: PaginationDirective;
 
-reclamations!:any
+reclamations!:any[];
 user!:any
+deletedRec!:any;
 isEditModal : boolean=false;
 selectedReclamation:any;
 paginatedItems: any[] = [];
@@ -40,10 +41,24 @@ ngOnInit(): void {
     }
   
     )}
+    changerEtat(recl:any,etat:any){
+      const updatedRecIndex = this.reclamations.findIndex(r => r.id === recl.id);
+      console.log(updatedRecIndex);
+      this.reclamationService.changerEtat(recl.id,etat).subscribe(
+        result=>{
+          console.log(this.reclamations.splice( updatedRecIndex , 1));
+           this.reclamations =  this.reclamations.splice(updatedRecIndex , 1);
+        }
+      )
+      
+    }
     openEdit(reclamation:any){
       this.isEditModal =true;
       console.log(this.isEditModal);
       this.selectedReclamation = reclamation;
+    }
+    deletedReclamation(rec:any){
+      this.deletedRec = rec;
     }
     setPage(pageNumber: number): void {
       // Call the setPage method of PaginationDirective

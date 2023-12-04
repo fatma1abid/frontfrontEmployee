@@ -37,7 +37,7 @@
                       <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon" data-toggle="modal" data-target="#exampleModal" (click)="openEdit(reclamation)">
                         <i class="ti-pencil"></i>
                       </button>
-                      <button type="button" class="btn btn-danger btn-rounded btn-icon">
+                      <button type="button" class="btn btn-danger btn-rounded btn-icon" data-toggle="modal" data-target="#confirmationModal" (click)="deletedReclamation(reclamation)">
                         <i class="ti-trash"></i>
                       </button>
                       </td>
@@ -50,4 +50,31 @@
         </div>
       </div>
       <app-formulaire-reclamation [user] = "user" (ReclamationAddEvent)="rechargeReclamations()" [(isEdit)]="isEditModal" [reclamation]="selectedReclamation"></app-formulaire-reclamation>
-</div>
+      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+    
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Supprimer reclamation</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+       
+                <div class="card">
+                  <div class="card-body">
+                    <p>Êtes-vous sûr de vouloir supprimer {{deletedRec?.nomEt}} {{deletedRec?.prenomEt}} ?</p>
+                    <div class="d-flex justify-content-space-between">
+
+                    <button class="btn btn-success" (click)="changerEtat(deletedRec,'archivé')">Confirmer</button>
+                    <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Annuler</button>
+
+                   </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>

@@ -7,6 +7,9 @@ import { AuthGuard } from '../shared/guards/auth.guard';
 import { UniversiteListComponent } from './universite/universite-list/universite-list.component';
 
 const routes: Routes = [
+  {path: 'accueil',component:PageAccueilComponent,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' }},
   {path: 'etudiants', loadChildren: () => import('./user/user.module').then(m => m.UserModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ADMIN' } },
@@ -35,8 +38,12 @@ const routes: Routes = [
   { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ADMIN' } },
-  {path:'chambre', loadChildren: () => import('./chambre/chambre.module').then(m => m.ChambreModule) },
-  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) }
+  {path:'chambre', loadChildren: () => import('./chambre/chambre.module').then(m => m.ChambreModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' }},
+  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule),canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } }
    
 ];
 

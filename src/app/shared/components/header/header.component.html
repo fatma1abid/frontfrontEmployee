@@ -111,6 +111,10 @@
               <!-- Add your profile link here -->
               <a [routerLink]="['/front/updateProfile']">Profile</a>
             </li>
+            <li class="dropdown-item">
+              <!-- Add your profile link here -->
+              <a [routerLink]="['/front/reclamation/mesRec']">Mes reclamations</a>
+            </li>
             <li *ngIf="isAuthenticated()" class="dropdown-item">
               <button class="btn btn-primary" type="button" (click)="logout()" style="font-size: 10px;">
                 Se déconnecter
@@ -304,50 +308,45 @@
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/accueil">
-              <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Profil</span>
             </a>
           </li>
          
           <li class="nav-item">
             <a class="nav-link" routerLink="admin/etudiants">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Liste d'étudiants</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/reclamation/listeRec">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Reclamations</span>
             </a>
-            <li class="nav-item"> <a class="nav-link" routerLink="/front/reservation/addReservation">reservation</a></li>
+            <li class="nav-item"> 
+              <a class="nav-link" routerLink="/front/reservation/addReservation">
+                Bibliothéques</a></li>
 
             <li class="nav-item"> <a class="nav-link"  routerLink="/admin/foyer/ShowFoyer">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Liste des foyers</span>
             </a></li>
             <li class="nav-item"> <a class="nav-link" routerLink="/admin/foyer/AddFoyer">
-              <i class="icon-paper menu-icon"> </i>
               <span class="menu-title">Ajouter un foyers</span></a></li>
-            <li class="nav-item"> <a class="nav-link" routerLink="/admin/bloc/AddBloc">       <i class="icon-paper menu-icon"></i>
+            <li class="nav-item"> <a class="nav-link" routerLink="/admin/bloc/AddBloc">       
               <span class="menu-title">Ajouter un bloc</span></a> </li>
        
       
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/universite/afficher">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Universités</span>
             </a>
           </li>
-              <li class="nav-item"> <a class="nav-link" routerLink="/admin/categorie/list">   <i class="icon-paper menu-icon"></i>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/categorie/list"> 
                 <span class="menu-title">Categories</span></a></li>
-              <li class="nav-item"> <a class="nav-link" routerLink="/admin/livre/list"><i class="icon-paper menu-icon"></i>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/livre/list">
                 <span class="menu-title">Livres</span></a></li>
-              <li class="nav-item"> <a class="nav-link" routerLink="/admin/empruntLivre/list"><i class="icon-paper menu-icon"></i>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/empruntLivre/list">
                 <span class="menu-title">Emprunts</span></a></li>
                 <li *ngIf="isAuthenticated()" class="nav-item">
-                  <button class="btn btn-primary" type="button" (click)="logout()">
-                    <i class="icon-deconnect menu-icon"></i>
+                  <button class="nav-link" type="button" (click)="logout()">
                     <span class="menu-title">Se déconnecter</span>
                   </button>
                 </li>

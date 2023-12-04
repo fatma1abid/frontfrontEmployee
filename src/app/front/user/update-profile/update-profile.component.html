@@ -54,7 +54,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-9">
-                                    <input type="email" class="form-control"formControlName="email" />
+                                    <input type="email" class="form-control"formControlName="email" [readonly]="true" />
                                     <div *ngIf="myControls['email'].touched && myControls['email'].invalid" >
                                         <div *ngIf="myControls['email'].errors && myControls['email'].errors['required']" class="error">
                                           email Obligatoir

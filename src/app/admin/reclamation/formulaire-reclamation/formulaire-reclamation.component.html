@@ -53,7 +53,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Reclamations</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -61,7 +61,7 @@
         <div class="modal-body">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Default form</h4>
+              <h4 class="card-title"></h4>
               <p class="card-description">
                 Basic form layout
               </p>
@@ -87,6 +87,7 @@
                 <button type="submit" class="btn btn-primary mr-2" [disabled]="reclamationForm.invalid">  {{ isEdit ? 'Modifier' : 'Ajouter' }}
                 </button>
               </form>
+              <app-alert [message]="alertMessage" [type]="alertType"></app-alert>
             </div>
       
         </div>

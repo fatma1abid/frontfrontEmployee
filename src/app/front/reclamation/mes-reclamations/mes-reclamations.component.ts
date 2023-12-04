@@ -8,8 +8,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./mes-reclamations.component.scss']
 })
 export class MesReclamationsComponent implements OnInit {
-reclamations!:any
+reclamations!:any[];
 user!:any
+deletedRec!:any;
+
 isEditModal : boolean=false;
 selectedReclamation:any;
 constructor(private reclamationService:ReclamationService,
@@ -27,6 +29,20 @@ ngOnInit(): void {
     )
 
   });
+  }
+  deletedReclamation(rec:any){
+    this.deletedRec = rec;
+  }
+  changerEtat(recl:any,etat:any){
+    const updatedRecIndex = this.reclamations.findIndex(r => r.id === recl.id);
+    console.log(updatedRecIndex);
+    this.reclamationService.changerEtat(recl.id,etat).subscribe(
+      result=>{
+        console.log(this.reclamations.splice( updatedRecIndex , 1));
+         this.reclamations =  this.reclamations.splice(updatedRecIndex , 1);
+      }
+    )
+    
   }
   rechargeReclamations(){
     this.reclamationService.getMyRec( this.user.email,"archivé").subscribe({

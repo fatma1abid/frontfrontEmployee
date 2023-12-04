@@ -26,7 +26,7 @@ export class ReclamationService {
   update(data:any,id:number):Observable<any>{
     return this.httpClient.put<any>(`${this.url}/modifier/${id}`,data)
   }
-  changerEtat(data:any,etat:string):Observable<any>{
-    return this.httpClient.put<any>(`${this.url}/changerEtat?email=${etat}`,data)
+  changerEtat(id:any,etat:any):Observable<any>{
+    return this.httpClient.put<any>(`${this.url}/changerEtat?id=${id}`,etat)
   }
 }

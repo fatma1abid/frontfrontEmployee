@@ -40,7 +40,9 @@ const routes: Routes = [
   { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ETUDIANT' } },
-  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) }
+  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' } }
 
 ];
 

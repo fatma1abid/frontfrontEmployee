@@ -35,7 +35,12 @@ export class ChambreService {
     return this.http.get<Chambre[]>(`${this.apiServerUrl}/getAllChambre`);
   } 
    
-
+  getchambreListe="http://localhost:8005/getChambreByIDBloc";
+  FshowChambre(idBloc:number) : Observable<Chambre[]>
+  {
+   const url = `${this.getchambreListe}/${idBloc}`;
+     return this.http.get<Chambre[]>(url);
+  }
    
   supprimerChambre(idChambre:any)  {
     return this.http.delete(this.apiServerUrl + `/deleteChambre/${idChambre}`);
