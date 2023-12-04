@@ -31,7 +31,9 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./universite/universite.module').then(m => m.UniversiteModule) ,canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ETUDIANT' }},
-
+  { path: '', loadChildren: () => import('./departement/departement.module').then(m => m.DepartementModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' }},
   { path: 'foyer', loadChildren: () => import('./foyer/foyer.module').then(m => m.FoyerModule) ,canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ETUDIANT' }},

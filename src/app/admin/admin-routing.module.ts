@@ -23,10 +23,18 @@ const routes: Routes = [
   {path: 'empruntLivre', loadChildren: () => import('./emprunt-livre/emprunt-livre.module').then(m => m.EmpruntLivreModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ADMIN' } },
-  {path:'accueil' , component:PageAccueilComponent},
-  { path: 'afficher', component: UniversiteListComponent },
-  { path: 'foyer', loadChildren: () => import('./foyer/foyer.module').then(m => m.FoyerModule) },
-  { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule) }
+  { path: '', loadChildren: () => import('./universite/universite.module').then(m => m.UniversiteModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' }},
+  { path: '', loadChildren: () => import('./departement/departement.module').then(m => m.DepartementModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' }},
+  { path: 'foyer', loadChildren: () => import('./foyer/foyer.module').then(m => m.FoyerModule),canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } },
+  { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule),canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } }
 ];
 
 @NgModule({
