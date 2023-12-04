@@ -12,6 +12,13 @@ import { ActivatedRoute , Router} from '@angular/router';
 })
 export class UpdatebiblioComponent implements OnInit {
   biblioForm!: FormGroup;
+  selectedFile!: File;
+  nameFile!:string
+
+  onFileChanged(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
 
   
     constructor(
@@ -28,6 +35,7 @@ export class UpdatebiblioComponent implements OnInit {
         numTel: new FormControl(),
         horaire: new FormControl(),
         description: new FormControl(),
+        imageB: new FormControl(),
 
       });
     }
@@ -48,6 +56,8 @@ export class UpdatebiblioComponent implements OnInit {
             numTel: bibliotheque.numTel,
             horaire: bibliotheque.horaire,
             description: bibliotheque.description,
+            imageB: bibliotheque.imageB,
+
           });
         },
         (error) => {

@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';  
 
 
 
@@ -26,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FullCalendarModule,
     FormsModule,
     BrowserAnimationsModule,
-    
+    RouterModule.forRoot([]),
+
    
 
 

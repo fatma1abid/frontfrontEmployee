@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
-import { ListbibliosComponent } from './components/listbiblios/listbiblios.component';
+import { BiblioComponent } from './components/biblio/biblio.component';
+import { CalendrierComponent } from './components/calendrier/calendrier.component';
 
 const routes: Routes = [
   {path:'accueil' , component:AccueilFrontComponent},
-  {path:'listBibs' , component:ListbibliosComponent},
+  {path:'Bib/:idFoyer' , component:BiblioComponent},
+  {path: 'calendrier/:idBibliotheque', component: CalendrierComponent }, 
+
+
 
 ];
 

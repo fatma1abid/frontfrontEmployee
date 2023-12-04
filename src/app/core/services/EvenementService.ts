@@ -32,9 +32,10 @@ export class EvenementService {
 
 
 
-    addEvent(nomE : string , dateDebut:Date ,  dateFin : Date ,  lieu : string ,description:string ,  etatEvent : EtatEvenement , image:File ):Observable<Evenement>{
+    addEvent(bibliotheque:number, nomE : string , dateDebut:Date ,  dateFin : Date ,  lieu : string ,description:string ,  etatEvent : EtatEvenement , image:File ):Observable<Evenement>{
 
     const formData: FormData = new FormData();
+    formData.append('idBibliotheque', bibliotheque.toString() );
     formData.append('nomE', nomE);
     formData.append('dateDebut', dateDebut.toString());
     formData.append('dateFin', dateFin.toString());
@@ -73,6 +74,8 @@ updateEvenement(idEvenement: number, evenement: Evenement): Observable<Evenement
 updateEventStartDate(idEvenement: number, newStartDate: Date): Observable<any> {
   return this.http.put(this.apiServerUrl + `/updateeventStartDate/${idEvenement}`, { newStartDate });
 }
-
+getEventsByBibliotheque(idBibliotheque:any) : Observable<Evenement[]> {
+  return this.http.get<Evenement[]>(this.apiServerUrl + `/bibliotheque/${idBibliotheque}`);
+}
 }
 

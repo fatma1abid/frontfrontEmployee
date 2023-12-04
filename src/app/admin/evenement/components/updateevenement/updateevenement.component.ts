@@ -27,6 +27,7 @@ export class UpdateevenementComponent implements OnInit {
       private router: Router,
     ) {
       this.eventForm = new FormGroup({
+        bibliotheque: new FormControl(),
         idEvenement: new FormControl(),
         nomE: new FormControl(),
         dateDebut: new FormControl(),
@@ -65,6 +66,7 @@ export class UpdateevenementComponent implements OnInit {
 
           // Affectez les valeurs de la bibliothèque au formulaire
           this.eventForm = this.fb.group({
+            bibliotheque: evenement.bibliotheque,
             idEvenement: evenement.idEvenement,
             nomE: evenement.nomE,
             dateDebut: formatteddateDebut,

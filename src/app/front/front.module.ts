@@ -3,19 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { FrontRoutingModule } from './front-routing.module';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
-import { ListbibliosComponent } from './components/listbiblios/listbiblios.component';
+import { CalendrierComponent } from './components/calendrier/calendrier.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { RouterModule } from '@angular/router';  
 
 
 @NgModule({
   declarations: [
     AccueilFrontComponent,
-    ListbibliosComponent
+    CalendrierComponent,
   ],
   imports: [
     CommonModule,
     FrontRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    RouterModule,
+
   ]
 })
 export class FrontModule { }

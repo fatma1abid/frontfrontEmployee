@@ -47,4 +47,7 @@ updateBibliotheque(idBibliotheque: number, bibliotheque: Bibliotheque): Observab
   return this.http.put<Bibliotheque>(this.apiServerUrl + '/updatebiblio'+ `/${idBibliotheque}`, bibliotheque);
 
 }
+getBibliothequeByFoyer(idFoyer:any) : Observable<Bibliotheque> {
+  return this.http.get<Bibliotheque>(this.apiServerUrl + `/byfoyer/${idFoyer}`);
+}
 }

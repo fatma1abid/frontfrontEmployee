@@ -1,8 +1,5 @@
-
-// Importez les bibliothèques nécessaires
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EvenementService } from 'src/app/core/services/EvenementService';
-
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import { CalendarOptions, EventApi } from '@fullcalendar/core';
@@ -17,6 +14,7 @@ import { Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EtatEvenement } from 'src/app/core/models/etatEvenement.enum';
 import { Evenement } from 'src/app/core/models/Evenement.model';
+import { Bibliotheque } from 'src/app/core/models/Bibliotheque.model';
 
 
 @Component({
@@ -34,6 +32,7 @@ export class CalendarComponent implements OnInit {
   //newEvent: any = {};
 
   newEvent = {
+    bibliotheque:'',
     nomE: '',
     dateDebut: '',
     dateFin: '',
@@ -86,8 +85,10 @@ export class CalendarComponent implements OnInit {
         this.events = events.map((event) => ({
           id: event.idEvenement,
           title: event.nomE,
+          bibliotheque:Bibliotheque,
           date: moment(event.dateDebut).toISOString(),
           eventDetails: {
+            bibliotheque:event.bibliotheque,
             idEvenement: event.idEvenement,
             dateDebut: event.dateDebut,
             dateFin: event.dateFin,
@@ -194,12 +195,16 @@ export class CalendarComponent implements OnInit {
   
   
     showEventDetailsPopup() {
+      const bibliothequeName = this.selectedEvent.eventDetails?.bibliotheque?.nomB ;
+    
       Swal.fire({
         title: this.selectedEvent.title,
         html: `
           <div>
-            <img src="http://localhost:8082/images_events/${this.selectedEvent.eventDetails.idEvenement}/${this.selectedEvent.eventDetails.image}" alt="Image" style="max-width: 100%;">
+            <img src="${this.urlImage}/${this.selectedEvent.eventDetails.idEvenement}/${this.selectedEvent.eventDetails.image}" alt="Image" style="max-width: 100%;">
           </div>
+          Bibliotheque: ${bibliothequeName}
+          <br>
           Date: ${this.formattedDate}
           <br>
           Lieu: ${this.selectedEvent.eventDetails.lieu}
@@ -210,7 +215,7 @@ export class CalendarComponent implements OnInit {
         showCancelButton: true,
         footer: `
           <button class="btn btn-secondary" id="modifyBtn">Modifier</button>
-          <button class="btn btn-danger" (click)="deleteEvent()" id="deleteBtn">Supprimer</button>
+          <button class="btn btn-danger" id="deleteBtn">Supprimer</button>
         `,
       }).then((result) => {
         if (result.isConfirmed) {
@@ -232,9 +237,15 @@ export class CalendarComponent implements OnInit {
           });
         }
     
-       
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', () => {
+            // Handle delete button click
+            this.deleteEvent(this.selectedEvent.eventDetails.idEvenement);
+          });
+        }
       });
     }
+    
     
     modifyEvent() {
       this.navigateToEdit(this.selectedEvent.eventDetails.idEvenement);
