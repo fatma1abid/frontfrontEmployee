@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Bibliotheque } from '../models/Bibliotheque.model';
+import { Livre } from '../models/livre.model';
 
 
 
@@ -50,4 +51,20 @@ updateBibliotheque(idBibliotheque: number, bibliotheque: Bibliotheque): Observab
 getBibliothequeByFoyer(idFoyer:any) : Observable<Bibliotheque> {
   return this.http.get<Bibliotheque>(this.apiServerUrl + `/byfoyer/${idFoyer}`);
 }
+getBibliothequeByEvenement(idEvenement:any) : Observable<Bibliotheque> {
+  return this.http.get<Bibliotheque>(this.apiServerUrl + `/evenement/${idEvenement}`);
+}
+
+
+getAllLivres() : Observable<Livre[]> {
+  return this.http.get<Livre[]>("http://localhost:8082/livres/all");
+}
+
+
+ajouterLivreBiblio(idLivre : any ,idBib:any){
+  const body = {}
+  return this.http.put<Bibliotheque>(this.apiServerUrl + '/ajoutLivre'+ `/${idLivre}/${idBib}`,body);
+}
+
+
 }

@@ -1,4 +1,4 @@
-import { Component , OnInit , Inject } from '@angular/core';
+import { Component , OnInit , Inject , Input } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { EvenementService } from 'src/app/core/services/EvenementService';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -13,11 +13,11 @@ import { Observable} from 'rxjs';
   styleUrls: ['./addevenement.component.scss']
 })
 export class AddevenementComponent implements OnInit {
-
   evenementForm! : FormGroup;
   selectedFile!: File;
   nameFile!:string
   bibliotheques !: Observable<Bibliotheque[]>
+  @Input() parentData: any;
 
   onFileChanged(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -69,5 +69,6 @@ export class AddevenementComponent implements OnInit {
   private refreshEventsList() {
     this.evenementService.getAllEvents();
   }
+
 
 }

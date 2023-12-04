@@ -6,6 +6,9 @@ import { AddbiblioComponent } from './components/addbiblio/addbiblio.component';
 import { UpdatebiblioComponent } from './components/updatebiblio/updatebiblio.component';
 import { ListbiblioComponent } from './components/listbiblio/listbiblio.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AjoutLivreComponent } from './components/ajout-livre/ajout-livre.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -13,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     AddbiblioComponent,
     UpdatebiblioComponent,
     ListbiblioComponent,
+    AjoutLivreComponent,
  
   ],
   imports: [
@@ -20,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     BibliothequeRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    MatButtonModule,
+    MatDialogModule
   ]
 })
 export class BibliothequeModule { }

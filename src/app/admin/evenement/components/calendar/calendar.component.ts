@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { EtatEvenement } from 'src/app/core/models/etatEvenement.enum';
 import { Evenement } from 'src/app/core/models/Evenement.model';
 import { Bibliotheque } from 'src/app/core/models/Bibliotheque.model';
+import { BiblioService } from 'src/app/core/services/BiblioService';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class CalendarComponent implements OnInit {
   formattedDate!: string;
   urlImage : string  = 'http://localhost:8082/images_events' ;
   isEventFormVisible: boolean = false;
+  nombibliotheque!:string
   //newEvent: any = {};
 
   newEvent = {
@@ -61,6 +63,7 @@ export class CalendarComponent implements OnInit {
      private router: Router ,
       private dialog: MatDialog,
       private renderer: Renderer2,
+      private biblioService: BiblioService,
       ) 
   {
 
@@ -85,10 +88,12 @@ export class CalendarComponent implements OnInit {
         this.events = events.map((event) => ({
           id: event.idEvenement,
           title: event.nomE,
-          bibliotheque:Bibliotheque,
+          bibliotheque:this.biblioService.getBibliothequeByEvenement(event.idEvenement).subscribe(
+            result => {this.nombibliotheque=result.nomB}
+          ),
           date: moment(event.dateDebut).toISOString(),
           eventDetails: {
-            bibliotheque:event.bibliotheque,
+            bibliotheque:this.nombibliotheque,
             idEvenement: event.idEvenement,
             dateDebut: event.dateDebut,
             dateFin: event.dateFin,
@@ -155,12 +160,14 @@ export class CalendarComponent implements OnInit {
   openAddEventDialog(selectedDate: Date) {
     const dialogRef = this.dialog.open(AddevenementComponent, {
       data: { dateDebut: selectedDate },
-      width: '800px', 
-      height: '2000px', // ajustez la largeur selon vos besoins
+      width: '800px',
+      height: '2000px',
+    });
 
-      });
+    // Utilisation d'une propriété d'entrée pour communiquer avec le composant enfant
+    dialogRef.componentInstance.parentData = 'Data que vous voulez passer au composant enfant';
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       // Traitez le résultat si nécessaire
     });
   }
@@ -203,7 +210,7 @@ export class CalendarComponent implements OnInit {
           <div>
             <img src="${this.urlImage}/${this.selectedEvent.eventDetails.idEvenement}/${this.selectedEvent.eventDetails.image}" alt="Image" style="max-width: 100%;">
           </div>
-          Bibliotheque: ${bibliothequeName}
+          Bibliotheque: ${this.nombibliotheque}
           <br>
           Date: ${this.formattedDate}
           <br>
@@ -212,7 +219,6 @@ export class CalendarComponent implements OnInit {
           Description: ${this.selectedEvent.eventDetails.description}
         `,
         confirmButtonText: 'Fermer',
-        showCancelButton: true,
         footer: `
           <button class="btn btn-secondary" id="modifyBtn">Modifier</button>
           <button class="btn btn-danger" id="deleteBtn">Supprimer</button>

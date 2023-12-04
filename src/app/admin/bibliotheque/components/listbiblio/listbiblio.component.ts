@@ -4,6 +4,10 @@ import { BiblioService } from 'src/app/core/services/BiblioService';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { AjoutLivreComponent } from '../ajout-livre/ajout-livre.component';
+
 
 
 @Component({
@@ -14,12 +18,14 @@ import Swal from 'sweetalert2';
 export class ListbiblioComponent implements OnInit {
 
 
-  constructor(private BiblioService : BiblioService , private router: Router ){
+  constructor(private BiblioService : BiblioService , private router: Router ,  private dialog:MatDialog ){
 
   }
  
   biblioList !: Observable<Bibliotheque[]>
-  urlImage : string  = 'http://localhost:8082/images_biblios' 
+  urlImage : string  = 'http://localhost:8082/images_biblios'
+  searchTerm: string = '';
+ 
 
 
    ngOnInit(): void {
@@ -62,4 +68,42 @@ supprimerBiblio(idBibliotheque: any): void {
   }
 });
 }
+
+refreshBiblios(): void {
+  this.biblioList = this.BiblioService.getAllBiblios();
+}
+searchBiblios(): void {
+  if (this.searchTerm.trim() !== '') {
+    this.biblioList = this.BiblioService.getAllBiblios().pipe(
+      map((biblios: Bibliotheque[]) =>
+        biblios.filter(biblio => biblio.nomB.toLowerCase().includes(this.searchTerm.toLowerCase()))
+      )
+    );
+  } else {
+    this.refreshBiblios();
+  }
+}
+
+clearSearch(): void {
+  this.searchTerm = '';
+  this.refreshBiblios();
+}
+
+
+   openModalAjout(id : any){
+    const dialogRef = this.dialog.open(AjoutLivreComponent, {
+      width: '350px',
+      height:'250px' ,
+      data: { title:"Ajouter livre" , bibId:id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+
+   } 
+
+
+
+
 }
