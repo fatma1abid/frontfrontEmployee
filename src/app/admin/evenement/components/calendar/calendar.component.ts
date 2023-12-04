@@ -184,9 +184,7 @@ export class CalendarComponent implements OnInit {
   navigateToEdit(id: number) {
     this.router.navigate(['/admin/evenement/updateevent', id]);
   }
-    navigateToDelete(id : number) {
-      this.router.navigate(['/admin/evenement',id]);
-    }
+    
     deleteEvent(idEvenement: number) {
       // Appelez la méthode deleteEvent du service
       this.evenementService.deleteEvent(idEvenement).subscribe(
@@ -224,6 +222,13 @@ export class CalendarComponent implements OnInit {
           <button class="btn btn-danger" id="deleteBtn">Supprimer</button>
         `,
       }).then((result) => {
+
+         // Add event listeners for the custom buttons
+        /* const modifyBtn = document.getElementById('modifyBtn');
+         console.log(modifyBtn)
+         const deleteBtn = document.getElementById('deleteBtn');
+
+
         if (result.isConfirmed) {
           // Handle the "Fermer" button click
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -232,13 +237,10 @@ export class CalendarComponent implements OnInit {
           // Handle the close button click
         }
     
-        // Add event listeners for the custom buttons
-        const modifyBtn = document.getElementById('modifyBtn');
-        const deleteBtn = document.getElementById('deleteBtn');
-    
         if (modifyBtn) {
           modifyBtn.addEventListener('click', () => {
             // Handle modify button click
+            console.log("clicked")
             this.modifyEvent();
           });
         }
@@ -248,17 +250,30 @@ export class CalendarComponent implements OnInit {
             // Handle delete button click
             this.deleteEvent(this.selectedEvent.eventDetails.idEvenement);
           });
+        }*/
+      });
+      document.body.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+    
+        Swal.close();
+        if (target.id === 'modifyBtn') {
+          console.log("Modify button clicked");
+          this.modifyEvent();
+        }
+    
+        if (target.id === 'deleteBtn') {
+          console.log("Delete button clicked");
+          this.deleteEvent(this.selectedEvent.eventDetails.idEvenement);
         }
       });
+  
     }
-    
-    
+
+  
     modifyEvent() {
+      console.log(this.selectedEvent.eventDetails.idEvenement)
       this.navigateToEdit(this.selectedEvent.eventDetails.idEvenement);
     }
-    
-    
-    
 
  
 
