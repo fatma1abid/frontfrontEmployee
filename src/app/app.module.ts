@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -15,6 +14,9 @@ import { httpInterceptorProviders } from './shared/interceptors';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor.service';
 import { FrontModule } from './front/front.module';
 import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { AdminModule } from './admin/admin.module';
     CoreModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    QRCodeModule,
     
   ],
 

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit{
         let token = response.token;
         localStorage.setItem('Token', token);
         if(this.userService.getRole() == "ADMIN"){
-          this.route.navigate(['/admin/accueil']);
+          this.route.navigateByUrl('/admin/accueil');
         }else if(this.userService.getRole() == "ETUDIANT"){
           this.route.navigate(['/front/universite/afficher']);
         }

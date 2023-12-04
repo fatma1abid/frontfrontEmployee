@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LivreComponent } from './components/livre/livre.component';
 import { BlocModule } from './bloc/bloc.module';
+import { ModifResComponent } from './reservation/components/modif-res/modif-res.component';
+
 
 
 @NgModule({

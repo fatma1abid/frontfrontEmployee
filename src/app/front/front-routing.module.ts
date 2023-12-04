@@ -39,7 +39,9 @@ const routes: Routes = [
   expectedRole: 'ETUDIANT' }},
   { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
-  expectedRole: 'ETUDIANT' } }
+  expectedRole: 'ETUDIANT' } },
+  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) }
+
 ];
 
 @NgModule({

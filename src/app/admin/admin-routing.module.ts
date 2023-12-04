@@ -34,7 +34,10 @@ const routes: Routes = [
   expectedRole: 'ADMIN' } },
   { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
-  expectedRole: 'ADMIN' } }
+  expectedRole: 'ADMIN' } },
+  {path:'chambre', loadChildren: () => import('./chambre/chambre.module').then(m => m.ChambreModule) },
+  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) }
+   
 ];
 
 @NgModule({

@@ -15,6 +15,8 @@ import { FilterPipe } from 'src/filter.pipe';
 import { FoyerModule } from './foyer/foyer.module';
 import { BlocModule } from '../front/bloc/bloc.module';
 
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+ 
 
 @NgModule({
   declarations: [

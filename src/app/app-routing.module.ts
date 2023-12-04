@@ -14,6 +14,10 @@ const routes: Routes = [
 
   
 
+  
+
+  { path: '', redirectTo: '/admin/accueil', pathMatch: 'full' },
+
 ];
 
 @NgModule({
