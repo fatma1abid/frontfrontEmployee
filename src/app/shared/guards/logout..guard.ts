@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import * as jwt from 'jwt-decode';
+import { UserService } from "src/app/services/user.service";
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import * as jwt from 'jwt-decode';
 
 export class LogoutGuard {
     
-    constructor( private router:Router,private jwtHelper:JwtHelperService) {}  
+    constructor( private router:Router,private jwtHelper:JwtHelperService,private userService:UserService) {}  
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const token = localStorage.getItem('Token');
@@ -19,7 +20,11 @@ export class LogoutGuard {
 
             return true;
         }else{
-            this.router.navigateByUrl('/front/accueil');
+            if(this.userService.getRole() =="ETUDIANT"){
+                this.router.navigateByUrl('/front/universite/afficher');
+            }else{
+                this.router.navigateByUrl('/admin/acceuil');
+            }
             return false;
         }
     }

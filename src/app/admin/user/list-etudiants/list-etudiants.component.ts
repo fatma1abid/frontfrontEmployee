@@ -17,7 +17,8 @@ export class ListEtudiantsComponent  implements OnInit{
   currentPage: number = 1;
   totalPages: number = 0;
   items:any[] =[];
-
+  isEdit:boolean = false;
+  selectedForUpdate!:any;
   constructor(private userService:UserService ){
   }
   ngOnInit(): void {
@@ -58,7 +59,22 @@ selectUser(user:any){
 updateItems(items: any[]): void {
   this.paginatedUsers = items;
 }
-
+editModal(etudiant:any){
+  this.isEdit =true;
+  this.selectedForUpdate = etudiant;
+}
+addForm(){
+  this.isEdit =false;
+}
+rechargeEtudiants(){
+  this.userService.getEtudiantNonArchive("ETUDIANT","archive").subscribe({
+    next:(users) =>{
+      this.users = users;
+      this.items= users;
+    },
+    error:(error)=>{}
+  });
+}
 updateCurrentPage(pageNumber: number): void {
   this.currentPage = pageNumber;
 }

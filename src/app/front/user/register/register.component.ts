@@ -67,6 +67,12 @@ constructor(private formBuilder :FormBuilder,private userService:UserService,pri
          this.showMessage = true;
          this.successMessage = 'un message de confirmation a été envoyé à' + v.email ;
          this.errorMessage = null;
+         setTimeout(() => {
+          this.showMessage = false;
+          this.successMessage = null;
+          this.errorMessage = null;
+          this.showModal = false;
+        }, 4000);
        },
        error: (e) => {
         this.showSpinner = false;
@@ -78,6 +84,12 @@ constructor(private formBuilder :FormBuilder,private userService:UserService,pri
           this.errorMessage  = 'L\'adresse e-mail existe déjà.';
       
       }
+      setTimeout(() => {
+        this.showMessage = false;
+        this.successMessage = null;
+        this.errorMessage = null;
+        this.showModal = false;
+      }, 4000);
     },complete:()=>{
         setTimeout(() => {
           this.showMessage = false;

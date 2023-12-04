@@ -11,7 +11,6 @@ import { DepartementListComponent } from './departement/departement-list/departe
 import { UniversiteListComponent } from './universite/universite-list/universite-list.component';
 
 const routes: Routes = [
-  {path:'accueil' , component:AccueilFrontComponent},
   { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'reclamation', loadChildren: () => import('./reclamation/reclamation.module').then(m => m.ReclamationModule) },
   {path:'accueil' , component:AccueilFrontComponent,canActivate: [AuthGuard,RoleGuard], 
@@ -29,12 +28,16 @@ const routes: Routes = [
   {path:'emprunterLivre/:idLivre' , component:DemandeEmpruntComponent,canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ETUDIANT' }},
+  { path: '', loadChildren: () => import('./universite/universite.module').then(m => m.UniversiteModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' }},
 
-  {path:'accueil' , component:AccueilFrontComponent},
-  {path:'afficher' , component:UniversiteListComponent},
-  { path: 'departement/:nomUniversite', component: DepartementListComponent },
-
-
+  { path: 'foyer', loadChildren: () => import('./foyer/foyer.module').then(m => m.FoyerModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' }},
+  { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule),canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' } }
 ];
 
 @NgModule({

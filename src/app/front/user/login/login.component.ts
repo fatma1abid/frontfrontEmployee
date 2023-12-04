@@ -23,13 +23,20 @@ export class LoginComponent implements OnInit{
       this.userService.getRole();
   
   }
+  get myControls(){
+    return this.loginForm.controls;
+ }
   onSubmitForm(){
     this.userService.login(this.loginForm.value).subscribe({
       
       next:(response) => {
         let token = response.token;
         localStorage.setItem('Token', token);
-        this.route.navigateByUrl("/front/accueil");
+        if(this.userService.getRole() == "ADMIN"){
+          this.route.navigate(['/admin/accueil']);
+        }else if(this.userService.getRole() == "ETUDIANT"){
+          this.route.navigate(['/front/universite/afficher']);
+        }
       },
       error:(error) => {        
           console.log(error);

@@ -14,7 +14,12 @@ export class RoleGuard {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const expectedRole = route.data['expectedRole']
     if(this.userService.getRole()!==expectedRole){
-      this.router.navigate(['user/home']);
+      if(this.userService.getRole()=="ADMIN"){
+        this.router.navigate(['/admin/acceuil']);
+      }else if(this.userService.getRole()=="ETUDIANT"){
+        this.router.navigate(['/front/universite/afficher']);
+
+      }
       return false;
     }
     return true;

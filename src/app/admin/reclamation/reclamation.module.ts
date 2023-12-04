@@ -4,6 +4,7 @@ import { ListeReclamationsComponent } from './liste-reclamations/liste-reclamati
 import { FormulaireReclamationComponent } from './formulaire-reclamation/formulaire-reclamation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReclamationRoutingModule } from './reclamation-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -17,7 +18,9 @@ import { ReclamationRoutingModule } from './reclamation-routing.module';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    ReclamationRoutingModule
+    ReclamationRoutingModule,
+    SharedModule
+    
   ]
 })
 export class ReclamationModule { }

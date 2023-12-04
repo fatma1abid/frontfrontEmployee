@@ -16,6 +16,8 @@ import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-em
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LivreComponent } from './components/livre/livre.component';
+import { BlocModule } from './bloc/bloc.module';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { LivreComponent } from './components/livre/livre.component';
     LivreDetailsComponent,
     DemandeEmpruntComponent,
     LivreComponent
+   
   ],
   imports: [
     SharedModule,
@@ -42,8 +45,8 @@ import { LivreComponent } from './components/livre/livre.component';
     JwtHelperService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  
-  ],
+    BlocModule
+  ]
 })
 export class FrontModule {
   constructor() {

@@ -11,7 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FormulaireReclamationComponent implements OnInit,OnChanges{
   reclamationForm !:FormGroup;
-  @Input() reclamation!:any;
+  alertType!: 'success' | 'error' ;
+  alertMessage!: string | null ;  @Input() reclamation!:any;
   @Output() ReclamationAddEvent = new EventEmitter<void>();
   @Input() isEdit!:boolean;
   @Output() isEditChange = new EventEmitter<boolean>();
@@ -49,12 +50,24 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
       if(!this.isEdit){
       this.reclamationService.add(this.reclamationForm.value,this.user.email).subscribe({
         next: (v) => {
-            alert("reclamation ajouter avec succes")
+          this.alertType ='success';
+          this.alertMessage ='reclamation ajouté avec succés'
+          
           this.ReclamationAddEvent.emit();
+          setTimeout(() => {
+            this.alertMessage = null;
+          
+          }, 4000);
          },
          error: (e) => {
-          alert("erreur d'ajout");
-      }
+          this.alertType ='error';
+          this.alertMessage ='erreur d\'ajout '
+          
+          this.ReclamationAddEvent.emit();
+          setTimeout(() => {
+            this.alertMessage = null;
+          
+          }, 4000);      }
        
        
       });
@@ -62,11 +75,15 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
       
       this.reclamationService.update(this.reclamationForm.value,this.reclamation.id).subscribe({
         next: (v) => {
-          alert("reclamation modifier avec succes")
-        this.ReclamationAddEvent.emit();
+          this.alertType ='success';
+          this.alertMessage ='reclamation modifié avec succés'  ;  
+              this.ReclamationAddEvent.emit();
         this.isEditChange.emit(this.isEdit);
         this.isReclamationChange.emit(this.reclamation);
-
+        setTimeout(() => {
+          this.alertMessage = null;
+        
+        }, 4000);  
        },
        error: (e) => {
         alert("erreur de modification");
@@ -76,5 +93,5 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
     }
 
     }
-
+  
 }

@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit ,Input,OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators,ValidatorFn,AbstractControl  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -7,7 +7,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit,OnChanges{
+  @Input() etudiant!:any;
+  @Input() isEdit :boolean =false;
+  @Output() isChange = new EventEmitter<boolean>();
+
+  alertType!: 'success' | 'error' ;
+  alertMessage!: string | null ;
+  type:string = "Ajouter";
   isModalVisible: boolean = false;
   emailSentMessage!: string;
   registerForm !:FormGroup;
@@ -17,6 +24,7 @@ export class UserFormComponent {
   
   }
       ngOnInit(): void {
+        if(this.isEdit == false){
         this.registerForm =this.formBuilder.group({
           nomEt: ['', Validators.required],
           prenomEt: ['', Validators.required],
@@ -29,7 +37,16 @@ export class UserFormComponent {
           {
             validators: [this.match('password', 'confirmPassword')]
           });
+       }else if(this.isEdit == true){
+        this.registerForm =this.formBuilder.group({
+          nomEt: ['', Validators.required],
+          prenomEt: ['', Validators.required],
+          cin: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]], // Sync validator for 8 digits
+          email : ['',  [Validators.required, Validators.pattern(this.emailRegex)]],
+          }
+          );
        }
+      }
        get myControls(){
         return this.registerForm.controls;
      }
@@ -48,28 +65,95 @@ export class UserFormComponent {
         }
       };
     }
-   
+    ngOnChanges(changes: SimpleChanges): void {
+      if (changes['isEdit'] && this.isEdit) {
+
+        this.registerForm =this.formBuilder.group({
+          nomEt: ['', Validators.required],
+          prenomEt: ['', Validators.required],
+          cin: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]], // Sync validator for 8 digits
+          email : ['',  [Validators.required, Validators.pattern(this.emailRegex)]],
+          }
+          );
+          this.registerForm.patchValue(this.etudiant);
+
+          this.type = "Modifier"
+      }
+      else if (changes['isEdit'] && !this.isEdit) {
+        this.registerForm =this.formBuilder.group({
+          nomEt: ['', Validators.required],
+          prenomEt: ['', Validators.required],
+          cin: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]], // Sync validator for 8 digits
+          email : ['',  [Validators.required, Validators.pattern(this.emailRegex)]],
+          password: ['',  [Validators.required, Validators.pattern(this.passwordRegex)]],
+          confirmPassword:['', Validators.required],
+  
+          },
+          {
+            validators: [this.match('password', 'confirmPassword')]
+          });
+          this.type = "Ajouter"
+      }
+    }
     onSubmitForm(){
-      this.userService.register(this.registerForm.value).subscribe({
+      if(!this.isEdit){
+        this.userService.register(this.registerForm.value).subscribe({
         next: (v) => {
           // this.route.navigateByUrl("front/login");
-           this.isModalVisible = true;
-           this.emailSentMessage = 'un message de confirmation a été envoyé à' + v.email ;
-           console.log(this.emailSentMessage);
-         },
+          this.alertType ='success';
+          this.alertMessage ='etudiant ajouté avec succés'
+          this.isChange.emit();
+          setTimeout(() => {
+            this.alertMessage = null;
+          
+          }, 4000);         },
          error: (e) => {
-          console.error('Error adding user:', e);
           if (e.status === 400) {
-            console.error('Email already exists:', e.error);
-            alert('L\'adresse e-mail existe déjà.');
-  
-        
+            this.alertType ='error';
+            this.alertMessage ='L\'adresse e-mail existe déjà.';
+            setTimeout(() => {
+              this.alertMessage = null;
+            
+            }, 4000);
         }
+      
+      },
+      complete:()=>{
+        this.isModalVisible = false;
       }
+    
        
        
       });
-    
+      }else{
+        this.userService.updateUser(this.etudiant.idEtudiant,this.registerForm.value).subscribe(
+          {
+
+          next: (v) => {
+            this.alertType ='success';
+            this.alertMessage ='etudiant modifié avec succés'
+            setTimeout(() => {
+              this.alertMessage = null;
+            
+            }, 4000);
+            this.isChange.emit();
+
+           },
+           error: (e) => {
+            
+            this.alertType ='error';
+            this.alertMessage ='erreur du modification'
+            setTimeout(() => {
+              this.alertMessage = null;
+            
+            }, 4000);
+          },
+          complete:()=>{
+            this.isModalVisible = false;
+          }
+        }
+        );
+      }
   
     }
   
