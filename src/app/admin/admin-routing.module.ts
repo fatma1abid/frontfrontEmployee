@@ -43,8 +43,15 @@ const routes: Routes = [
   expectedRole: 'ADMIN' }},
   {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule),canActivate: [AuthGuard,RoleGuard], 
   data: { 
-  expectedRole: 'ADMIN' } }
+  expectedRole: 'ADMIN' } },
    
+  {path: 'bibliotheque', loadChildren: () => import('./bibliotheque/bibliotheque.module').then(m => m.BibliothequeModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } },
+  {path: 'evenement', loadChildren: () => import('./evenement/evenement.module').then(m => m.EvenementModule) ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ADMIN' } },
+
 ];
 
 @NgModule({

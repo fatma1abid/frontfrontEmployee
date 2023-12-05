@@ -69,11 +69,11 @@ export class ListEmpruntLivresComponent implements OnInit {
         this.nbreEmpruntsAccepte = nombre;
     })
 
-    this.livreService.getLivreWithMaxEmprunts().subscribe(
+    /*this.livreService.getLivreWithMaxEmprunts().subscribe(
       (livre) => {
          this.livre = livre
       }
-    )
+    )*/
   }
 
   

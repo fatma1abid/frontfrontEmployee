@@ -9,7 +9,8 @@ import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-em
 import { RoleGuard } from '../shared/guards/role.guard';
 import { DepartementListComponent } from './departement/departement-list/departement-list.component';
 import { UniversiteListComponent } from './universite/universite-list/universite-list.component';
-
+import { BiblioComponent } from './components/biblio/biblio.component';
+import { CalendrierComponent } from './components/calendrier/calendrier.component';
 const routes: Routes = [
   { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'reclamation', loadChildren: () => import('./reclamation/reclamation.module').then(m => m.ReclamationModule) },
@@ -42,9 +43,18 @@ const routes: Routes = [
   expectedRole: 'ETUDIANT' } },
   {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) ,canActivate: [AuthGuard,RoleGuard], 
   data: { 
-  expectedRole: 'ETUDIANT' } }
+  expectedRole: 'ETUDIANT' } },
 
-];
+
+  {path:'Bib/:idFoyer' , component:BiblioComponent,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' } },
+  {path: 'calendrier/:idBibliotheque', component: CalendrierComponent,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' }  }, 
+]
+
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

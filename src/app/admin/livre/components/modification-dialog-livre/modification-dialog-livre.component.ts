@@ -25,7 +25,7 @@ export class ModificationDialogLivreComponent {
   selectedFile!: File;
   msg !: String;
   error !: String;
-
+  urlImage : string  = 'http://localhost:8080/images_livres'
   nameFile!:string
 
 
@@ -71,7 +71,8 @@ export class ModificationDialogLivreComponent {
           nomAuteur:result.nomAuteur,
           nbPages:result.nbPages,
           dateDePublication: formattedDate,
-          image : result.image
+          image : result.image,  
+        disponibilite : result.disponibilite
         }
       }
     );
@@ -97,16 +98,38 @@ export class ModificationDialogLivreComponent {
 
 
   modifierLivre(){
+    
+    const nouveauTitre = this.modificationLivreForm.get('titre')?.value;
+    const nouveauDescription = this.modificationLivreForm.get('description')?.value;
+    const nouveauAuteur = this.modificationLivreForm.get('nomAuteur')?.value;
+    const nouveauPages = this.modificationLivreForm.get('nbPages')?.value;
+    const nouveauDate = this.modificationLivreForm.get('dateDePublication')?.value;
+    const nouveauCategorie = this.modificationLivreForm.get('categorie')?.value;
+    const nouveauDisp = this.modificationLivreForm.get('disponibilite')?.value;
+    const nouveauImage = this.selectedFile;
+
+    const titreFinal = nouveauTitre !== null ? nouveauTitre : this.livre.titre;
+    const descriptionFinal = nouveauDescription !== null ? nouveauDescription : this.livre.description;
+    const auteurFinal = nouveauAuteur !== null ? nouveauAuteur : this.livre.nomAuteur;
+    const pagesFinal = nouveauPages !== null ? nouveauPages : this.livre.nbPages;
+    const dateFinal = nouveauDate !== null ? nouveauDate : this.livre.dateDePublication;
+    const CategorieFinal = nouveauCategorie !== null ? nouveauCategorie : this.data.categorieId;
+    const DispFinal = nouveauDisp !== null ? nouveauDisp : this.livre.disponibilite ? 1 : 0;
+
+
+    const defaultImageValue = new File([this.urlImage], this.livre.image);
+    const imageFinal = nouveauImage !== null && nouveauImage !== undefined ? nouveauImage: defaultImageValue
     console.log( this.modificationLivreForm.get('disponibilite')?.value)
     this.livreService.modifierLivre(this.data.livreId,
-      this.modificationLivreForm.get('titre')?.value,
-      this.modificationLivreForm.get('description')?.value,
-      this.modificationLivreForm.get('nomAuteur')?.value,
-      this.modificationLivreForm.get('nbPages')?.value,
-      this.modificationLivreForm.get('dateDePublication')?.value,
-      this.modificationLivreForm.get('categorie')?.value,
-      this.modificationLivreForm.get('disponibilite')?.value,
-      this.selectedFile).subscribe(
+      titreFinal,
+      descriptionFinal,
+      auteurFinal,
+      pagesFinal,
+      dateFinal,
+      CategorieFinal,
+      DispFinal,
+      imageFinal
+      ).subscribe(
       ()=>{
         this.msg = "Livre modifié avec succées"
           },

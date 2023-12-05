@@ -39,7 +39,8 @@ ngOnInit(): void {
     this.reclamationService.changerEtat(recl.id,etat).subscribe(
       result=>{
         console.log(this.reclamations.splice( updatedRecIndex , 1));
-         this.reclamations =  this.reclamations.splice(updatedRecIndex , 1);
+         this.reclamations.splice(updatedRecIndex , 1);
+         this.reclamations ;
       }
     )
     

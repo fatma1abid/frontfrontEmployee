@@ -20,10 +20,11 @@ import { FilterPipe } from 'src/filter.pipe';
     FooterComponent,
     SpinnerModalComponent,
     AlertComponent,
-    
-    FilterPipe
+    FilterPipe,
+
   ],
   imports: [
+
     CommonModule,
     RouterModule,
   ],
@@ -36,8 +37,8 @@ import { FilterPipe } from 'src/filter.pipe';
     PaginationDirective,
     SpinnerModalComponent,
     AlertComponent,
-
     FilterPipe
+
   ]
 })
 export class SharedModule { }

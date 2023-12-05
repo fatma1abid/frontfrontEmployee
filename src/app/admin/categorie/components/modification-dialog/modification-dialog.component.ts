@@ -22,7 +22,7 @@ export class ModificationDialogComponent implements OnInit {
   selectedFile!: File;
   msg !: String;
   error !: String;
-
+  urlImage : string  = 'http://localhost:8080/images';
   nameFile!:string
 
   categorie !: Categorie;
@@ -60,7 +60,21 @@ export class ModificationDialogComponent implements OnInit {
 
 
   modifierCategorie(){
-    this.categorieService.modifierCategorie(this.data.categorieId,this.modificationCategorieForm.get('nom')?.value,this.modificationCategorieForm.get('description')?.value,this.selectedFile).subscribe(
+    const nouveauNom = this.modificationCategorieForm.get('nom')?.value;
+    const nouveauDescription = this.modificationCategorieForm.get('description')?.value;
+    const nouveauImage = this.selectedFile;
+
+    const nomFinal = nouveauNom !== null ? nouveauNom : this.categorie.nom;
+    const descriptionFinal = nouveauDescription !== null ? nouveauDescription : this.categorie.description;
+
+    const defaultImageValue = new File([this.urlImage], this.categorie.image);
+
+    const imageFinal = nouveauImage !== null && nouveauImage !== undefined ? nouveauImage: defaultImageValue
+
+    this.categorieService.modifierCategorie(this.data.categorieId,
+      nomFinal,
+      descriptionFinal,
+      imageFinal).subscribe(
       ()=>{
         this.msg = "Categorie modifié avec succées"
           },

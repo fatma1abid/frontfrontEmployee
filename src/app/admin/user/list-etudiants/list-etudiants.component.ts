@@ -47,7 +47,8 @@ export class ListEtudiantsComponent  implements OnInit{
         if (updatedUserIndex !== -1 && etat!="archivé") {
           this.users[updatedUserIndex].etat = etat;
         }else if (updatedUserIndex !== -1 && etat=="archivé") {
-         this.users = this.users.splice( updatedUserIndex , 1);
+         this.users.splice( updatedUserIndex , 1);
+         this.users;
         }
       }
     )

@@ -28,7 +28,6 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     SharedModule,
     CommonModule,
     AdminRoutingModule,
-    SharedModule,
     MatButtonModule,
     MatDialogModule,
     FoyerModule,

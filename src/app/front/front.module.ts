@@ -1,6 +1,5 @@
 import { NgModule,LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FrontRoutingModule } from './front-routing.module';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -19,6 +18,10 @@ import { LivreComponent } from './components/livre/livre.component';
 import { BlocModule } from './bloc/bloc.module';
 import { ModifResComponent } from './reservation/components/modif-res/modif-res.component';
 
+import { CalendrierComponent } from './components/calendrier/calendrier.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { RouterModule } from '@angular/router';  
+import { FrontRoutingModule } from './front-routing.module';
 
 
 @NgModule({
@@ -29,13 +32,17 @@ import { ModifResComponent } from './reservation/components/modif-res/modif-res.
     ListLivresComponent,
     LivreDetailsComponent,
     DemandeEmpruntComponent,
-    LivreComponent
+    LivreComponent,
    
+    CalendrierComponent,
   ],
   imports: [
+    FrontRoutingModule,
     SharedModule,
     CommonModule,
-    FrontRoutingModule,
+    BlocModule,
+    FullCalendarModule,
+    RouterModule,
     ReactiveFormsModule,
     FormsModule,
     MatDialogModule
@@ -47,7 +54,8 @@ import { ModifResComponent } from './reservation/components/modif-res/modif-res.
     JwtHelperService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    BlocModule
+   
+
   ]
 })
 export class FrontModule {

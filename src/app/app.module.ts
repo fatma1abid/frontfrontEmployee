@@ -5,9 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { CoreModule } from './core/core.module';
+import { HttpClientXsrfModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { RouterModule } from '@angular/router';  
+
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { httpInterceptorProviders } from './shared/interceptors';
@@ -40,6 +44,14 @@ import { QRCodeModule } from 'angularx-qrcode';
     BrowserAnimationsModule,
     QRCodeModule,
     
+   
+    FullCalendarModule,
+
+    RouterModule.forRoot([]),
+
+   
+
+
   ],
 
   

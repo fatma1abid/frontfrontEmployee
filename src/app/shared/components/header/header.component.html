@@ -100,7 +100,7 @@
          <li class="front"><a [routerLink]="['/front/universite/afficher']">Accueil</a></li>
          <li class="front"><a [routerLink]="['/front/universite/afficher']">Universités</a></li>
          <li class="front"><a [routerLink]="['/front/foyer/ConsulterFoyer']">Foyer</a></li>
-         <li class="front"><a href="#">Biblothéques</a></li>
+         <li class="front"><a [routerLink]="['/front/listCategory']">Biblothéques</a></li>
          <li class="front"><a href="#">Contact</a></li>
          <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -322,7 +322,7 @@
               <span class="menu-title">Reclamations</span>
             </a>
             <li class="nav-item"> 
-              <a class="nav-link" routerLink="/front/reservation/addReservation">
+              <a class="nav-link" routerLink="/front/bibliotheque/listbiblio">
                 Bibliothéques</a></li>
 
             <li class="nav-item"> <a class="nav-link"  routerLink="/admin/foyer/ShowFoyer">

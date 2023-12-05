@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Foyer } from 'src/app/Model/Foyer';
 import { FoyersServiceService } from 'src/app/Service/foyers-service.service';
 
@@ -14,7 +14,7 @@ export class DetailFoyerComponent {
   id!:number;
   sum!:number;
 
-  constructor(private s:FoyersServiceService,private route:ActivatedRoute)
+  constructor(private s:FoyersServiceService,private route:ActivatedRoute,private router:Router)
   {
 
   }
@@ -34,5 +34,9 @@ export class DetailFoyerComponent {
 
 
   }
+  consulterBib(id:number){
+  this.router.navigate(['/front/Bib/'+id])
 
+  
+}
 }

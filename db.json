@@ -13,6 +13,7 @@
       "postId": 1
     }
   ],
+<<<<<<< HEAD
   "universites": [
     {
       "nomUniversite": "lala",
@@ -36,4 +37,9 @@
       "specialite": "rrrgt"
     }
   ]
+=======
+  "profile": {
+    "name": "typicode"
+  }
+>>>>>>> befad06d039ffe4e88ec418552771fd1e4f08f4a
 }
