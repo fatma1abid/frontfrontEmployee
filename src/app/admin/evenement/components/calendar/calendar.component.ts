@@ -73,7 +73,14 @@ export class CalendarComponent implements OnInit {
     this.loadEvents();
     this.evenementService.selectedDate$.subscribe((selectedDate) => {
       if (selectedDate) {
-        this.openAddEventDialog(selectedDate);
+        const originalDate = new Date(selectedDate);
+        const formattedDate =
+          originalDate.getFullYear() +
+          '-' +
+          ('0' + (originalDate.getMonth() + 1)).slice(-2) +
+          '-' +
+          ('0' + originalDate.getDate()).slice(-2);
+        this.openAddEventDialog(formattedDate);
         this.evenementService.resetSelectedDate();
       }
     });
@@ -157,7 +164,7 @@ export class CalendarComponent implements OnInit {
       console.error('An error occurred in handleDateClick:', error);
     }
   }
-  openAddEventDialog(selectedDate: Date) {
+  openAddEventDialog(selectedDate: string) {
     const dialogRef = this.dialog.open(AddevenementComponent, {
       data: { dateDebut: selectedDate },
       width: '800px',

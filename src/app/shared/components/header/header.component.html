@@ -101,7 +101,7 @@
          <li class="front"><a [routerLink]="['/front/universite/afficher']">Universités</a></li>
          <li class="front"><a [routerLink]="['/front/foyer/ConsulterFoyer']">Foyer</a></li>
          <li class="front"><a [routerLink]="['/front/listCategory']">Biblothéques</a></li>
-         <li class="front"><a href="#">Contact</a></li>
+         <li class="front"><a [routerLink]="['/front/reservation/addReservation']">Réservations</a></li>
          <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user" aria-hidden="true"></i> <!-- Use the appropriate user icon class -->
@@ -322,9 +322,11 @@
               <span class="menu-title">Reclamations</span>
             </a>
             <li class="nav-item"> 
-              <a class="nav-link" routerLink="/front/bibliotheque/listbiblio">
+              <a class="nav-link" routerLink="/admin/bibliotheque/listbiblio">
                 Bibliothéques</a></li>
-
+                <li class="nav-item"> 
+                  <a class="nav-link" routerLink="/admin/evenement/calendar">
+                    Bibliothéques</a></li>
             <li class="nav-item"> <a class="nav-link"  routerLink="/admin/foyer/ShowFoyer">
               <span class="menu-title">Liste des foyers</span>
             </a></li>
@@ -337,6 +339,17 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/universite/afficher">
               <span class="menu-title">Universités</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/departement/afficher">
+              <span class="menu-title">Départements</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/chambre/addChambre">
+              <span class="menu-title">Chambres</span>
             </a>
           </li>
               <li class="nav-item"> <a class="nav-link" routerLink="/admin/categorie/list"> 

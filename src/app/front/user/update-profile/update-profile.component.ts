@@ -18,7 +18,6 @@ export class UpdateProfileComponent implements OnInit{
       email : ['', Validators.required],
       cin : ['', Validators.required],
       dateNaissance: ['', Validators.required],
-      image: ['']
       });
       
     this.userService.getUserByEmail(this.userService.getUserEmail()).subscribe(resultat=>{
